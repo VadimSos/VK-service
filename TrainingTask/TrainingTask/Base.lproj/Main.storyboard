@@ -10,19 +10,98 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TrainingTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TrainingTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginVC" translatesAutoresizingMaskIntoConstraints="NO" id="VHT-6F-D9y">
+                                <rect key="frame" x="50" y="120" width="314" height="366"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMl-oU-Ja0" customClass="ButtonRounded" customModule="TrainingTask" customModuleProvider="target">
+                                <rect key="frame" x="90" y="586" width="234" height="50"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="VKAuthorization:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qlj-GJ-Qkc"/>
+                                    <segue destination="OcE-Xe-mhl" kind="show" id="K1C-rk-sz5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dMl-oU-Ja0" secondAttribute="bottom" constant="100" id="BHn-n1-M6j"/>
+                            <constraint firstItem="dMl-oU-Ja0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="90" id="FOg-aO-9sN"/>
+                            <constraint firstItem="VHT-6F-D9y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="JPS-cm-R7S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dMl-oU-Ja0" secondAttribute="trailing" constant="90" id="L3s-TA-gUK"/>
+                            <constraint firstItem="dMl-oU-Ja0" firstAttribute="top" secondItem="VHT-6F-D9y" secondAttribute="bottom" constant="100" id="Ypi-fA-Avl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VHT-6F-D9y" secondAttribute="bottom" constant="250" id="aUD-6g-H3j"/>
+                            <constraint firstItem="VHT-6F-D9y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="j0M-C3-Ef6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VHT-6F-D9y" secondAttribute="trailing" constant="50" id="kbp-FA-WoM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="37.681159420289859" y="23.64130434782609"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Fy4-tv-A1X">
+            <objects>
+                <viewController id="Buh-gw-axe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qgp-lN-LrX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="buK-wn-aJg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="HpZ-SB-3LZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d7G-VE-X5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2097" y="-411"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="apu-zQ-mGJ">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OcE-Xe-mhl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iE0-0z-Xmy">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Buh-gw-axe" kind="relationship" relationship="viewControllers" id="KkV-WD-3My"/>
+                        <segue destination="rZs-wg-4En" kind="relationship" relationship="viewControllers" id="72G-ry-eue"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5z-1T-7gH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044.9275362318842" y="23.64130434782609"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="ma1-mE-uZn">
+            <objects>
+                <viewController id="rZs-wg-4En" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3oS-Ly-aKD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="N6e-78-2XF"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="WN9-aD-ULG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dGv-jS-QDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2096" y="352"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LoginVC" width="1200" height="1200"/>
+    </resources>
 </document>
