@@ -1,0 +1,12 @@
+line_length: 150
+cyclomatic_complexity:
+  ignores_case_statements: true
+  warning: 20
+identifier_name:
+  allowed_symbols: "_"
+  min_length:
+    warning: 0
+    error: 0
+excluded:
+  - Pods
+  - Carthage
