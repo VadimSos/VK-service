@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
         "client_id": "7059368",
         "client_secret": "WlZlgKtJLW4msmkPTSUd",
         "authorize_uri": "http://oauth.vk.com/authorize",
-        "token_uri": "https://oauth.vk.com/access_token",   // code grant only
-        "redirect_uris": ["trainingtask"],   // register your own "trainingtask" scheme in Info.plist
+        "redirect_uri": "trainingtask://",   // register your own "trainingtask" scheme in Info.plist
+        "v": "5.74",
         "scope": "offline",
         ] as OAuth2JSON)
 
@@ -39,12 +39,11 @@ class LoginViewController: UIViewController {
         let loader = OAuth2DataLoader(oauth2: oauth2)
         self.loader = loader
 
-        loader.perform(request: userDataRequest) { response in
+        loader.perform(request: userAuthentication) { response in
             do {
                 let json = try response.responseJSON()
                 print("\(json)")
-            }
-            catch let error {
+            } catch let error {
                 print("\(error)")
             }
         }
@@ -52,13 +51,12 @@ class LoginViewController: UIViewController {
 
     // MARK: - Actions
 
-    var userDataRequest: URLRequest {
+    var userAuthentication: URLRequest {
         var request = URLRequest(url: URL(string: "https://api.github.com/user")!)
-        request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+//        request.setValue("user_id=210700286&v=5.52", forHTTPHeaderField: "Accept")
         return request
     }
 }
-
 
 class OAuth2RetryHandler: RequestRetrier, RequestAdapter {
 
@@ -81,8 +79,7 @@ class OAuth2RetryHandler: RequestRetrier, RequestAdapter {
                     }
                 }
             }
-        }
-        else {
+        } else {
             completion(false, 0.0)   // not a 401, not our problem
         }
     }

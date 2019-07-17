@@ -14,6 +14,7 @@
 		ED28224C22DCDF0F003F1784 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED28224B22DCDF0F003F1784 /* Assets.xcassets */; };
 		ED28224F22DCDF0F003F1784 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED28224D22DCDF0F003F1784 /* LaunchScreen.storyboard */; };
 		ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12C722DDE81900534EED /* ButtonRounded.swift */; };
+		ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		ED28224E22DCDF0F003F1784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED28225022DCDF0F003F1784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED3E12C722DDE81900534EED /* ButtonRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRounded.swift; sourceTree = "<group>"; };
+		ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		F6E0451FF255AAF46BF4CBBE /* Pods-TrainingTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.debug.xcconfig"; path = "Target Support Files/Pods-TrainingTask/Pods-TrainingTask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				ED28224622DCDF0E003F1784 /* LoginViewController.swift */,
+				ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			files = (
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
+				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

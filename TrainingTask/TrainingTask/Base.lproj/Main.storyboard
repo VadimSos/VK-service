@@ -10,6 +10,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Web View View Controller-->
+        <scene sceneID="Uyu-GT-iDk">
+            <objects>
+                <viewController id="l4Q-mR-llZ" customClass="WebViewViewController" customModule="TrainingTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ttc-Bb-vqa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ztb-LT-teD"/>
+                    </view>
+                    <connections>
+                        <segue destination="OcE-Xe-mhl" kind="show" id="Hnk-Ev-Bdl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhK-9h-AZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218.84057971014494" y="23.64130434782609"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -28,7 +46,7 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="VKAuthorization:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qlj-GJ-Qkc"/>
-                                    <segue destination="OcE-Xe-mhl" kind="show" id="K1C-rk-sz5"/>
+                                    <segue destination="l4Q-mR-llZ" kind="show" id="7vj-g8-Ek7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -48,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="37.681159420289859" y="23.64130434782609"/>
+            <point key="canvasLocation" x="-596" y="24"/>
         </scene>
         <!--Item-->
         <scene sceneID="Fy4-tv-A1X">
