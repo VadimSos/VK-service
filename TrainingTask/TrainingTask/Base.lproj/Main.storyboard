@@ -45,8 +45,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="VKAuthorization:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qlj-GJ-Qkc"/>
-                                    <segue destination="l4Q-mR-llZ" kind="show" id="7vj-g8-Ek7"/>
+                                    <segue destination="l4Q-mR-llZ" kind="show" id="Qtd-K6-YME"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -21,11 +21,17 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        OAuthURLRequest(clientID: "client_id=6191231&", scope: "scope=4096&", redirectURL: "redirect_uri=https://oauth.vk.com&", display: "display=page&", version: "v=5.101&", responseToken: "response_type=token")
+        componentsOfURLRequest()
     }
 
-    func OAuthURLRequest(clientID: String, scope: String, redirectURL: String, display: String, version: String, responseToken: String) {
+    func componentsOfURLRequest() {
         let api = "https://oauth.vk.com/authorize?"
+        let clientID = "client_id=6191231&"
+        let scope = "scope=4096&"
+        let redirectURL = "redirect_uri=https://oauth.vk.com&"
+        let display = "display=page&"
+        let version = "v=5.101&"
+        let responseToken = "response_type=token"
         let myURL = URL(string: api + clientID + scope + redirectURL + display + version + responseToken)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)

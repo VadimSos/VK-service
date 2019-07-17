@@ -10,7 +10,6 @@ import UIKit
 import p2_OAuth2
 import Alamofire
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIView {
 
-    
 }
