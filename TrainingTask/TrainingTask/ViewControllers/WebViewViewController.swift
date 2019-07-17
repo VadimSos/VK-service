@@ -12,7 +12,7 @@ import WebKit
 class WebViewViewController: UIViewController {
 
     var webView: WKWebView!
-    
+
     override func loadView() {
         webView = WKWebView()
         view = webView
@@ -21,7 +21,12 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let myURL = URL(string: "https://oauth.vk.com/authorize?client_id=6191231&scope=4096&redirect_uri=https://oauth.vk.com&display=page&v=5.101&response_type=token")
+        OAuthURLRequest(clientID: "client_id=6191231&", scope: "scope=4096&", redirectURL: "redirect_uri=https://oauth.vk.com&", display: "display=page&", version: "v=5.101&", responseToken: "response_type=token")
+    }
+
+    func OAuthURLRequest(clientID: String, scope: String, redirectURL: String, display: String, version: String, responseToken: String) {
+        let api = "https://oauth.vk.com/authorize?"
+        let myURL = URL(string: api + clientID + scope + redirectURL + display + version + responseToken)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
