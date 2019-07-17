@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import p2_OAuth2
-import Alamofire
 
-class LoginViewController: UIView {
+class LoginViewController: UIViewController {
 
 }
