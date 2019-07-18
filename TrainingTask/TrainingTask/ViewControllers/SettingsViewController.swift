@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController {
         let requestToken = compileToken()
         guard let myURL = URL(string: api + version + requestToken) else {return}
         
-        Alamofire.request(myURL).responseJSON { response in
+        AF.request(myURL).responseJSON { response in
             debugPrint(response)
             
             if let json = response.result.value {
