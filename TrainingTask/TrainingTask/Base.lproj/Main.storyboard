@@ -21,7 +21,7 @@
                         <viewLayoutGuide key="safeArea" id="ztb-LT-teD"/>
                     </view>
                     <connections>
-                        <segue destination="OcE-Xe-mhl" kind="show" id="Hnk-Ev-Bdl"/>
+                        <segue destination="OcE-Xe-mhl" kind="show" identifier="toTabBat" id="Hnk-Ev-Bdl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhK-9h-AZF" userLabel="First Responder" sceneMemberID="firstResponder"/>

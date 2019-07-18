@@ -27,6 +27,7 @@ class WebViewViewController: UIViewController {
         componentsOfURLRequest()
     }
 
+    //create, send URL to VK
     func componentsOfURLRequest() {
         let api = "https://oauth.vk.com/authorize?"
         let clientID = "client_id=6191231&"
@@ -41,6 +42,8 @@ class WebViewViewController: UIViewController {
     }
 }
 
+    // MARK: - handle response URL
+
 extension WebViewViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
@@ -50,7 +53,12 @@ extension WebViewViewController: WKNavigationDelegate {
             let stringURL = requestURL!.absoluteString
 
             if validateResponseUrl(stringURL: stringURL) {
-                _ = requestURL?.params(url: requestURL!)
+                let parseURLResult = requestURL?.params(url: requestURL!)
+
+                //open tab bar controller
+                if parseURLResult!.count <= 4 {
+                    performSegue(withIdentifier: "toTabBat", sender: nil)
+                }
                 return decisionHandler(.allow)
             }
             return decisionHandler(.allow)

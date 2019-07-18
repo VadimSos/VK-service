@@ -31,7 +31,7 @@ extension URL {
                 do {
                     try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
                 } catch {
-                    print(tokenDict)
+                    print(error)
                 }
             }
 
