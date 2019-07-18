@@ -50,11 +50,7 @@ extension WebViewViewController: WKNavigationDelegate {
             let stringURL = requestURL!.absoluteString
 
             if validateResponseUrl(stringURL: stringURL) {
-//                    let httpResponse = requestURL as? HTTPURLResponse
-//                    let token = httpResponse?.allHeaderFields["access_token"] as? String
-//                    print(token)
-//                let allParameters = requestURL?.params()
-//                print(allParameters)
+                _ = requestURL?.params(url: requestURL!)
                 return decisionHandler(.allow)
             }
             return decisionHandler(.allow)
