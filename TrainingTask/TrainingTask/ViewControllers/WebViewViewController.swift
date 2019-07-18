@@ -24,11 +24,11 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        componentsOfURLRequest()
+        urlRequest()
     }
 
     //create, send URL to VK
-    func componentsOfURLRequest() {
+    func urlRequest() {
         let api = "https://oauth.vk.com/authorize?"
         let clientID = "client_id=6191231&"
         let scope = "scope=4096&"

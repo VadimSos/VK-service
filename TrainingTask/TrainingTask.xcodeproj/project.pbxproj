@@ -16,6 +16,7 @@
 		ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12C722DDE81900534EED /* ButtonRounded.swift */; };
 		ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */; };
 		ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CE22DF4D3B00534EED /* ParseURL.swift */; };
+		ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12D222E0831F00534EED /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		ED3E12C722DDE81900534EED /* ButtonRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRounded.swift; sourceTree = "<group>"; };
 		ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		ED3E12CE22DF4D3B00534EED /* ParseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseURL.swift; sourceTree = "<group>"; };
+		ED3E12D222E0831F00534EED /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				ED28224622DCDF0E003F1784 /* LoginViewController.swift */,
 				ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */,
+				ED3E12D222E0831F00534EED /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
 				ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */,
+				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
