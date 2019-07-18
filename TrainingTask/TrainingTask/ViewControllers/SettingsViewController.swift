@@ -9,6 +9,7 @@
 import UIKit
 import Locksmith
 import Alamofire
+import SwiftyJSON
 
 class SettingsViewController: UIViewController {
 
@@ -31,34 +32,21 @@ class SettingsViewController: UIViewController {
         let version = "v=5.101&"
         let requestToken = compileToken()
         guard let myURL = URL(string: api + version + requestToken) else {return}
-        
-        AF.request(myURL).responseJSON { response in
-            debugPrint(response)
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-                
-                /*JSON: {
-                    response =     {
-                        bdate = "20.4.1991";
-                        "bdate_visibility" = 0;
-                        city =         {
-                            id = 282;
-                            title = Minsk;
-                        };
-                        country =         {
-                            id = 3;
-                            title = Belarus;
-                        };
-                        "first_name" = Vadim;
-                        "home_town" = "\U041c\U0438\U043d\U0441\U043a";
-                        "last_name" = Sosnovsky;
-                        phone = "+375 ** *** ** 91";
-                        relation = 0;
-                        sex = 2;
-                        status = "+375295000791";
-                    };
-                }*/
+
+        //send request and operate response
+        AF.request(myURL).responseData { response in
+
+            if let data = response.data {
+                do {
+                    let json = try JSON(data: data)
+                    //take dictionary from JSON
+                    let response = json["response"].dictionaryValue
+                    //take value from dictionary
+                    let name = response["first_name"]?.stringValue
+                    self.accountName.text = name
+                } catch {
+                    print(error)
+                }
             }
         }
     }
