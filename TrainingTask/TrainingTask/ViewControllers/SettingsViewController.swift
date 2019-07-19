@@ -63,4 +63,14 @@ class SettingsViewController: UIViewController {
 
         return finalToken
     }
+
+    @IBAction func logoutButtonDidTab(_ sender: UIButton) {
+        do {
+            try Locksmith.deleteDataForUserAccount(userAccount: "VK")
+        } catch {
+            print(error)
+        }
+
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
 }

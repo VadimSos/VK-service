@@ -33,10 +33,10 @@ class ChatViewController: UIViewController {
         let extended = "extended=0&"
         let version = "v=5.101&"
         let requestToken = compileToken()
-        guard let myURL = URL(string: api + version + requestToken) else {return}
+        guard let myURL = URL(string: api + offset + count + filter + extended + version + requestToken) else {return}
 
         //send request and operate response
-        AF.request(myURL).responseData { response in
+        AF.request(myURL).responseJSON { response in
             debugPrint(response)
         }
     }

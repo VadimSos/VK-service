@@ -186,6 +186,9 @@
                                     <constraint firstAttribute="height" constant="50" id="WhM-oX-w3k"/>
                                 </constraints>
                                 <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonDidTab:" destination="rZs-wg-4En" eventType="touchUpInside" id="PaM-MU-PKb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03R-MJ-Y08">
                                 <rect key="frame" x="100" y="290" width="214" height="40"/>
