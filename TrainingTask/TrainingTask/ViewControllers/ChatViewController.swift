@@ -26,7 +26,7 @@ class ChatViewController: UIViewController {
 
     //create, send URL to VK
     func urlRequest() {
-        let api = "https://api.vk.com/method/messages.getChat?"
+        let api = "https://api.vk.com/method/messages.getConversations?"
         let offset = "offset=0&"
         let count = "count=1&"
         let filter = "filter=all&"
@@ -52,5 +52,19 @@ class ChatViewController: UIViewController {
         let finalToken = tokenKey + "=" + tokenValue
 
         return finalToken
+    }
+}
+
+extension ChatViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as? ChatTabTableViewCell else {
+            fatalError("error")
+        }
+
+        return cell
     }
 }
