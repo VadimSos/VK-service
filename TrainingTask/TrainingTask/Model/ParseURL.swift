@@ -28,10 +28,18 @@ extension URL {
             if word.contains("#") {
                 let index = dict.index(forKey: "access_token")
                 let tokenDict: [String: String] = [dict[index!].key: dict[index!].value as? String ?? "error"]
-                do {
-                    try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
-                } catch {
-                    print(error)
+                if Locksmith.loadDataForUserAccount(userAccount: "VK") != nil {
+                    do {
+                        try Locksmith.updateData(data: tokenDict, forUserAccount: "VK")
+                    } catch {
+                        print(error)
+                    }
+                } else {
+                    do {
+                        try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
+                    } catch {
+                        print(error)
+                    }
                 }
             }
 

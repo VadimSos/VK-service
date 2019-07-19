@@ -30,8 +30,8 @@ class WebViewViewController: UIViewController {
     //create, send URL to VK
     func urlRequest() {
         let api = "https://oauth.vk.com/authorize?"
-        let clientID = "client_id=6191231&"
-        let scope = "scope=4096&"
+        let clientID = "client_id=7062888&"
+        let scope = "scope=4102&"
         let display = "display=page&"
         let version = "v=5.101&"
         let responseToken = "response_type=token"
