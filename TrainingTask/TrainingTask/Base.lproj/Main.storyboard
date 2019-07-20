@@ -67,10 +67,10 @@
             </objects>
             <point key="canvasLocation" x="-596" y="24"/>
         </scene>
-        <!--Chats-->
+        <!--Groups-->
         <scene sceneID="Fy4-tv-A1X">
             <objects>
-                <viewController id="Buh-gw-axe" customClass="ChatViewController" customModule="TrainingTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Buh-gw-axe" customClass="GroupsViewController" customModule="TrainingTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qgp-lN-LrX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +79,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chatCell" rowHeight="70" id="98o-O1-Ry3" customClass="ChatTabTableViewCell" customModule="TrainingTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupsCell" rowHeight="70" id="98o-O1-Ry3" customClass="GroupsTableViewCell" customModule="TrainingTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="98o-O1-Ry3" id="JSu-RN-k8C">
@@ -120,9 +120,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="chatImage" destination="EId-bc-Dih" id="uYJ-LI-XBz"/>
-                                            <outlet property="chatLastMessageLabel" destination="L8g-G8-tj6" id="BDz-px-yTu"/>
-                                            <outlet property="chatNameLabel" destination="xYT-E1-Zh2" id="9Gn-Vp-w5Z"/>
+                                            <outlet property="groupsImage" destination="EId-bc-Dih" id="QQ4-IY-8YM"/>
+                                            <outlet property="groupsName" destination="xYT-E1-Zh2" id="xjx-Jk-08r"/>
+                                            <outlet property="groupsType" destination="L8g-G8-tj6" id="21T-pA-UQY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -137,9 +137,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="buK-wn-aJg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chats" image="tabBarChat" id="HpZ-SB-3LZ"/>
+                    <tabBarItem key="tabBarItem" title="Groups" image="tabBarChat" id="HpZ-SB-3LZ"/>
                     <connections>
-                        <outlet property="chatTableView" destination="1Vr-Cq-MfT" id="9AQ-ya-gMP"/>
+                        <outlet property="group" destination="1Vr-Cq-MfT" id="sQb-kg-SAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7G-VE-X5U" userLabel="First Responder" sceneMemberID="firstResponder"/>

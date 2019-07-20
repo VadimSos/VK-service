@@ -1,22 +1,22 @@
 //
-//  ChatTabTableViewCell.swift
+//  GroupsTableViewCell.swift
 //  TrainingTask
 //
-//  Created by Sosnovsky, Vadim on 7/19/19.
+//  Created by Vadzim Sasnouski on 7/20/19.
 //  Copyright © 2019 Sosnovsky, Vadim. All rights reserved.
 //
 
 import UIKit
 
-class ChatTabTableViewCell: UITableViewCell {
+class GroupsTableViewCell: UITableViewCell {
 
-    // MARK: - Outlets
+	// MARK: - Outlets
 
-    @IBOutlet weak var chatImage: UIImageView!
-    @IBOutlet weak var chatNameLabel: UILabel!
-    @IBOutlet weak var chatLastMessageLabel: UILabel!
+	@IBOutlet weak var groupsImage: UIImageView!
+	@IBOutlet weak var groupsName: UILabel!
+	@IBOutlet weak var groupsType: UILabel!
 
-    override func awakeFromNib() {
+	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
