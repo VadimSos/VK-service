@@ -30,16 +30,12 @@ class WebViewViewController: UIViewController {
     //create, send URL to VK
     func urlRequest() {
         let api = "https://oauth.vk.com/authorize?"
-        let clientID = "client_id=6191231&"
-        let scope = "scope=messages&"
+        let clientID = "client_id=7062888&"
         let display = "display=page&"
         let version = "v=5.101&"
         let responseToken = "response_type=token&"
-//        let start_message_id = "start_message_id=1"
-//        let fileds = "fields=career"
-//        let group_id = "group_id=1"
         let revoke = "revoke=1"
-        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
+        let myURL = URL(string: api + clientID + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.allowsBackForwardNavigationGestures = true //move backward or forward in web browsing

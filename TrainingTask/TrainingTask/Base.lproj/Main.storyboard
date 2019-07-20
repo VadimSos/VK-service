@@ -139,7 +139,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Groups" image="tabBarChat" id="HpZ-SB-3LZ"/>
                     <connections>
-                        <outlet property="group" destination="1Vr-Cq-MfT" id="sQb-kg-SAo"/>
+                        <outlet property="groupsTableView" destination="1Vr-Cq-MfT" id="sQb-kg-SAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7G-VE-X5U" userLabel="First Responder" sceneMemberID="firstResponder"/>

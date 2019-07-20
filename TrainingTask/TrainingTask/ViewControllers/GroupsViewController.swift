@@ -14,7 +14,11 @@ class GroupsViewController: UIViewController {
 
 	// MARK: - Outlets
 
-	@IBOutlet weak var group: UITableView!
+	@IBOutlet weak var groupsTableView: UITableView!
+	
+	// MARK: - Variables
+	
+	let countAmmount = 10
 
 	// MARK: - Lifecycle
 
@@ -26,18 +30,26 @@ class GroupsViewController: UIViewController {
 
 	//create, send URL to VK
 	func urlRequest() {
-		let api = "https://api.vk.com/method/messages.getConversations?"
-		let offset = "offset=0&"
-		let count = "count=1&"
-		let filter = "filter=all&"
-		let extended = "extended=0&"
+		let api = "https://api.vk.com/method/groups.get?"
+		let extended = "extended=1&"
+		let count = "count=\(countAmmount)&"
 		let version = "v=5.101&"
 		let requestToken = compileToken()
-		guard let myURL = URL(string: api + offset + count + filter + extended + version + requestToken) else {return}
+		guard let myURL = URL(string: api + extended + count + version + requestToken) else {return}
 
 		//send request and operate response
 		AF.request(myURL).responseJSON { response in
-			debugPrint(response)
+			print("Request: \(String(describing: response.request))")   // original url request
+			print("Response: \(String(describing: response.response))") // http url response
+			print("Result: \(response.result)")                         // response serialization result
+			
+			if let json = response.result.value {
+				print("JSON: \(json)") // serialized json response
+			}
+			
+			if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+				print("Data: \(utf8Text)") // original server data as UTF8 string
+			}
 		}
 	}
 
@@ -57,7 +69,7 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 5
+		return countAmmount
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
