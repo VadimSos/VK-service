@@ -7,13 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		D7FC92CC14426D68BCBF240C /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2926435EA017BBC553EDADF /* Pods_TrainingTask.framework */; };
-=======
-		70F23C6DB061E6DCB900E48E /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DB5EDCFE8FAC22C0EF3F4 /* Pods_TrainingTask.framework */; };
-		ED11FF0322E1A06500D1E149 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11FF0222E1A06500D1E149 /* ChatViewController.swift */; };
-		ED11FF0522E1CFC300D1E149 /* ChatTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11FF0422E1CFC300D1E149 /* ChatTabTableViewCell.swift */; };
->>>>>>> 975d63da846d7f87e79fecc9b6ef9e3b6c0ec66a
 		ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224422DCDF0E003F1784 /* AppDelegate.swift */; };
 		ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224622DCDF0E003F1784 /* LoginViewController.swift */; };
 		ED28224A22DCDF0E003F1784 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED28224822DCDF0E003F1784 /* Main.storyboard */; };
