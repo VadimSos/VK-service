@@ -11,7 +11,7 @@ import WebKit
 
 class WebViewViewController: UIViewController {
 
-    private let redirectURL = "https://oauth.vk.com"
+    private let redirectURL = "https://oauth.vk.com/blank.html"
 
     var webView: WKWebView!
 
@@ -31,11 +31,15 @@ class WebViewViewController: UIViewController {
     func urlRequest() {
         let api = "https://oauth.vk.com/authorize?"
         let clientID = "client_id=6191231&"
-        let scope = "scope=4096&"
+        let scope = "scope=messages&"
         let display = "display=page&"
         let version = "v=5.101&"
-        let responseToken = "response_type=token"
-        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken)
+        let responseToken = "response_type=token&"
+//        let start_message_id = "start_message_id=1"
+//        let fileds = "fields=career"
+//        let group_id = "group_id=1"
+        let revoke = "revoke=1"
+        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.allowsBackForwardNavigationGestures = true //move backward or forward in web browsing
@@ -56,7 +60,11 @@ extension WebViewViewController: WKNavigationDelegate {
                 let parseURLResult = requestURL?.params(url: requestURL!)
 
                 //open tab bar controller
-                if parseURLResult!.count <= 4 {
+                if parseURLResult!.count <= 3 {
+                    if parseURLResult?.keys.first?.first == "e" {
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        return decisionHandler(.cancel)
+                    }
                     performSegue(withIdentifier: "toTabBat", sender: nil)
                 }
                 return decisionHandler(.allow)

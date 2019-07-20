@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		D7FC92CC14426D68BCBF240C /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2926435EA017BBC553EDADF /* Pods_TrainingTask.framework */; };
+=======
+		70F23C6DB061E6DCB900E48E /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DB5EDCFE8FAC22C0EF3F4 /* Pods_TrainingTask.framework */; };
+		ED11FF0322E1A06500D1E149 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11FF0222E1A06500D1E149 /* ChatViewController.swift */; };
+		ED11FF0522E1CFC300D1E149 /* ChatTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11FF0422E1CFC300D1E149 /* ChatTabTableViewCell.swift */; };
+>>>>>>> 975d63da846d7f87e79fecc9b6ef9e3b6c0ec66a
 		ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224422DCDF0E003F1784 /* AppDelegate.swift */; };
 		ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224622DCDF0E003F1784 /* LoginViewController.swift */; };
 		ED28224A22DCDF0E003F1784 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED28224822DCDF0E003F1784 /* Main.storyboard */; };
@@ -20,9 +26,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		8A0DE7E72E991A6F5A2FF8DB /* Pods-TrainingTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.release.xcconfig"; sourceTree = "<group>"; };
 		9001234C6259C9C8952232CF /* Pods-TrainingTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.debug.xcconfig"; sourceTree = "<group>"; };
 		C2926435EA017BBC553EDADF /* Pods_TrainingTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainingTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+=======
+		BCB67914F9636BCC374FA2A2 /* Pods-TrainingTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.debug.xcconfig"; path = "Target Support Files/Pods-TrainingTask/Pods-TrainingTask.debug.xcconfig"; sourceTree = "<group>"; };
+		C0732739AFD2106AD8ACF943 /* Pods-TrainingTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.release.xcconfig"; path = "Target Support Files/Pods-TrainingTask/Pods-TrainingTask.release.xcconfig"; sourceTree = "<group>"; };
+		ED11FF0222E1A06500D1E149 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		ED11FF0422E1CFC300D1E149 /* ChatTabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabTableViewCell.swift; sourceTree = "<group>"; };
+>>>>>>> 975d63da846d7f87e79fecc9b6ef9e3b6c0ec66a
 		ED28224122DCDF0E003F1784 /* TrainingTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainingTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED28224422DCDF0E003F1784 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED28224622DCDF0E003F1784 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +149,8 @@
 				ED28224622DCDF0E003F1784 /* LoginViewController.swift */,
 				ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */,
 				ED3E12D222E0831F00534EED /* SettingsViewController.swift */,
+				ED11FF0222E1A06500D1E149 /* ChatViewController.swift */,
+				ED11FF0422E1CFC300D1E149 /* ChatTabTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -285,9 +300,11 @@
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
+				ED11FF0322E1A06500D1E149 /* ChatViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
 				ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */,
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
+				ED11FF0522E1CFC300D1E149 /* ChatTabTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
