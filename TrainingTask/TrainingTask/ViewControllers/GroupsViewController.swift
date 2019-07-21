@@ -20,7 +20,7 @@ class GroupsViewController: UIViewController {
 
 	// MARK: - Variables
 
-	var countAmmount = 10
+	var countAmmount = 12
 	var groupsArray: [PostModel] = []
 
 	// MARK: - Lifecycle
@@ -56,7 +56,6 @@ class GroupsViewController: UIViewController {
 
 						let urlImageView = UIImageView()
 						urlImageView.load(url: urlImage)
-
 						self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
 					}
 				} catch {
