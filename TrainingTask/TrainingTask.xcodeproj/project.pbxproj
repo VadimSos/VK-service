@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		30F6E3C45474D5171E660779 /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E71645DF89DA9D9AF1B69DAD /* Pods_TrainingTask.framework */; };
+		3F31DC0122E4600D00D7AAC9 /* PostModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0022E4600D00D7AAC9 /* PostModelProtocol.swift */; };
+		3F31DC0322E4606300D7AAC9 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0222E4606300D7AAC9 /* PostModel.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
 		D7FC92CC14426D68BCBF240C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		392B5EB580878434B2CD47A0 /* Pods-TrainingTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.debug.xcconfig"; sourceTree = "<group>"; };
+		3F31DC0022E4600D00D7AAC9 /* PostModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModelProtocol.swift; sourceTree = "<group>"; };
+		3F31DC0222E4606300D7AAC9 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		DE89C317A00B81F8B32637B4 /* Pods-TrainingTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				ED3E12CE22DF4D3B00534EED /* ParseURL.swift */,
+				3F31DC0022E4600D00D7AAC9 /* PostModelProtocol.swift */,
+				3F31DC0222E4606300D7AAC9 /* PostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */,
+				3F31DC0322E4606300D7AAC9 /* PostModel.swift in Sources */,
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
@@ -298,6 +305,7 @@
 				ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */,
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
 				3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */,
+				3F31DC0122E4600D00D7AAC9 /* PostModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

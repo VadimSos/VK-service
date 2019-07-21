@@ -9,16 +9,18 @@
 import UIKit
 import Locksmith
 import Alamofire
+import SwiftyJSON
 
 class GroupsViewController: UIViewController {
 
 	// MARK: - Outlets
 
 	@IBOutlet weak var groupsTableView: UITableView!
-	
+
 	// MARK: - Variables
-	
-	let countAmmount = 10
+
+	var countAmmount = 10
+	var namesArray: [PostModel] = []
 
 	// MARK: - Lifecycle
 
@@ -38,18 +40,24 @@ class GroupsViewController: UIViewController {
 		guard let myURL = URL(string: api + extended + count + version + requestToken) else {return}
 
 		//send request and operate response
-		AF.request(myURL).responseJSON { response in
-			print("Request: \(String(describing: response.request))")   // original url request
-			print("Response: \(String(describing: response.response))") // http url response
-			print("Result: \(response.result)")                         // response serialization result
-			
-			if let json = response.result.value {
-				print("JSON: \(json)") // serialized json response
+		AF.request(myURL).responseData { response in
+			if let data = response.data {
+				do {
+					let json = try JSON(data: data)
+					//take dictionary from JSON
+					let response = json["response"].dictionaryValue
+					//take value from dictionary
+					guard let items = response["items"]?.arrayValue else {return}
+					//save names into array
+					for items in items {
+						guard let name = items["name"].string else {return}
+						self.namesArray.append(PostModel(pGroupName: name))
+					}
+				} catch {
+					print(error)
+				}
 			}
-			
-			if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-				print("Data: \(utf8Text)") // original server data as UTF8 string
-			}
+			self.groupsTableView.reloadData()
 		}
 	}
 
@@ -69,13 +77,14 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return countAmmount
+		return namesArray.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
 			fatalError("error")
 		}
+		cell.updateTableOfGroups(with: namesArray[indexPath.row])
 		return cell
 	}
 }
