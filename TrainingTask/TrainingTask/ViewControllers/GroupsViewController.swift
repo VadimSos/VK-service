@@ -20,25 +20,36 @@ class GroupsViewController: UIViewController {
 
 	// MARK: - Variables
 
-	var countAmmount = 12
+	var userOffsetAmount = 0
 	var groupsArray: [PostModel] = []
+	var refreshControl: UIRefreshControl!
 
 	// MARK: - Lifecycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 		urlRequest()
+
+		refreshControl = UIRefreshControl()
+		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+		groupsTableView.addSubview(refreshControl)
+	}
+
+	@objc func refresh(_ sender: Any) {
+		urlRequest()
+		refreshControl.endRefreshing()
 	}
 
 	//create, send URL to VK
 	func urlRequest() {
 		let api = "https://api.vk.com/method/groups.get?"
 		let extended = "extended=1&"
-		let count = "count=\(countAmmount)&"
+		let count = "count=12&"
+		let offset = "offset=\(userOffsetAmount)&"
 		let version = "v=5.101&"
 		let requestToken = compileToken()
-		guard let myURL = URL(string: api + extended + count + version + requestToken) else {return}
+		guard let myURL = URL(string: api + extended + offset + count + version + requestToken) else {return}
 
 		//send request and operate response
 		AF.request(myURL).responseData { response in
@@ -49,6 +60,8 @@ class GroupsViewController: UIViewController {
 					let response = json["response"].dictionaryValue
 					//take value from dictionary
 					guard let items = response["items"]?.arrayValue else {return}
+					guard let groupCount = response["count"]?.intValue else {return}
+					self.userOffsetAmount += 12
 					//save names into array and link into array
 					for eachItems in items {
 						guard let name = eachItems["name"].string else {return}

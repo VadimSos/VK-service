@@ -17,7 +17,7 @@ struct PostModel: GroupsPostProtocol {
 	func postGroupName() -> String {
 		return self.pGroupName
 	}
-	
+
 	func postImage() -> UIImage {
 		return self.pGroupImage
 	}
