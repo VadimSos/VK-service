@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
-struct PostModel: PostModelProtocol {
+struct PostModel: GroupsPostProtocol {
 
 	var pGroupName: String
+	var pGroupImage: UIImage
 
 	func postGroupName() -> String {
 		return self.pGroupName
+	}
+	
+	func postImage() -> UIImage {
+		return self.pGroupImage
 	}
 }

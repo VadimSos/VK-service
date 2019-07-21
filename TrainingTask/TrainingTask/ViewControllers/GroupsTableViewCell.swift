@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class GroupsTableViewCell: UITableViewCell {
 
@@ -16,8 +17,9 @@ class GroupsTableViewCell: UITableViewCell {
 	@IBOutlet weak var groupsName: UILabel!
 	@IBOutlet weak var groupsType: UILabel!
 
-	func updateTableOfGroups(with items: PostModelProtocol) {
+	func updateTableOfGroups(with items: GroupsPostProtocol) {
 		groupsName.text = items.postGroupName()
+		groupsImage.image = items.postImage()
 	}
 
 }

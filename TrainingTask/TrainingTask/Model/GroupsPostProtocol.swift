@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-protocol PostModelProtocol {
+protocol GroupsPostProtocol {
 	func postGroupName() -> String
+	func postImage() -> UIImage
 }

@@ -10,6 +10,7 @@ import UIKit
 import Locksmith
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class GroupsViewController: UIViewController {
 
@@ -20,7 +21,7 @@ class GroupsViewController: UIViewController {
 	// MARK: - Variables
 
 	var countAmmount = 10
-	var namesArray: [PostModel] = []
+	var groupsArray: [PostModel] = []
 
 	// MARK: - Lifecycle
 
@@ -48,10 +49,15 @@ class GroupsViewController: UIViewController {
 					let response = json["response"].dictionaryValue
 					//take value from dictionary
 					guard let items = response["items"]?.arrayValue else {return}
-					//save names into array
-					for items in items {
-						guard let name = items["name"].string else {return}
-						self.namesArray.append(PostModel(pGroupName: name))
+					//save names into array and link into array
+					for eachItems in items {
+						guard let name = eachItems["name"].string else {return}
+						guard let urlImage = eachItems["photo_50"].url else {return}
+
+						let urlImageView = UIImageView()
+						urlImageView.load(url: urlImage)
+
+						self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
 					}
 				} catch {
 					print(error)
@@ -77,14 +83,14 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return namesArray.count
+		return groupsArray.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
 			fatalError("error")
 		}
-		cell.updateTableOfGroups(with: namesArray[indexPath.row])
+		cell.updateTableOfGroups(with: groupsArray[indexPath.row])
 		return cell
 	}
 }
