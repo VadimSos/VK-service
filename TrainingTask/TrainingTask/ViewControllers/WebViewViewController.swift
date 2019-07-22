@@ -56,10 +56,11 @@ extension WebViewViewController: WKNavigationDelegate {
                 let parseURLResult = requestURL?.params(url: requestURL!)
                 //open tab bar controller
                 if parseURLResult!.count <= 3 {
-//					if parseURLResult?.keys.first?.first == "e" {
-//                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-//                        return decisionHandler(.cancel)
-//                    }
+                    //if cancel permissions in VK
+                    if parseURLResult?.keys.first?.description == "error_description" || parseURLResult?.keys.first?.description == "error" || parseURLResult?.keys.first?.description == "error_reason"{
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        return decisionHandler(.cancel)
+                    }
                     performSegue(withIdentifier: "toTabBat", sender: nil)
                 }
                 return decisionHandler(.allow)

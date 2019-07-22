@@ -14,8 +14,9 @@ import SDWebImage
 
 class GroupsViewController: UIViewController {
 
-	// MARK: - Outlets
+        // MARK: - Outlets
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var groupsTableView: UITableView!
 
 	// MARK: - Variables
@@ -23,6 +24,7 @@ class GroupsViewController: UIViewController {
 	var userOffsetAmount = 0
 	var groupsArray: [PostModel] = []
 	var refreshControl: UIRefreshControl!
+//    var loadMoreStatus = true
 
 	// MARK: - Lifecycle
 
@@ -31,15 +33,32 @@ class GroupsViewController: UIViewController {
 		urlRequest()
 
 		refreshControl = UIRefreshControl()
-		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+		refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
 		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 		groupsTableView.addSubview(refreshControl)
+        self.groupsTableView.tableFooterView?.isHidden = true
 	}
 
 	@objc func refresh(_ sender: Any) {
-		urlRequest()
+
+//        if loadMoreStatus == true {
+//            self.loadMoreStatus = true
+//            self.activityIndicator.startAnimating()
+//            self.groupsTableView.tableFooterView!.isHidden = false
+//        }
+        urlRequest()
 		refreshControl.endRefreshing()
 	}
+
+//    func scrollViewDidScroll(scrollView: UIScrollView!) {
+//        let currentOffset = scrollView.contentOffset.y
+//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//        let deltaOffset = maximumOffset - currentOffset
+//
+//        if deltaOffset <= 0 {
+//            urlRequest()
+//        }
+//    }
 
 	//create, send URL to VK
 	func urlRequest() {
@@ -60,7 +79,6 @@ class GroupsViewController: UIViewController {
 					let response = json["response"].dictionaryValue
 					//take value from dictionary
 					guard let items = response["items"]?.arrayValue else {return}
-					guard let groupCount = response["count"]?.intValue else {return}
 					self.userOffsetAmount += 12
 					//save names into array and link into array
 					for eachItems in items {
