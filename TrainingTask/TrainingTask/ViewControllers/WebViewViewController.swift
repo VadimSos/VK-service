@@ -73,7 +73,6 @@ extension WebViewViewController: WKNavigationDelegate {
     }
 
     func validateResponseUrl (stringURL: String) -> Bool {
-
         var result = false
         if stringURL.hasPrefix("\(redirectURL)") || stringURL.hasPrefix("https://oauth.vk.com/authorize") {
             result = true

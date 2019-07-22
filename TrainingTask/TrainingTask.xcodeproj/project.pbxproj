@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,7 @@
 		3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0622E4791600D7AAC9 /* UIImageView.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
-		D7FC92CC14426D68BCBF240C /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D7FC92CC14426D68BCBF240C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224422DCDF0E003F1784 /* AppDelegate.swift */; };
 		ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224622DCDF0E003F1784 /* LoginViewController.swift */; };
 		ED28224A22DCDF0E003F1784 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED28224822DCDF0E003F1784 /* Main.storyboard */; };
@@ -23,6 +23,10 @@
 		ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */; };
 		ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CE22DF4D3B00534EED /* ParseURL.swift */; };
 		ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12D222E0831F00534EED /* SettingsViewController.swift */; };
+		EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */; };
+		EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */; };
+		EDD80B1722E5E74500784AF2 /* PostsPostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1622E5E74500784AF2 /* PostsPostProtocol.swift */; };
+		EDD80B1922E5E77E00784AF2 /* PostsPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1822E5E77E00784AF2 /* PostsPostModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		ED3E12CE22DF4D3B00534EED /* ParseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseURL.swift; sourceTree = "<group>"; };
 		ED3E12D222E0831F00534EED /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
+		EDD80B1622E5E74500784AF2 /* PostsPostProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPostProtocol.swift; sourceTree = "<group>"; };
+		EDD80B1822E5E77E00784AF2 /* PostsPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPostModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7FC92CC14426D68BCBF240C /* BuildFile in Frameworks */,
+				D7FC92CC14426D68BCBF240C /* (null) in Frameworks */,
 				30F6E3C45474D5171E660779 /* Pods_TrainingTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,9 +130,9 @@
 		ED3E12B722DDAEEC00534EED /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EDD80B1322E5E70D00784AF2 /* Posts */,
+				EDD80B1222E5E6F900784AF2 /* Groups */,
 				ED3E12CE22DF4D3B00534EED /* ParseURL.swift */,
-				3F31DC0022E4600D00D7AAC9 /* GroupsPostProtocol.swift */,
-				3F31DC0222E4606300D7AAC9 /* PostModel.swift */,
 				3F31DC0622E4791600D7AAC9 /* UIImageView.swift */,
 			);
 			path = Model;
@@ -150,11 +158,31 @@
 			children = (
 				ED28224622DCDF0E003F1784 /* LoginViewController.swift */,
 				ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */,
-				ED3E12D222E0831F00534EED /* SettingsViewController.swift */,
 				3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */,
 				3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */,
+				EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */,
+				EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */,
+				ED3E12D222E0831F00534EED /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EDD80B1222E5E6F900784AF2 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				3F31DC0022E4600D00D7AAC9 /* GroupsPostProtocol.swift */,
+				3F31DC0222E4606300D7AAC9 /* PostModel.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		EDD80B1322E5E70D00784AF2 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				EDD80B1622E5E74500784AF2 /* PostsPostProtocol.swift */,
+				EDD80B1822E5E77E00784AF2 /* PostsPostModel.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,9 +318,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */,
 				3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */,
 				3F31DC0322E4606300D7AAC9 /* PostModel.swift in Sources */,
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
+				EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
@@ -301,6 +331,8 @@
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
 				3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */,
 				3F31DC0122E4600D00D7AAC9 /* GroupsPostProtocol.swift in Sources */,
+				EDD80B1922E5E77E00784AF2 /* PostsPostModel.swift in Sources */,
+				EDD80B1722E5E74500784AF2 /* PostsPostProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
