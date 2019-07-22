@@ -65,15 +65,17 @@ extension WebViewViewController: WKNavigationDelegate {
                 }
                 return decisionHandler(.allow)
             }
-            return decisionHandler(.allow)
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            return decisionHandler(.cancel)
         }
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         decisionHandler(.cancel)
     }
 
     func validateResponseUrl (stringURL: String) -> Bool {
 
         var result = false
-        if stringURL.hasPrefix("\(redirectURL)") {
+        if stringURL.hasPrefix("\(redirectURL)") || stringURL.hasPrefix("https://oauth.vk.com/authorize") {
             result = true
         }
         return result
