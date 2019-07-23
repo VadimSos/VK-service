@@ -31,11 +31,12 @@ class WebViewViewController: UIViewController {
     func urlRequest() {
         let api = "https://oauth.vk.com/authorize?"
         let clientID = "client_id=7062888&"
+        let scope = "scope=8192&"
         let display = "display=page&"
         let version = "v=5.101&"
         let responseToken = "response_type=token&"
         let revoke = "revoke=1"
-        let myURL = URL(string: api + clientID + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
+        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.allowsBackForwardNavigationGestures = true //move backward or forward in web browsing

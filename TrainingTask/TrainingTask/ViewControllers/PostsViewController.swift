@@ -16,24 +16,27 @@ class PostsViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet weak var postTableView: UITableView!
-
-    // MARK: - Variables
+    @IBOutlet weak var postTextField: UITextField!
     
-    var userOffsetAmount = 10
+    // MARK: - Variables
+
+    var userOffsetAmount = 0
     var postsArray: [PostsPostModel] = []
+    var postText: [String] = []
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        urlRequest()
+        getPostList()
+        self.postTableView.rowHeight = 100
     }
 
     //create, send URL to VK
-    func urlRequest() {
+    func getPostList() {
         let api = "https://api.vk.com/method/wall.get?"
         let extended = "extended=1&"
-        let count = "count=8&"
+        let count = "count=15&"
         let offset = "offset=\(userOffsetAmount)&"
         let version = "v=5.101&"
         let requestToken = compileToken()
@@ -50,15 +53,17 @@ class PostsViewController: UIViewController {
                     guard let profiles = response["profiles"]?.arrayValue else {return}
                     self.userOffsetAmount += 8
                     guard let items = response["items"]?.arrayValue else {return}
-                    for eachPost in items {
-                        guard let postText = eachPost["text"].string else {return}
-                        //save names into array and link into array
-                        for eachProfile in profiles {
-                            guard let name = eachProfile["first_name"].string else {return}
-                            guard let urlImage = eachProfile["photo_50"].url else {return}
 
-                            let urlImageView = UIImageView()
-                            urlImageView.load(url: urlImage)
+                    //save names into array and link into array
+                    for eachProfile in profiles {
+                        guard let name = eachProfile["first_name"].string else {return}
+                        guard let urlImage = eachProfile["photo_50"].url else {return}
+
+                        let urlImageView = UIImageView()
+                        urlImageView.load(url: urlImage)
+
+                        for eachPost in items {
+                            guard let postText = eachPost["text"].string else {return}
                             self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
                         }
                     }
@@ -82,13 +87,30 @@ class PostsViewController: UIViewController {
 
         return finalToken
     }
+
+    @IBAction func addPostButtonDidTap(_ sender: UIButton) {
+        postPostList()
+    }
+
+    //add post
+    func postPostList() {
+        let api = "https://api.vk.com/method/wall.post?"
+        guard let text = postTextField.text else {return}
+        let message = "message=\(text)&"
+        let version = "v=5.101&"
+        let requestToken = compileToken()
+        guard let myURL = URL(string: api + message + version + requestToken) else {return}
+
+        //make post on the wall
+        AF.request(myURL)
+    }
 }
 
 extension PostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postsArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath) as? PostsTableViewCell else {
             fatalError("error")

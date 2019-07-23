@@ -26,6 +26,4 @@ struct PostsPostModel: PostsPostProtocol {
     func postUserText() -> String {
         return self.pUserText
     }
-    
-    
 }

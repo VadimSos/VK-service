@@ -64,7 +64,7 @@ class GroupsViewController: UIViewController {
 	func urlRequest() {
 		let api = "https://api.vk.com/method/groups.get?"
 		let extended = "extended=1&"
-		let count = "count=12&"
+		let count = "count=20&"
 		let offset = "offset=\(userOffsetAmount)&"
 		let version = "v=5.101&"
 		let requestToken = compileToken()
