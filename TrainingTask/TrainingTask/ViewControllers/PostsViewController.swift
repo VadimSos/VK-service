@@ -17,12 +17,13 @@ class PostsViewController: UIViewController {
 
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var postTextField: UITextField!
-    
+
     // MARK: - Variables
 
     var userOffsetAmount = 0
     var postsArray: [PostsPostModel] = []
     var postText: [String] = []
+    var refreshControl: UIRefreshControl!
 
     // MARK: - Lifecycle
 
@@ -30,6 +31,18 @@ class PostsViewController: UIViewController {
         super.viewDidLoad()
         getPostList()
         self.postTableView.rowHeight = 100
+
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        postTableView.addSubview(refreshControl)
+    }
+
+    @objc func refresh(_ sender: Any) {
+        postsArray.removeAll()
+        self.userOffsetAmount = 0
+        getPostList()
+        refreshControl.endRefreshing()
     }
 
     //create, send URL to VK
@@ -90,6 +103,8 @@ class PostsViewController: UIViewController {
 
     @IBAction func addPostButtonDidTap(_ sender: UIButton) {
         postPostList()
+        postsArray.removeAll()
+        getPostList()
     }
 
     //add post
@@ -104,6 +119,12 @@ class PostsViewController: UIViewController {
         //make post on the wall
         AF.request(myURL)
     }
+
+    func detectingEndOfTable() {
+        if postTableView.contentOffset.y >= (postTableView.contentSize.height - postTableView.frame.size.height) {
+            getPostList()
+        }
+    }
 }
 
 extension PostsViewController: UITableViewDataSource {
@@ -115,6 +136,7 @@ extension PostsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath) as? PostsTableViewCell else {
             fatalError("error")
         }
+        detectingEndOfTable()
         cell.updateTableOfPosts(with: postsArray[indexPath.row])
         return cell
     }

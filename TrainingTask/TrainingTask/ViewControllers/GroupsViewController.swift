@@ -32,33 +32,18 @@ class GroupsViewController: UIViewController {
 		super.viewDidLoad()
 		urlRequest()
 
-		refreshControl = UIRefreshControl()
-		refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
-		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-		groupsTableView.addSubview(refreshControl)
-        self.groupsTableView.tableFooterView?.isHidden = true
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        groupsTableView.addSubview(refreshControl)
 	}
 
-	@objc func refresh(_ sender: Any) {
-
-//        if loadMoreStatus == true {
-//            self.loadMoreStatus = true
-//            self.activityIndicator.startAnimating()
-//            self.groupsTableView.tableFooterView!.isHidden = false
-//        }
+    @objc func refresh(_ sender: Any) {
+        groupsArray.removeAll()
+        self.userOffsetAmount = 0
         urlRequest()
-		refreshControl.endRefreshing()
-	}
-
-//    func scrollViewDidScroll(scrollView: UIScrollView!) {
-//        let currentOffset = scrollView.contentOffset.y
-//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-//        let deltaOffset = maximumOffset - currentOffset
-//
-//        if deltaOffset <= 0 {
-//            urlRequest()
-//        }
-//    }
+        refreshControl.endRefreshing()
+    }
 
 	//create, send URL to VK
 	func urlRequest() {
@@ -79,7 +64,7 @@ class GroupsViewController: UIViewController {
 					let response = json["response"].dictionaryValue
 					//take value from dictionary
 					guard let items = response["items"]?.arrayValue else {return}
-					self.userOffsetAmount += 12
+					self.userOffsetAmount += 20
 					//save names into array and link into array
 					for eachItems in items {
 						guard let name = eachItems["name"].string else {return}
@@ -109,6 +94,13 @@ class GroupsViewController: UIViewController {
 
 		return finalToken
 	}
+    
+    func detectingEndOfTable() {
+        if groupsTableView.contentOffset.y >= (groupsTableView.contentSize.height - groupsTableView.frame.size.height) {
+            urlRequest()
+        }
+    }
+    
 }
 
 extension GroupsViewController: UITableViewDataSource {
@@ -120,7 +112,14 @@ extension GroupsViewController: UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
 			fatalError("error")
 		}
+        detectingEndOfTable()
 		cell.updateTableOfGroups(with: groupsArray[indexPath.row])
 		return cell
 	}
 }
+
+//extension GroupsViewController: UITableViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
+//    }
+//}
