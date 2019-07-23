@@ -119,12 +119,6 @@ class PostsViewController: UIViewController {
         //make post on the wall
         AF.request(myURL)
     }
-
-    func detectingEndOfTable() {
-        if postTableView.contentOffset.y >= (postTableView.contentSize.height - postTableView.frame.size.height) {
-            getPostList()
-        }
-    }
 }
 
 extension PostsViewController: UITableViewDataSource {
@@ -136,8 +130,11 @@ extension PostsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath) as? PostsTableViewCell else {
             fatalError("error")
         }
-        detectingEndOfTable()
         cell.updateTableOfPosts(with: postsArray[indexPath.row])
+        
+        if postsArray.count - 1 == indexPath.row {
+            getPostList()
+        }
         return cell
     }
 }

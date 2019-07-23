@@ -95,12 +95,11 @@ class GroupsViewController: UIViewController {
 		return finalToken
 	}
     
-    func detectingEndOfTable() {
-        if groupsTableView.contentOffset.y >= (groupsTableView.contentSize.height - groupsTableView.frame.size.height) {
-            urlRequest()
-        }
-    }
-    
+//    func detectingEndOfTable() {
+//        if groupsTableView.contentOffset.y >= (groupsTableView.contentSize.height - groupsTableView.frame.size.height) {
+//            urlRequest()
+//        }
+//    }
 }
 
 extension GroupsViewController: UITableViewDataSource {
@@ -112,8 +111,12 @@ extension GroupsViewController: UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
 			fatalError("error")
 		}
-        detectingEndOfTable()
 		cell.updateTableOfGroups(with: groupsArray[indexPath.row])
+//        print("request \(indexPath.row), \(groupsArray.count)")
+        if groupsArray.count - 1 == indexPath.row {
+//            print("request success")
+            urlRequest()
+        }
 		return cell
 	}
 }
