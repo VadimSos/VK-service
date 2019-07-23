@@ -121,8 +121,11 @@ extension GroupsViewController: UITableViewDataSource {
 	}
 }
 
-//extension GroupsViewController: UITableViewDelegate {
+extension GroupsViewController: UITableViewDelegate {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
 //    }
-//}
+}

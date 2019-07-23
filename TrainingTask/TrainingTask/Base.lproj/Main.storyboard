@@ -125,6 +125,25 @@
                                             <outlet property="groupsType" destination="L8g-G8-tj6" id="21T-pA-UQY"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="ZFT-3f-ceK">
+                                        <rect key="frame" x="0.0" y="98" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFT-3f-ceK" id="FHf-8R-xsY">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-T5-jMA">
+                                                    <rect key="frame" x="197" y="11" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="BLT-T5-jMA" secondAttribute="trailing" constant="177" id="3pp-7y-m6N"/>
+                                                <constraint firstItem="BLT-T5-jMA" firstAttribute="top" secondItem="FHf-8R-xsY" secondAttribute="topMargin" id="QET-vs-kmv"/>
+                                                <constraint firstItem="BLT-T5-jMA" firstAttribute="leading" secondItem="FHf-8R-xsY" secondAttribute="leadingMargin" constant="177" id="VnZ-kX-XoP"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BLT-T5-jMA" secondAttribute="bottom" constant="2" id="YKZ-Tp-mOv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Buh-gw-axe" id="Rn3-ms-ESY"/>
