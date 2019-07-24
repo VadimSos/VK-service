@@ -14,7 +14,7 @@ import SDWebImage
 
 class GroupsViewController: UIViewController {
 
-        // MARK: - Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var groupsTableView: UITableView!
@@ -56,9 +56,9 @@ class GroupsViewController: UIViewController {
 		let requestToken = compileToken()
 		guard let myURL = URL(string: api + extended + offset + count + version + requestToken) else {return}
 
-		//send request and operate response
+		//do not increase cells more than total amount of groups
         if userOffsetAmount <= totalCountOfGroups {
-
+            //send request and operate response
             AF.request(myURL).responseData { response in
                 if let data = response.data {
                     do {
@@ -102,12 +102,6 @@ class GroupsViewController: UIViewController {
 
 		return finalToken
 	}
-
-//    func detectingEndOfTable() {
-//        if groupsTableView.contentOffset.y >= (groupsTableView.contentSize.height - groupsTableView.frame.size.height) {
-//            urlRequest()
-//        }
-//    }
 }
 
 extension GroupsViewController: UITableViewDataSource {
@@ -139,21 +133,17 @@ extension GroupsViewController: UITableViewDataSource {
             cell.spinner.startAnimating()
             return cell
         }
-
-//        print("request \(indexPath.row), \(groupsArray.count)")
-//        if groupsArray.count - 1 == indexPath.row {
-//          print("request success")
-//          urlRequest()
-//        }
 	}
 }
+
+    // MARK: - TableViewDelegate
 
 extension GroupsViewController: UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    // MARK: - hanlode scrolling in the end of table
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //detect position from top of frame till the beginning of content
         let offsetY = scrollView.contentOffset.y

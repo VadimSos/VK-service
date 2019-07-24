@@ -348,6 +348,28 @@
                                             <outlet property="postUserNameLabel" destination="pEj-fa-Quq" id="xPw-fy-FQ8"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="Oct-j7-6oG" customClass="PostsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="128" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oct-j7-6oG" id="Noq-CX-kc6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Ue-v5s">
+                                                    <rect key="frame" x="197" y="11" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="WQF-Ue-v5s" secondAttribute="trailing" constant="177" id="D1R-dT-b2d"/>
+                                                <constraint firstItem="WQF-Ue-v5s" firstAttribute="top" secondItem="Noq-CX-kc6" secondAttribute="topMargin" id="Wyb-mL-fm4"/>
+                                                <constraint firstItem="WQF-Ue-v5s" firstAttribute="leading" secondItem="Noq-CX-kc6" secondAttribute="leadingMargin" constant="177" id="omu-GT-fN0"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="WQF-Ue-v5s" secondAttribute="bottom" constant="2" id="xVt-nG-EKn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="spinner" destination="WQF-Ue-v5s" id="HBm-xc-Jkf"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="29m-M0-7Bc" id="qhk-0o-ZZx"/>
