@@ -348,7 +348,7 @@
                                             <outlet property="postUserNameLabel" destination="pEj-fa-Quq" id="xPw-fy-FQ8"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="Oct-j7-6oG" customClass="PostsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingPostCell" id="Oct-j7-6oG" customClass="PostsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="128" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oct-j7-6oG" id="Noq-CX-kc6">

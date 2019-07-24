@@ -69,31 +69,31 @@ class PostsViewController: UIViewController {
                         let response = json["response"].dictionaryValue
                         //take value from dictionary
                         guard let profiles = response["profiles"]?.arrayValue else {return}
-                        self.userOffsetAmount += 8
+                        self.userOffsetAmount += 15
+                        print("scroll: \(self.userOffsetAmount)")
                         guard let items = response["items"]?.arrayValue else {return}
                         //return total count of posts
                         guard let totalPosts = response["count"]?.intValue else {return}
                         self.totalCountOfPosts = totalPosts
 
-                        guard let fromID = items[0]["from_id"].int else {return}
-                        guard let profileID = profiles[0]["id"].int else {return}
-                        print(fromID, profileID)
                         //save names into array and link into array
                         for eachPost in items {
                             guard let postText = eachPost["text"].string else {return}
-                            
-                            if fromID == profileID {
-                                guard let name = profiles[0]["first_name"].string else {return}
-                                guard let urlImage = profiles[0]["photo_50"].url else {return}
-                                
-                                let urlImageView = UIImageView()
-                                urlImageView.load(url: urlImage)
-                                
-                                self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
+                            guard let fromID = eachPost["from_id"].int else {return}
+
+                            for eachProfile in profiles {
+                                guard let id = eachProfile["id"].int else {return}
+                                guard let name = eachProfile["first_name"].string else {return}
+                                guard let urlImage = eachProfile["photo_50"].url else {return}
+
+                                //find proper user info for current post item
+                                if fromID == id {
+                                    let urlImageView = UIImageView()
+                                    urlImageView.load(url: urlImage)
+
+                                    self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
+                                }
                             }
-//                            for eachProfile in profiles {
-//
-//                            }
                         }
                     } catch {
                         print(error)
@@ -165,7 +165,7 @@ extension PostsViewController: UITableViewDataSource {
             cell.updateTableOfPosts(with: postsArray[indexPath.row])
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? PostsLoadingTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingPostCell", for: indexPath) as? PostsLoadingTableViewCell else {
                 fatalError("error")
             }
             cell.spinner.startAnimating()
