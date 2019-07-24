@@ -47,7 +47,10 @@ class WebViewViewController: UIViewController {
 
 extension WebViewViewController: WKNavigationDelegate {
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+    func webView(_ webView: WKWebView,
+                 decidePolicyFor navigationResponse: WKNavigationResponse,
+                 decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+
         let requestURL = navigationResponse.response.url
 
         if requestURL != nil {
@@ -58,7 +61,10 @@ extension WebViewViewController: WKNavigationDelegate {
                 //open tab bar controller
                 if parseURLResult!.count <= 3 {
                     //if cancel permissions in VK
-                    if parseURLResult?.keys.first?.description == "error_description" || parseURLResult?.keys.first?.description == "error" || parseURLResult?.keys.first?.description == "error_reason"{
+                    if parseURLResult?.keys.first?.description == "error_description" ||
+                        parseURLResult?.keys.first?.description == "error" ||
+                        parseURLResult?.keys.first?.description == "error_reason" {
+
                         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                         return decisionHandler(.cancel)
                     }

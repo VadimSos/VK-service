@@ -144,7 +144,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="loadingIndicator" destination="BLT-T5-jMA" id="ZVN-31-n1J"/>
+                                            <outlet property="spinner" destination="BLT-T5-jMA" id="ZVN-31-n1J"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

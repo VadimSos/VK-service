@@ -115,7 +115,11 @@ extension GroupsViewController: UITableViewDataSource {
         if section == 0 {
             return groupsArray.count
         } else if section == 1 && scrollMore {
-            return 1
+            //if this is end of table do not show spinner at all
+            if userOffsetAmount <= totalCountOfGroups {
+                return 1
+            }
+            return 0
         }
 		return 0
 	}
@@ -132,7 +136,7 @@ extension GroupsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
                 fatalError("error")
             }
-            cell.loadingIndicator.startAnimating()
+            cell.spinner.startAnimating()
             return cell
         }
 
@@ -166,7 +170,8 @@ extension GroupsViewController: UITableViewDelegate {
         scrollMore = true
         print("begin scroll")
         groupsTableView.reloadSections(IndexSet(integer: 1), with: .none)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        //add 1 second delay before request new list of groups
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             print("start scroll")
             self.urlRequest()
             self.scrollMore = false
