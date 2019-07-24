@@ -125,7 +125,7 @@
                                             <outlet property="groupsType" destination="L8g-G8-tj6" id="21T-pA-UQY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="ZFT-3f-ceK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="ZFT-3f-ceK" customClass="GroupsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFT-3f-ceK" id="FHf-8R-xsY">
@@ -143,6 +143,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="BLT-T5-jMA" secondAttribute="bottom" constant="2" id="YKZ-Tp-mOv"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="loadingIndicator" destination="BLT-T5-jMA" id="ZVN-31-n1J"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

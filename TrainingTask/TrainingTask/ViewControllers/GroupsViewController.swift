@@ -22,9 +22,10 @@ class GroupsViewController: UIViewController {
 	// MARK: - Variables
 
 	var userOffsetAmount = 0
+    var totalCountOfGroups = 0
 	var groupsArray: [PostModel] = []
 	var refreshControl: UIRefreshControl!
-//    var loadMoreStatus = true
+    var scrollMore = false
 
 	// MARK: - Lifecycle
 
@@ -56,30 +57,37 @@ class GroupsViewController: UIViewController {
 		guard let myURL = URL(string: api + extended + offset + count + version + requestToken) else {return}
 
 		//send request and operate response
-		AF.request(myURL).responseData { response in
-			if let data = response.data {
-				do {
-					let json = try JSON(data: data)
-					//take dictionary from JSON
-					let response = json["response"].dictionaryValue
-					//take value from dictionary
-					guard let items = response["items"]?.arrayValue else {return}
-					self.userOffsetAmount += 20
-					//save names into array and link into array
-					for eachItems in items {
-						guard let name = eachItems["name"].string else {return}
-						guard let urlImage = eachItems["photo_50"].url else {return}
+        if userOffsetAmount <= totalCountOfGroups {
 
-						let urlImageView = UIImageView()
-						urlImageView.load(url: urlImage)
-						self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
-					}
-				} catch {
-					print(error)
-				}
-			}
-			self.groupsTableView.reloadData()
-		}
+            AF.request(myURL).responseData { response in
+                if let data = response.data {
+                    do {
+                        let json = try JSON(data: data)
+                        //take dictionary from JSON
+                        let response = json["response"].dictionaryValue
+                        //take value from dictionary
+                        guard let items = response["items"]?.arrayValue else {return}
+                        self.userOffsetAmount += 20
+                        //total count of groups
+                        guard let groupsCount = response["count"]?.intValue else {return}
+                        self.totalCountOfGroups = groupsCount
+                        //save names into array and link into array
+                        for eachItems in items {
+                            guard let name = eachItems["name"].string else {return}
+                            guard let urlImage = eachItems["photo_50"].url else {return}
+
+                            let urlImageView = UIImageView()
+                            urlImageView.load(url: urlImage)
+                            self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
+                        }
+                    } catch {
+                        print(error)
+                    }
+                }
+                self.groupsTableView.reloadData()
+            }
+
+        }
 	}
 
 	//prepare token to the correct format
@@ -94,7 +102,7 @@ class GroupsViewController: UIViewController {
 
 		return finalToken
 	}
-    
+
 //    func detectingEndOfTable() {
 //        if groupsTableView.contentOffset.y >= (groupsTableView.contentSize.height - groupsTableView.frame.size.height) {
 //            urlRequest()
@@ -104,20 +112,35 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return groupsArray.count
+        if section == 0 {
+            return groupsArray.count
+        } else if section == 1 && scrollMore {
+            return 1
+        }
+		return 0
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
-			fatalError("error")
-		}
-		cell.updateTableOfGroups(with: groupsArray[indexPath.row])
-//        print("request \(indexPath.row), \(groupsArray.count)")
-        if groupsArray.count - 1 == indexPath.row {
-//            print("request success")
-            urlRequest()
+
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
+                fatalError("error")
+            }
+            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
+                fatalError("error")
+            }
+            cell.loadingIndicator.startAnimating()
+            return cell
         }
-		return cell
+
+//        print("request \(indexPath.row), \(groupsArray.count)")
+//        if groupsArray.count - 1 == indexPath.row {
+//          print("request success")
+//          urlRequest()
+//        }
 	}
 }
 
@@ -126,6 +149,27 @@ extension GroupsViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //detect position from top of frame till the beginning of content
+        let offsetY = scrollView.contentOffset.y
+        let contentHigh = scrollView.contentSize.height
+
+        if offsetY > contentHigh - scrollView.frame.height {
+            if !scrollMore {
+                beginScrollMore()
+            }
+        }
+    }
+
+    func beginScrollMore() {
+        scrollMore = true
+        print("begin scroll")
+        groupsTableView.reloadSections(IndexSet(integer: 1), with: .none)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            print("start scroll")
+            self.urlRequest()
+            self.scrollMore = false
+        })
+    }
 }

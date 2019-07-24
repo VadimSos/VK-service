@@ -23,6 +23,7 @@
 		ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */; };
 		ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12CE22DF4D3B00534EED /* ParseURL.swift */; };
 		ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E12D222E0831F00534EED /* SettingsViewController.swift */; };
+		ED97092E22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97092D22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift */; };
 		EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */; };
 		EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */; };
 		EDD80B1722E5E74500784AF2 /* PostsPostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1622E5E74500784AF2 /* PostsPostProtocol.swift */; };
@@ -49,6 +50,7 @@
 		ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		ED3E12CE22DF4D3B00534EED /* ParseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseURL.swift; sourceTree = "<group>"; };
 		ED3E12D222E0831F00534EED /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		ED97092D22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		EDD80B1622E5E74500784AF2 /* PostsPostProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPostProtocol.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				ED28224622DCDF0E003F1784 /* LoginViewController.swift */,
 				ED3E12CC22DF16AA00534EED /* WebViewViewController.swift */,
 				3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */,
+				ED97092D22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift */,
 				3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */,
 				EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */,
 				EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */,
@@ -326,6 +329,7 @@
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
+				ED97092E22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift in Sources */,
 				3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */,
 				ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */,
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
