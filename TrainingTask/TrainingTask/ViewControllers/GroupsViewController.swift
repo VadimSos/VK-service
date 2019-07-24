@@ -11,6 +11,7 @@ import Locksmith
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import RealmSwift
 
 class GroupsViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class GroupsViewController: UIViewController {
 
 	// MARK: - Variables
 
+//    let realm = try? Realm()
 	var userOffsetAmount = 0
     var totalCountOfGroups = 0
 	var groupsArray: [PostModel] = []
@@ -78,8 +80,18 @@ class GroupsViewController: UIViewController {
 
                             let urlImageView = UIImageView()
                             urlImageView.load(url: urlImage)
+
                             self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
+
+//                            //realm save data
+//                            let groups = GroupsList()
+//                            groups.name = name
+//
+//                            try self.realm?.write {
+//                                self.realm?.add(groups)
+//                            }
                         }
+                        print("gropsArray: \(self.groupsArray)")
                     } catch {
                         print(error)
                     }

@@ -13,7 +13,7 @@ class PostsTableViewCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postUserNameLabel: UILabel!
     @IBOutlet weak var postTextLabel: UILabel!
-    
+
     func updateTableOfPosts(with item: PostsPostProtocol) {
         postImage.image = item.postUserImage()
         postUserNameLabel.text = item.postUserName()

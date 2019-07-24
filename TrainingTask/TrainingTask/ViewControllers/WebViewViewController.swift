@@ -68,7 +68,7 @@ extension WebViewViewController: WKNavigationDelegate {
                         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                         return decisionHandler(.cancel)
                     }
-                    performSegue(withIdentifier: "toTabBat", sender: nil)
+                    performSegue(withIdentifier: "toTabBar", sender: nil)
                 }
                 return decisionHandler(.allow)
             }
