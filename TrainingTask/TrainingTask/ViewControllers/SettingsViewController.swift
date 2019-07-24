@@ -22,12 +22,12 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        urlRequest()
+        getProfileImage()
+        getProfileName()
     }
 
     //create, send URL to VK
-    func urlRequest() {
+    func getProfileName() {
         let api = "https://api.vk.com/method/account.getProfileInfo?"
         let version = "v=5.101&"
         let requestToken = compileToken()
@@ -44,6 +44,41 @@ class SettingsViewController: UIViewController {
                     //take value from dictionary
                     let name = response["first_name"]?.stringValue
                     self.accountName.text = name
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+
+    //create, send URL to VK
+    func getProfileImage() {
+        let api = "https://api.vk.com/method/photos.getProfile?"
+        let reverse = "rev=0&"
+        let extended = "extended=0&"
+        let photoSizes = "photo_sizes=0&"
+        let version = "v=5.101&"
+        let requestToken = compileToken()
+        guard let myURL = URL(string: api + reverse + extended + photoSizes + version + requestToken) else {return}
+
+        //send request and operate response
+        AF.request(myURL).responseData { response in
+
+            if let data = response.data {
+                do {
+                    let json = try JSON(data: data)
+                    //take dictionary from JSON
+                    let response = json["response"].dictionaryValue
+                    //take value from dictionary
+                    guard let items = response["items"]?.arrayValue else {return}
+                    guard let item = items.last?.dictionaryValue else {return}
+                    let sizes = item["sizes"]!.arrayValue
+                    guard let photo = sizes.last!["url"].url else {return}
+
+                    let image = UIImageView()
+                    image.load(url: photo)
+
+                    self.avatarImage.image = image.image
                 } catch {
                     print(error)
                 }

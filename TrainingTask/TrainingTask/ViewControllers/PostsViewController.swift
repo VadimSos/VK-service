@@ -84,7 +84,7 @@ class PostsViewController: UIViewController {
                             for eachProfile in profiles {
                                 guard let id = eachProfile["id"].int else {return}
                                 guard let name = eachProfile["first_name"].string else {return}
-                                guard let urlImage = eachProfile["photo_50"].url else {return}
+                                guard let urlImage = eachProfile["photo_100"].url else {return}
 
                                 //find proper user info for current post item
                                 if fromID == id {
