@@ -11,6 +11,6 @@ import RealmSwift
 
 class GroupsList: Object {
     
-    @objc dynamic var image = UIImage()
+//    @objc dynamic var image = Data()
     @objc dynamic var name = ""
 }

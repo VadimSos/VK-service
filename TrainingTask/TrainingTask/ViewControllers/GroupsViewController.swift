@@ -22,7 +22,10 @@ class GroupsViewController: UIViewController {
 
 	// MARK: - Variables
 
-//    let realm = try? Realm()
+    // swiftlint:disable:next force_try
+    let realm = try! Realm()
+    var items: Results<GroupsList>!
+    
 	var userOffsetAmount = 0
     var totalCountOfGroups = 0
 	var groupsArray: [PostModel] = []
@@ -39,6 +42,10 @@ class GroupsViewController: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         groupsTableView.addSubview(refreshControl)
+        
+        //request to DB
+        items = realm.objects(GroupsList.self)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
 	}
 
     @objc func refresh(_ sender: Any) {
@@ -80,18 +87,27 @@ class GroupsViewController: UIViewController {
 
                             let urlImageView = UIImageView()
                             urlImageView.load(url: urlImage)
-
-                            self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
-
-//                            //realm save data
-//                            let groups = GroupsList()
-//                            groups.name = name
-//
-//                            try self.realm?.write {
-//                                self.realm?.add(groups)
+                            
+                            let task = GroupsList()
+                            task.name = name
+                            print(name)
+//                            task.image = (urlImageView.image?.pngData())!
+                            
+//                            var data : Data = (urlImageView.image)!.pngData()!
+                            
+//                            if let data = img.pngRepresentationData {  // If image type is PNG
+//                                task.imagenews = data
+//                            } else if let data = img.jpegRepresentationData { // If image type is JPG/JPEG
+//                                task.imagenews = data
 //                            }
+                            
+                            try self.realm.write {
+                                print("name: \(task.name)")
+                                self.realm.add(task)
+                            }
+
+//                            self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
                         }
-                        print("gropsArray: \(self.groupsArray)")
                     } catch {
                         print(error)
                     }
@@ -119,7 +135,10 @@ class GroupsViewController: UIViewController {
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return groupsArray.count
+            if items?.count != nil && items?.count != 0 {
+                return items!.count
+            }
+            return 0
         } else if section == 1 && scrollMore {
             //if this is end of table do not show spinner at all
             if userOffsetAmount <= totalCountOfGroups {
@@ -136,7 +155,10 @@ extension GroupsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
                 fatalError("error")
             }
-            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
+            let item = items?[indexPath.row]
+            cell.textLabel?.text = item?.name
+//            cell.imageView?.image = item?.image
+//            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
