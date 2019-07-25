@@ -19,4 +19,10 @@ class PostsTableViewCell: UITableViewCell {
         postUserNameLabel.text = item.postUserName()
         postTextLabel.text = item.postUserText()
     }
+
+    func updateRealmData(image: Data, name: String, text: String) {
+        postImage.image = UIImage(data: image)
+        postUserNameLabel.text = name
+        postTextLabel.text = text
+    }
 }

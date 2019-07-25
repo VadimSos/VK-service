@@ -10,6 +10,7 @@ import UIKit
 import Locksmith
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class PostsViewController: UIViewController {
 
@@ -19,6 +20,10 @@ class PostsViewController: UIViewController {
     @IBOutlet weak var postTextField: UITextField!
 
     // MARK: - Variables
+
+    // swiftlint:disable:next force_try
+    let realm = try! Realm()
+    var items: Results<PostsList>!
 
     var userOffsetAmount = 0
     var totalCountOfPosts = 0
@@ -31,18 +36,30 @@ class PostsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPostList()
         self.postTableView.rowHeight = 100
 
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         postTableView.addSubview(refreshControl)
+
+        //request to realm DB
+        items = realm.objects(PostsList.self)
+        //print realm DB in Finder
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print("//\(items.count)")
+        if items.count == 0 {
+            getPostList()
+        }
     }
 
     @objc func refresh(_ sender: Any) {
         postsArray.removeAll()
         self.userOffsetAmount = 0
+        // swiftlint:disable:next force_try
+        try! realm.write {
+            items.realm?.delete(items)
+        }
         getPostList()
         refreshControl.endRefreshing()
     }
@@ -91,7 +108,20 @@ class PostsViewController: UIViewController {
                                     let urlImageView = UIImageView()
                                     urlImageView.load(url: urlImage)
 
-                                    self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
+//                                    self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
+
+                                    // swiftlint:disable:next force_try
+                                    try! self.realm.write {
+                                        let realmData = PostsList()
+                                        realmData.name = name
+                                        realmData.text = postText
+                                        //save image to realm DB as Data
+                                        let url = URL(string: urlImage.absoluteString)
+                                        guard let imgData = NSData(contentsOf: url!) else {return}
+                                        realmData.image = imgData as Data
+
+                                        self.realm.add(realmData)
+                                    }
                                 }
                             }
                         }
@@ -123,6 +153,10 @@ class PostsViewController: UIViewController {
         //update table with new post
         postsArray.removeAll()
         userOffsetAmount = 0
+        // swiftlint:disable:next force_try
+        try! realm.write {
+            items.realm?.delete(items)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             self.getPostList()
         })
@@ -145,7 +179,11 @@ class PostsViewController: UIViewController {
 extension PostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return postsArray.count
+            //realm
+            if items?.count != nil && items?.count != 0 {
+                return items!.count
+            }
+            return 0
         } else if section == 1 && scrollMore {
             //if this is end of table do not show spinner at all
             if userOffsetAmount <= totalCountOfPosts {
@@ -162,7 +200,10 @@ extension PostsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath) as? PostsTableViewCell else {
                 fatalError("error")
             }
-            cell.updateTableOfPosts(with: postsArray[indexPath.row])
+            //realm
+            let item = items?[indexPath.row]
+            cell.updateRealmData(image: item!.image, name: item!.name, text: item!.text)
+//            cell.updateTableOfPosts(with: postsArray[indexPath.row])
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingPostCell", for: indexPath) as? PostsLoadingTableViewCell else {
