@@ -36,7 +36,6 @@ class GroupsViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		urlRequest()
 
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
@@ -47,11 +46,19 @@ class GroupsViewController: UIViewController {
         items = realm.objects(GroupsList.self)
         //print realm DB in Finder
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print("//\(items.count)")
+        if items.count == 0 {
+            urlRequest()
+        }
 	}
 
     @objc func refresh(_ sender: Any) {
         groupsArray.removeAll()
         self.userOffsetAmount = 0
+        // swiftlint:disable:next force_try
+        try! realm.write {
+            items.realm?.delete(items)
+        }
         urlRequest()
         refreshControl.endRefreshing()
     }
@@ -96,14 +103,13 @@ class GroupsViewController: UIViewController {
                                 let realmData = GroupsList()
                                 realmData.name = name
                                 print(name)
-                                //save image as Data
+                                //save image to realm DB as Data
                                 let url = URL(string: urlImage.absoluteString)
                                 guard let imgData = NSData(contentsOf: url!) else {return}
                                 realmData.image = imgData as Data
                                 print(realmData.image)
 
                                 self.realm.add(realmData)
-
                             }
                         }
                     } catch {
@@ -158,6 +164,7 @@ extension GroupsViewController: UITableViewDataSource {
             let item = items?[indexPath.row]
             cell.updateNameInRealm(name: item!.name, image: item!.image)
 //            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
+            print("//\(items.count)")
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
