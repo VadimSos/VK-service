@@ -25,7 +25,7 @@ class GroupsViewController: UIViewController {
     // swiftlint:disable:next force_try
     let realm = try! Realm()
     var items: Results<GroupsList>!
-    
+
 	var userOffsetAmount = 0
     var totalCountOfGroups = 0
 	var groupsArray: [PostModel] = []
@@ -42,9 +42,10 @@ class GroupsViewController: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         groupsTableView.addSubview(refreshControl)
-        
-        //request to DB
+
+        //request to realm DB
         items = realm.objects(GroupsList.self)
+        //print realm DB in Finder
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 	}
 
@@ -87,26 +88,23 @@ class GroupsViewController: UIViewController {
 
                             let urlImageView = UIImageView()
                             urlImageView.load(url: urlImage)
-                            
-                            let task = GroupsList()
-                            task.name = name
-                            print(name)
-//                            task.image = (urlImageView.image?.pngData())!
-                            
-//                            var data : Data = (urlImageView.image)!.pngData()!
-                            
-//                            if let data = img.pngRepresentationData {  // If image type is PNG
-//                                task.imagenews = data
-//                            } else if let data = img.jpegRepresentationData { // If image type is JPG/JPEG
-//                                task.imagenews = data
-//                            }
-                            
-                            try self.realm.write {
-                                print("name: \(task.name)")
-                                self.realm.add(task)
-                            }
 
 //                            self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
+
+                            // swiftlint:disable:next force_try
+                            try! self.realm.write {
+                                let realmData = GroupsList()
+                                realmData.name = name
+                                print(name)
+                                //save image as Data
+                                let url = URL(string: urlImage.absoluteString)
+                                guard let imgData = NSData(contentsOf: url!) else {return}
+                                realmData.image = imgData as Data
+                                print(realmData.image)
+
+                                self.realm.add(realmData)
+
+                            }
                         }
                     } catch {
                         print(error)
@@ -135,6 +133,7 @@ class GroupsViewController: UIViewController {
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            //realm
             if items?.count != nil && items?.count != 0 {
                 return items!.count
             }
@@ -155,9 +154,9 @@ extension GroupsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
                 fatalError("error")
             }
+            //realm
             let item = items?[indexPath.row]
-            cell.textLabel?.text = item?.name
-//            cell.imageView?.image = item?.image
+            cell.updateNameInRealm(name: item!.name, image: item!.image)
 //            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
             return cell
         } else {

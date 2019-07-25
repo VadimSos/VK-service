@@ -82,7 +82,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupsCell" rowHeight="70" id="98o-O1-Ry3" customClass="GroupsTableViewCell" customModule="TrainingTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="98o-O1-Ry3" id="JSu-RN-k8C">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="98o-O1-Ry3" id="JSu-RN-k8C">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -94,35 +94,26 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-E1-Zh2">
-                                                    <rect key="frame" x="78" y="11" width="316" height="21"/>
+                                                    <rect key="frame" x="78" y="24" width="316" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8g-G8-tj6">
-                                                    <rect key="frame" x="78" y="42" width="316" height="15.666666666666664"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="L8g-G8-tj6" firstAttribute="top" secondItem="xYT-E1-Zh2" secondAttribute="bottom" constant="10" id="34c-5u-RJt"/>
-                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="top" secondItem="EId-bc-Dih" secondAttribute="top" id="3DL-QQ-VnI"/>
-                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="leading" secondItem="EId-bc-Dih" secondAttribute="trailing" constant="8" id="KQM-RD-sgo"/>
+                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="leading" secondItem="EId-bc-Dih" secondAttribute="trailing" constant="8" id="43z-s9-dSz"/>
                                                 <constraint firstItem="EId-bc-Dih" firstAttribute="leading" secondItem="JSu-RN-k8C" secondAttribute="leadingMargin" id="Qbi-qS-6o0"/>
-                                                <constraint firstItem="L8g-G8-tj6" firstAttribute="trailing" secondItem="xYT-E1-Zh2" secondAttribute="trailing" id="S94-bj-sCf"/>
                                                 <constraint firstItem="EId-bc-Dih" firstAttribute="bottom" secondItem="JSu-RN-k8C" secondAttribute="bottomMargin" id="T4F-dz-yKK"/>
-                                                <constraint firstItem="L8g-G8-tj6" firstAttribute="leading" secondItem="xYT-E1-Zh2" secondAttribute="leading" id="TdN-pr-dWL"/>
-                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="trailing" secondItem="JSu-RN-k8C" secondAttribute="trailingMargin" id="mf0-We-8Cg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="xYT-E1-Zh2" secondAttribute="bottom" constant="14" id="W1w-MZ-Qvq"/>
+                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="trailing" secondItem="JSu-RN-k8C" secondAttribute="trailingMargin" id="XLF-7c-ZKl"/>
+                                                <constraint firstItem="xYT-E1-Zh2" firstAttribute="top" secondItem="JSu-RN-k8C" secondAttribute="topMargin" constant="13" id="tKn-mO-Ahc"/>
                                                 <constraint firstItem="EId-bc-Dih" firstAttribute="top" secondItem="JSu-RN-k8C" secondAttribute="topMargin" id="v0F-vx-VIs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="groupsImage" destination="EId-bc-Dih" id="QQ4-IY-8YM"/>
                                             <outlet property="groupsName" destination="xYT-E1-Zh2" id="xjx-Jk-08r"/>
-                                            <outlet property="groupsType" destination="L8g-G8-tj6" id="21T-pA-UQY"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="ZFT-3f-ceK" customClass="GroupsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
@@ -170,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7G-VE-X5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2096" y="-807"/>
+            <point key="canvasLocation" x="2095.6521739130435" y="-807.06521739130437"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="apu-zQ-mGJ">
