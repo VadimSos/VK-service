@@ -161,9 +161,10 @@ extension GroupsViewController: UITableViewDataSource {
                 fatalError("error")
             }
             //realm
-            let item = items?[indexPath.row]
-            cell.updateNameInRealm(name: item!.name, image: item!.image)
-//            cell.updateTableOfGroups(with: groupsArray[indexPath.row])
+            if indexPath.row < items.count {
+                let item = items?[indexPath.row]
+                cell.updateNameInRealm(name: item!.name, image: item!.image)
+            }
             print("//\(items.count)")
             return cell
         } else {

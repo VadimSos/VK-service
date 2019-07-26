@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 
-class PostsViewController: UIViewController {
+class PostsViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Outlets
 
@@ -51,6 +51,25 @@ class PostsViewController: UIViewController {
         if items.count == 0 {
             getPostList()
         }
+    }
+    //after press keyboard button "Done"
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        postTextField.resignFirstResponder()
+        
+        postPostList()
+        //remove text in textField
+        postTextField.text?.removeAll()
+        //update table with new post
+        postsArray.removeAll()
+        userOffsetAmount = 0
+        // swiftlint:disable:next force_try
+        try! realm.write {
+            items.realm?.delete(items)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.getPostList()
+        })
+        return true
     }
 
     @objc func refresh(_ sender: Any) {
@@ -201,9 +220,10 @@ extension PostsViewController: UITableViewDataSource {
                 fatalError("error")
             }
             //realm
-            let item = items?[indexPath.row]
-            cell.updateRealmData(image: item!.image, name: item!.name, text: item!.text)
-//            cell.updateTableOfPosts(with: postsArray[indexPath.row])
+            if indexPath.row < items.count {
+                let item = items?[indexPath.row]
+                cell.updateRealmData(image: item!.image, name: item!.name, text: item!.text)
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingPostCell", for: indexPath) as? PostsLoadingTableViewCell else {
