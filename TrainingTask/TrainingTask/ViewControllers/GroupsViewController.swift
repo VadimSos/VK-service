@@ -10,7 +10,6 @@ import UIKit
 import Locksmith
 import Alamofire
 import SwiftyJSON
-import SDWebImage
 import RealmSwift
 
 class GroupsViewController: UIViewController {
@@ -28,7 +27,6 @@ class GroupsViewController: UIViewController {
 
 	var userOffsetAmount = 0
     var totalCountOfGroups = 0
-	var groupsArray: [PostModel] = []
 	var refreshControl: UIRefreshControl!
     var scrollMore = false
 
@@ -53,7 +51,6 @@ class GroupsViewController: UIViewController {
 	}
 
     @objc func refresh(_ sender: Any) {
-        groupsArray.removeAll()
         self.userOffsetAmount = 0
         // swiftlint:disable:next force_try
         try! realm.write {
@@ -95,8 +92,6 @@ class GroupsViewController: UIViewController {
 
                             let urlImageView = UIImageView()
                             urlImageView.load(url: urlImage)
-
-//                            self.groupsArray.append(PostModel(pGroupName: name, pGroupImage: urlImageView.image!))
 
                             // swiftlint:disable:next force_try
                             try! self.realm.write {

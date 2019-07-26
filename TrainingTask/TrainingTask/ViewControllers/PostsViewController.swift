@@ -27,8 +27,6 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     var userOffsetAmount = 0
     var totalCountOfPosts = 0
-    var postsArray: [PostsPostModel] = []
-    var postText: [String] = []
     var refreshControl: UIRefreshControl!
     var scrollMore = false
 
@@ -55,25 +53,13 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
     //after press keyboard button "Done"
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         postTextField.resignFirstResponder()
-        
-        postPostList()
+        addingPost()
         //remove text in textField
         postTextField.text?.removeAll()
-        //update table with new post
-        postsArray.removeAll()
-        userOffsetAmount = 0
-        // swiftlint:disable:next force_try
-        try! realm.write {
-            items.realm?.delete(items)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.getPostList()
-        })
         return true
     }
 
     @objc func refresh(_ sender: Any) {
-        postsArray.removeAll()
         self.userOffsetAmount = 0
         // swiftlint:disable:next force_try
         try! realm.write {
@@ -127,8 +113,6 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                                     let urlImageView = UIImageView()
                                     urlImageView.load(url: urlImage)
 
-//                                    self.postsArray.append(PostsPostModel(pUserName: name, pUserImage: urlImageView.image!, pUserText: postText))
-
                                     // swiftlint:disable:next force_try
                                     try! self.realm.write {
                                         let realmData = PostsList()
@@ -168,17 +152,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func addPostButtonDidTap(_ sender: UIButton) {
-        postPostList()
-        //update table with new post
-        postsArray.removeAll()
-        userOffsetAmount = 0
-        // swiftlint:disable:next force_try
-        try! realm.write {
-            items.realm?.delete(items)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.getPostList()
-        })
+        addingPost()
     }
 
     //add post
@@ -192,6 +166,20 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
         //make post on the wall
         AF.request(myURL)
+    }
+
+    func addingPost() {
+        postPostList()
+
+        //update table with new post
+        userOffsetAmount = 0
+        // swiftlint:disable:next force_try
+        try! realm.write {
+            items.realm?.delete(items)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.getPostList()
+        })
     }
 }
 

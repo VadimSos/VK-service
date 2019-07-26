@@ -16,11 +16,6 @@ class GroupsTableViewCell: UITableViewCell {
 	@IBOutlet weak var groupsImage: UIImageView!
 	@IBOutlet weak var groupsName: UILabel!
 
-	func updateTableOfGroups(with items: GroupsPostProtocol) {
-		groupsName.text = items.postGroupName()
-		groupsImage.image = items.postImage()
-	}
-
     func updateNameInRealm(name: String, image: Data) {
         groupsName.text = name
         groupsImage.image = UIImage(data: image)
