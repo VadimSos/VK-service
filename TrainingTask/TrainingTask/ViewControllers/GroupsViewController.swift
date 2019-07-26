@@ -29,6 +29,9 @@ class GroupsViewController: UIViewController {
     var totalCountOfGroups = 0
 	var refreshControl: UIRefreshControl!
     var scrollMore = false
+    //update realm
+    var needUpdate = false
+    var item = 0
 
 	// MARK: - Lifecycle
 
@@ -52,10 +55,11 @@ class GroupsViewController: UIViewController {
 
     @objc func refresh(_ sender: Any) {
         self.userOffsetAmount = 0
+        self.needUpdate = true
         // swiftlint:disable:next force_try
-        try! realm.write {
-            items.realm?.delete(items)
-        }
+//        try! realm.write {
+//            items.realm?.delete(items)
+//        }
         urlRequest()
         refreshControl.endRefreshing()
     }
@@ -104,7 +108,11 @@ class GroupsViewController: UIViewController {
                                 realmData.image = imgData as Data
                                 print(realmData.image)
 
-                                self.realm.add(realmData)
+                                if self.needUpdate {
+                                    self.updateRealmData(name: name, image: imgData as Data)
+                                } else {
+                                    self.realm.add(realmData)
+                                }
                             }
                         }
                     } catch {
@@ -116,6 +124,15 @@ class GroupsViewController: UIViewController {
 
         }
 	}
+
+    func updateRealmData(name: String, image: Data) {
+        if item < userOffsetAmount {
+            let updatedData = realm.objects(GroupsList.self)
+            updatedData[item].name = name
+            updatedData[item].image = image
+            item += 1
+        }
+    }
 
 	//prepare token to the correct format
 	func compileToken() -> String {
