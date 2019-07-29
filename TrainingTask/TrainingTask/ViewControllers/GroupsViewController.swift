@@ -24,8 +24,8 @@ class GroupsViewController: UIViewController {
     // swiftlint:disable:next force_try
     let realm = try! Realm()
     var items: Results<GroupsList>!
-
-	var userOffsetAmount = 0
+    
+    var userOffsetAmount = 0
     var totalCountOfGroups = 0
 	var refreshControl: UIRefreshControl!
     var scrollMore = false
@@ -216,6 +216,7 @@ extension GroupsViewController: UITableViewDelegate {
         //add 1 second delay before request new list of groups
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             print("start scroll")
+            self.needUpdate = false
             self.urlRequest()
             self.scrollMore = false
         })

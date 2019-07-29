@@ -50,12 +50,9 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
             getPostList()
         }
     }
-    //after press keyboard button "Done"
+    //after press keyboard button "Done" hide keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         postTextField.resignFirstResponder()
-        addingPost()
-        //remove text in textField
-        postTextField.text?.removeAll()
         return true
     }
 
@@ -153,10 +150,10 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func addPostButtonDidTap(_ sender: UIButton) {
         addingPost()
+        postTextField.text?.removeAll()
     }
 
-    //add post
-    func postPostList() {
+    func addingPost() {
         let api = "https://api.vk.com/method/wall.post?"
         guard let text = postTextField.text else {return}
         let message = "message=\(text)&"
@@ -164,22 +161,15 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
         let requestToken = compileToken()
         guard let myURL = URL(string: api + message + version + requestToken) else {return}
 
-        //make post on the wall
-        AF.request(myURL)
-    }
+        AF.request(myURL).response { _ in
 
-    func addingPost() {
-        postPostList()
-
-        //update table with new post
-        userOffsetAmount = 0
-        // swiftlint:disable:next force_try
-        try! realm.write {
-            items.realm?.delete(items)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.userOffsetAmount = 0
+            // swiftlint:disable:next force_try
+            try! self.realm.write {
+                self.items.realm?.delete(self.items)
+            }
             self.getPostList()
-        })
+        }
     }
 }
 

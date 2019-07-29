@@ -98,12 +98,35 @@ class SettingsViewController: UIViewController {
 
         return finalToken
     }
-
+    
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {
         do {
             try Locksmith.deleteDataForUserAccount(userAccount: "VK")
         } catch {
             print(error)
+        }
+
+        let logoutURL = URL(string: "https://api.vk.com/oauth/logout?client_id=6191231")
+
+        AF.request(logoutURL!).responseData { response in
+            print("Request: \(String(describing: response.request))")   // original url request
+            print("Response: \(String(describing: response.response))") // http url response
+            print("Result: \(response.result)")                         // response serialization result
+
+            if let json = response.result.value {
+                print("JSON: \(json)") // serialized json response
+            }
+
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)") // original server data as UTF8 string
+            }
+        }
+
+        let storage = HTTPCookieStorage.shared
+        if let cookies = storage.cookies {
+            for cookie in cookies {
+                storage.deleteCookie(cookie)
+            }
         }
 
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
