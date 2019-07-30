@@ -119,6 +119,9 @@ class GroupsViewController: UIViewController {
                         print(error)
                     }
                 }
+                print("start scroll")
+                self.needUpdate = false
+                self.scrollMore = false
                 self.groupsTableView.reloadData()
             }
 
@@ -156,7 +159,7 @@ extension GroupsViewController: UITableViewDataSource {
                 return items!.count
             }
             return 0
-        } else if section == 1 && scrollMore {
+        } else if section == 1 && !scrollMore {
             //if this is end of table do not show spinner at all
             if userOffsetAmount <= totalCountOfGroups {
                 return 1
@@ -203,22 +206,19 @@ extension GroupsViewController: UITableViewDelegate {
         let contentHigh = scrollView.contentSize.height
 
         if offsetY > contentHigh - scrollView.frame.height {
-            if !scrollMore {
-                beginScrollMore()
+
+            if scrollMore == false {
+                beginScrollMore {
+                    self.urlRequest()
+                }
             }
         }
     }
 
-    func beginScrollMore() {
+    func beginScrollMore(completion: () -> ()) {
         scrollMore = true
         print("begin scroll")
         groupsTableView.reloadSections(IndexSet(integer: 1), with: .none)
-        //add 1 second delay before request new list of groups
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            print("start scroll")
-            self.needUpdate = false
-            self.urlRequest()
-            self.scrollMore = false
-        })
+        completion()
     }
 }

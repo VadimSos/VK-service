@@ -129,6 +129,8 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                         print(error)
                     }
                 }
+                print("start scroll")
+                self.scrollMore = false
                 self.postTableView.reloadData()
             }
 
@@ -228,20 +230,17 @@ extension PostsViewController: UITableViewDelegate {
 
         if offsetY > contentHigh - scrollView.frame.height {
             if !scrollMore {
-                beginScrollMore()
+                beginScrollMore {
+                    self.getPostList()
+                }
             }
         }
     }
 
-    func beginScrollMore() {
+    func beginScrollMore(completion: () -> ()) {
         scrollMore = true
         print("begin scroll")
         postTableView.reloadSections(IndexSet(integer: 1), with: .none)
-        //add 1 second delay before request new list of groups
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            print("start scroll")
-            self.getPostList()
-            self.scrollMore = false
-        })
+        completion()
     }
 }
