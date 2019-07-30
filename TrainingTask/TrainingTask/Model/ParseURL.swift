@@ -13,38 +13,12 @@ extension URL {
     func params(url: URL) -> [String: Any] {
         var dict = [String: Any]()
 
-        let word = url.absoluteString
-        let newString = word.replacingOccurrences(of: "#", with: "?")
-        let resultURL = URL(string: newString)
-
-        if let components = URLComponents(url: resultURL!, resolvingAgainstBaseURL: false) {
+        if let components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
             if let queryItems = components.queryItems {
                 for item in queryItems {
                     dict[item.name] = item.value!
                 }
             }
-
-            //save token to Locksmith
-            if word.contains("#") {
-                let index = dict.index(forKey: "access_token")
-                if index != nil {
-                    let tokenDict: [String: String] = [dict[index!].key: dict[index!].value as? String ?? "error"]
-                    if Locksmith.loadDataForUserAccount(userAccount: "VK") != nil {
-                        do {
-                            try Locksmith.updateData(data: tokenDict, forUserAccount: "VK")
-                        } catch {
-                            print(error)
-                        }
-                    } else {
-                        do {
-                            try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }
-            }
-
             return dict
         } else {
             return [:]

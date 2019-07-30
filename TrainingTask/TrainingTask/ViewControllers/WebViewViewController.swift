@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import Locksmith
 
 class WebViewViewController: UIViewController {
 
@@ -51,15 +52,41 @@ extension WebViewViewController: WKNavigationDelegate {
                  decidePolicyFor navigationResponse: WKNavigationResponse,
                  decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
-        let requestURL = navigationResponse.response.url
+        let requestURL = navigationResponse.response.url?.absoluteString
+        guard let newString = (requestURL?.replacingOccurrences(of: "#", with: "?")) else {return}
+        let resultURL = URL(string: newString)
 
         if requestURL != nil {
-            let stringURL = requestURL!.absoluteString
+            let stringURL = (resultURL?.absoluteString)!
 
             if validateResponseUrl(stringURL: stringURL) {
-                let parseURLResult = requestURL?.params(url: requestURL!)
+                let parseURLResult = resultURL?.params(url: resultURL!)
+
                 //open tab bar controller
                 if parseURLResult!.count <= 3 {
+
+                    //save token to Locksmith
+                    guard let index = parseURLResult?.index(forKey: "access_token") else {
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        return decisionHandler(.cancel)
+                    }
+                    if parseURLResult != nil {
+                        let tokenDict: [String: String] = [(parseURLResult![index].key): parseURLResult![index].value as? String ?? "error"]
+                        if Locksmith.loadDataForUserAccount(userAccount: "VK") != nil {
+                            do {
+                                try Locksmith.updateData(data: tokenDict, forUserAccount: "VK")
+                            } catch {
+                                print(error)
+                            }
+                        } else {
+                            do {
+                                try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+
                     //if cancel permissions in VK
                     if parseURLResult?.keys.first?.description == "error_description" ||
                         parseURLResult?.keys.first?.description == "error" ||
