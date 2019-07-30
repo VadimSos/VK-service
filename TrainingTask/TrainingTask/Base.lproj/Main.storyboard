@@ -45,7 +45,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <segue destination="l4Q-mR-llZ" kind="show" id="Qtd-K6-YME"/>
+                                    <action selector="loginButtonDidTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wWU-JX-JPl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -62,6 +62,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="l4Q-mR-llZ" kind="show" identifier="loginSuccess" id="HRc-oU-dTN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -397,7 +400,7 @@
     <resources>
         <image name="LoginVC" width="1200" height="1200"/>
         <image name="SendPost" width="28" height="23"/>
-        <image name="Settings picture" width="1200" height="800"/>
+        <image name="Settings picture" width="300" height="300"/>
         <image name="tabBarChat" width="31" height="31"/>
         <image name="tabBarSettings" width="42" height="42"/>
     </resources>

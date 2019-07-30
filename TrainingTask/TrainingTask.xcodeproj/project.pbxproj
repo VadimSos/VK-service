@@ -24,6 +24,7 @@
 		ED97092E22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97092D22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift */; };
 		ED97093022E84E39009EEB20 /* PostsLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97092F22E84E39009EEB20 /* PostsLoadingTableViewCell.swift */; };
 		ED97093322E892B4009EEB20 /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97093222E892B4009EEB20 /* GroupsModel.swift */; };
+		EDC120CA22F03E2F0016B067 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120C922F03E2F0016B067 /* Reachability.swift */; };
 		EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCC14F522E9E55E000F5F57 /* PostsModel.swift */; };
 		EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */; };
 		EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */; };
@@ -50,6 +51,7 @@
 		ED97092D22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		ED97092F22E84E39009EEB20 /* PostsLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		ED97093222E892B4009EEB20 /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
+		EDC120C922F03E2F0016B067 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EDCC14F522E9E55E000F5F57 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3E12C722DDE81900534EED /* ButtonRounded.swift */,
+				EDC120C922F03E2F0016B067 /* Reachability.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
 				3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */,
 				EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */,
+				EDC120CA22F03E2F0016B067 /* Reachability.swift in Sources */,
 				ED97093322E892B4009EEB20 /* GroupsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
