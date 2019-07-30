@@ -162,7 +162,11 @@ extension GroupsViewController: UITableViewDataSource {
         } else if section == 1 && !scrollMore {
             //if this is end of table do not show spinner at all
             if userOffsetAmount <= totalCountOfGroups {
-                return 1
+                if Reachability.isConnectedToNetwork() {
+                    return 1
+                } else {
+                    return 0
+                }
             }
             return 0
         }
@@ -186,7 +190,12 @@ extension GroupsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
                 fatalError("error")
             }
-            cell.spinner.startAnimating()
+            if Reachability.isConnectedToNetwork() {
+                cell.spinner.startAnimating()
+                cell.spinner.alpha = 1
+            } else {
+                cell.spinner.alpha = 0
+            }
             return cell
         }
 	}
@@ -216,9 +225,14 @@ extension GroupsViewController: UITableViewDelegate {
     }
 
     func beginScrollMore(completion: () -> ()) {
-        scrollMore = true
-        print("begin scroll")
-        groupsTableView.reloadSections(IndexSet(integer: 1), with: .none)
-        completion()
+        if Reachability.isConnectedToNetwork() {
+            scrollMore = true
+            print("begin scroll")
+            groupsTableView.reloadSections(IndexSet(integer: 1), with: .none)
+            completion()
+        } else {
+            scrollMore = false
+            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
+        }
     }
 }

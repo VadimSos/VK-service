@@ -14,13 +14,7 @@ class LoginViewController: UIViewController {
         if Reachability.isConnectedToNetwork() {
             performSegue(withIdentifier: "loginSuccess", sender: nil)
         } else {
-            showReachabilityAlert()
+            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
         }
-    }
-
-    func showReachabilityAlert() {
-            let alert = UIAlertController(title: "Warning!", message: "Internet Connection not Available!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
     }
 }
