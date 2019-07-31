@@ -24,11 +24,13 @@ class GroupsViewController: UIViewController {
     // swiftlint:disable:next force_try
     let realm = try! Realm()
     var items: Results<GroupsList>!
-    
+
     var userOffsetAmount = 0
     var totalCountOfGroups = 0
 	var refreshControl: UIRefreshControl!
     var scrollMore = false
+    var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
+
     //update realm
     var needUpdate = false
     var item = 0
@@ -49,7 +51,13 @@ class GroupsViewController: UIViewController {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         print("//\(items.count)")
         if items.count == 0 {
-            urlRequest()
+            DispatchQueue.global().async {
+                self.urlRequest()
+                DispatchQueue.main.async {
+                    self.groupsTableView.reloadData()
+                }
+            }
+
         }
 	}
 
@@ -95,8 +103,10 @@ class GroupsViewController: UIViewController {
                             guard let urlImage = eachItems["photo_50"].url else {return}
 
                             let urlImageView = UIImageView()
-                            urlImageView.load(url: urlImage)
+                            urlImageView.load(url: urlImage) {
 
+                                self.groupsTableView.reloadData()
+                            }
                             // swiftlint:disable:next force_try
                             try! self.realm.write {
                                 let realmData = GroupsList()
@@ -114,6 +124,7 @@ class GroupsViewController: UIViewController {
                                     self.realm.add(realmData)
                                 }
                             }
+
                         }
                     } catch {
                         print(error)
@@ -123,6 +134,7 @@ class GroupsViewController: UIViewController {
                 self.needUpdate = false
                 self.scrollMore = false
                 self.groupsTableView.reloadData()
+                self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
             }
 
         }
@@ -185,6 +197,15 @@ extension GroupsViewController: UITableViewDataSource {
                 cell.updateNameInRealm(name: item!.name, image: item!.image)
             }
             print("//\(items.count)")
+            if indexPath.row == items.count - 1 {
+                if scrollMore == false {
+                    beginScrollMore {
+                        if Reachability.isConnectedToNetwork() {
+                            self.urlRequest()
+                        }
+                    }
+                }
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
@@ -192,10 +213,12 @@ extension GroupsViewController: UITableViewDataSource {
             }
             if Reachability.isConnectedToNetwork() {
                 cell.spinner.startAnimating()
-                cell.spinner.alpha = 1
+                cell.textRefreshingLabel.text = "Refreshing..."
             } else {
-                cell.spinner.alpha = 0
+                cell.spinner.startAnimating()
+                cell.textRefreshingLabel.text = "Can't refresh data. Please check your network connection."
             }
+            cell.hideSeparator()
             return cell
         }
 	}
@@ -205,23 +228,19 @@ extension GroupsViewController: UITableViewDataSource {
 
 extension GroupsViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.cellHeightsDictionary[indexPath] = cell.frame.size.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let height =  self.cellHeightsDictionary[indexPath] {
+            return height
+        }
+        return UITableView.automaticDimension
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
-    }
-    // MARK: - hanlode scrolling in the end of table
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //detect position from top of frame till the beginning of content
-        let offsetY = scrollView.contentOffset.y
-        let contentHigh = scrollView.contentSize.height
-
-        if offsetY > contentHigh - scrollView.frame.height {
-
-            if scrollMore == false {
-                beginScrollMore {
-                    self.urlRequest()
-                }
-            }
-        }
     }
 
     func beginScrollMore(completion: () -> ()) {
@@ -232,7 +251,8 @@ extension GroupsViewController: UITableViewDelegate {
             completion()
         } else {
             scrollMore = false
-            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
+//            groupsTableView.reloadSections(IndexSet(integer: 1), with: .bottom)
+//            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
         }
     }
 }

@@ -119,26 +119,36 @@
                                             <outlet property="groupsName" destination="xYT-E1-Zh2" id="xjx-Jk-08r"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="ZFT-3f-ceK" customClass="GroupsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="60" id="ZFT-3f-ceK" customClass="GroupsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFT-3f-ceK" id="FHf-8R-xsY">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-T5-jMA">
                                                     <rect key="frame" x="197" y="11" width="20" height="20"/>
                                                 </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refreshing..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCR-zb-aMS">
+                                                    <rect key="frame" x="0.0" y="36" width="414" height="13.666666666666664"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="BLT-T5-jMA" secondAttribute="trailing" constant="177" id="3pp-7y-m6N"/>
                                                 <constraint firstItem="BLT-T5-jMA" firstAttribute="top" secondItem="FHf-8R-xsY" secondAttribute="topMargin" id="QET-vs-kmv"/>
                                                 <constraint firstItem="BLT-T5-jMA" firstAttribute="leading" secondItem="FHf-8R-xsY" secondAttribute="leadingMargin" constant="177" id="VnZ-kX-XoP"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="BLT-T5-jMA" secondAttribute="bottom" constant="2" id="YKZ-Tp-mOv"/>
+                                                <constraint firstAttribute="bottom" secondItem="yCR-zb-aMS" secondAttribute="bottom" constant="10" id="e6W-C5-zic"/>
+                                                <constraint firstItem="yCR-zb-aMS" firstAttribute="leading" secondItem="FHf-8R-xsY" secondAttribute="leading" id="vNi-9W-P4i"/>
+                                                <constraint firstItem="yCR-zb-aMS" firstAttribute="top" secondItem="BLT-T5-jMA" secondAttribute="bottom" constant="5" id="xwk-DA-UjC"/>
+                                                <constraint firstAttribute="trailing" secondItem="yCR-zb-aMS" secondAttribute="trailing" id="z4L-uq-GMQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="spinner" destination="BLT-T5-jMA" id="ZVN-31-n1J"/>
+                                            <outlet property="textRefreshingLabel" destination="yCR-zb-aMS" id="0wU-Eb-zHP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -345,25 +355,34 @@
                                             <outlet property="postUserNameLabel" destination="pEj-fa-Quq" id="xPw-fy-FQ8"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingPostCell" id="Oct-j7-6oG" customClass="PostsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingPostCell" rowHeight="60" id="Oct-j7-6oG" customClass="PostsLoadingTableViewCell" customModule="TrainingTask" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="128" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oct-j7-6oG" id="Noq-CX-kc6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Ue-v5s">
-                                                    <rect key="frame" x="197" y="11" width="20" height="20"/>
+                                                    <rect key="frame" x="197" y="12.666666666666664" width="20" height="20"/>
                                                 </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-pf-zaQ">
+                                                    <rect key="frame" x="0.0" y="37.666666666666664" width="414" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="sep-pf-zaQ" firstAttribute="leading" secondItem="Noq-CX-kc6" secondAttribute="leading" id="5TQ-NG-X71"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="WQF-Ue-v5s" secondAttribute="trailing" constant="177" id="D1R-dT-b2d"/>
-                                                <constraint firstItem="WQF-Ue-v5s" firstAttribute="top" secondItem="Noq-CX-kc6" secondAttribute="topMargin" id="Wyb-mL-fm4"/>
+                                                <constraint firstAttribute="bottom" secondItem="sep-pf-zaQ" secondAttribute="bottom" constant="10" id="N34-gF-3sw"/>
+                                                <constraint firstItem="sep-pf-zaQ" firstAttribute="top" secondItem="WQF-Ue-v5s" secondAttribute="bottom" constant="5" id="ZFf-P8-Ggb"/>
                                                 <constraint firstItem="WQF-Ue-v5s" firstAttribute="leading" secondItem="Noq-CX-kc6" secondAttribute="leadingMargin" constant="177" id="omu-GT-fN0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="WQF-Ue-v5s" secondAttribute="bottom" constant="2" id="xVt-nG-EKn"/>
+                                                <constraint firstAttribute="trailing" secondItem="sep-pf-zaQ" secondAttribute="trailing" id="zpO-gm-nly"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="refreshTextLabel" destination="sep-pf-zaQ" id="3Xc-VG-pJS"/>
                                             <outlet property="spinner" destination="WQF-Ue-v5s" id="HBm-xc-Jkf"/>
                                         </connections>
                                     </tableViewCell>

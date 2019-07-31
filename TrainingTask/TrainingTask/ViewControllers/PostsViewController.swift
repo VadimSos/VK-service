@@ -29,6 +29,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
     var totalCountOfPosts = 0
     var refreshControl: UIRefreshControl!
     var scrollMore = false
+    var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
 
     // MARK: - Lifecycle
 
@@ -47,7 +48,13 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         print("//\(items.count)")
         if items.count == 0 {
-            getPostList()
+            DispatchQueue.global().async {
+                self.getPostList()
+                DispatchQueue.main.async {
+                    self.postTableView.reloadData()
+                }
+            }
+//            getPostList()
         }
     }
     //after press keyboard button "Done" hide keyboard
@@ -108,8 +115,10 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                                 //find proper user info for current post item
                                 if fromID == id {
                                     let urlImageView = UIImageView()
-                                    urlImageView.load(url: urlImage)
+                                    urlImageView.load(url: urlImage) {
 
+                                        self.postTableView.reloadData()
+                                    }
                                     // swiftlint:disable:next force_try
                                     try! self.realm.write {
                                         let realmData = PostsList()
@@ -122,6 +131,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
                                         self.realm.add(realmData)
                                     }
+
                                 }
                             }
                         }
@@ -132,6 +142,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                 print("start scroll")
                 self.scrollMore = false
                 self.postTableView.reloadData()
+                self.postTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
             }
 
         }
@@ -208,6 +219,15 @@ extension PostsViewController: UITableViewDataSource {
                 let item = items?[indexPath.row]
                 cell.updateRealmData(image: item!.image, name: item!.name, text: item!.text)
             }
+            if indexPath.row == items.count - 1 {
+                if scrollMore == false {
+                    beginScrollMore {
+                        if Reachability.isConnectedToNetwork() {
+                            self.getPostList()
+                        }
+                    }
+                }
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingPostCell", for: indexPath) as? PostsLoadingTableViewCell else {
@@ -215,10 +235,12 @@ extension PostsViewController: UITableViewDataSource {
             }
             if Reachability.isConnectedToNetwork() {
                 cell.spinner.startAnimating()
-                cell.spinner.alpha = 1
+                cell.refreshTextLabel.text = "Refreshing..."
             } else {
-                cell.spinner.alpha = 0
+                cell.spinner.startAnimating()
+                cell.refreshTextLabel.text = "Can't refresh data. Please check your network connection."
             }
+            cell.hideSeparator()
             return cell
         }
     }
@@ -228,23 +250,36 @@ extension PostsViewController: UITableViewDataSource {
 
 extension PostsViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.cellHeightsDictionary[indexPath] = cell.frame.size.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let height =  self.cellHeightsDictionary[indexPath] {
+            return height
+        }
+        return UITableView.automaticDimension
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    // MARK: - hanlode scrolling in the end of table
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //detect position from top of frame till the beginning of content
-        let offsetY = scrollView.contentOffset.y
-        let contentHigh = scrollView.contentSize.height
-
-        if offsetY > contentHigh - scrollView.frame.height {
-            if !scrollMore {
-                beginScrollMore {
-                    self.getPostList()
-                }
-            }
-        }
-    }
+//    // MARK: - hanlode scrolling in the end of table
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        //detect position from top of frame till the beginning of content
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHigh = scrollView.contentSize.height
+//
+//        if offsetY > contentHigh - scrollView.frame.height {
+//            if !scrollMore {
+//                beginScrollMore {
+//                    if Reachability.isConnectedToNetwork() {
+//                        self.getPostList()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     func beginScrollMore(completion: () -> ()) {
         if Reachability.isConnectedToNetwork() {

@@ -11,4 +11,5 @@ import UIKit
 class PostsLoadingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var refreshTextLabel: UILabel!
 }

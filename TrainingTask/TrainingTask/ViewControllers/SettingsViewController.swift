@@ -76,9 +76,10 @@ class SettingsViewController: UIViewController {
                     guard let photo = sizes.last!["url"].url else {return}
 
                     let image = UIImageView()
-                    image.load(url: photo)
+                    image.load(url: photo) {
+                        self.avatarImage.image = image.image
+                    }
 
-                    self.avatarImage.image = image.image
                 } catch {
                     print(error)
                 }

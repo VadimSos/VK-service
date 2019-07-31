@@ -11,4 +11,5 @@ import UIKit
 class GroupsLoadingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var textRefreshingLabel: UILabel!
 }
