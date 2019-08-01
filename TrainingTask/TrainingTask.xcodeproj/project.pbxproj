@@ -28,6 +28,7 @@
 		EDC120CE22F0813A0016B067 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120CD22F0813A0016B067 /* UIAlertController.swift */; };
 		EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120CF22F1C3C30016B067 /* UITableView.swift */; };
 		EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D122F1E3DD0016B067 /* UITableViewCell.swift */; };
+		EDC120D422F2E9810016B067 /* aouthTokenHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D322F2E9810016B067 /* aouthTokenHandle.swift */; };
 		EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCC14F522E9E55E000F5F57 /* PostsModel.swift */; };
 		EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */; };
 		EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		EDC120CD22F0813A0016B067 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		EDC120CF22F1C3C30016B067 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		EDC120D122F1E3DD0016B067 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		EDC120D322F2E9810016B067 /* aouthTokenHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aouthTokenHandle.swift; sourceTree = "<group>"; };
 		EDCC14F522E9E55E000F5F57 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				EDC120CD22F0813A0016B067 /* UIAlertController.swift */,
 				EDC120CF22F1C3C30016B067 /* UITableView.swift */,
 				EDC120D122F1E3DD0016B067 /* UITableViewCell.swift */,
+				EDC120D322F2E9810016B067 /* aouthTokenHandle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				ED97093022E84E39009EEB20 /* PostsLoadingTableViewCell.swift in Sources */,
 				EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */,
 				3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */,
+				EDC120D422F2E9810016B067 /* aouthTokenHandle.swift in Sources */,
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
 				EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */,
 				EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */,

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Locksmith
 
 extension URL {
     func params(url: URL) -> [String: Any] {

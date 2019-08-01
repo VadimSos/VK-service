@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Locksmith
 import Alamofire
 import SwiftyJSON
 
@@ -89,7 +88,7 @@ class SettingsViewController: UIViewController {
 
     //prepare token to the correct format
     func compileToken() -> String {
-        let token = Locksmith.loadDataForUserAccount(userAccount: "VK")
+        let token = AouthTokenHandle().loadToken()
 
         let tokenKey: String = (token?.keys.first)!
         guard let tokenValue: String = token?.values.first as? String else {
@@ -99,13 +98,9 @@ class SettingsViewController: UIViewController {
 
         return finalToken
     }
-    
+
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {
-        do {
-            try Locksmith.deleteDataForUserAccount(userAccount: "VK")
-        } catch {
-            print(error)
-        }
+        AouthTokenHandle().deleteToken()
 
         let logoutURL = URL(string: "https://api.vk.com/oauth/logout?client_id=6191231")
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Locksmith
 import Alamofire
 import SwiftyJSON
 import RealmSwift
@@ -109,6 +108,7 @@ class GroupsViewController: UIViewController {
                             // swiftlint:disable:next force_try
                             try! self.realm.write {
                                 let realmData = GroupsList()
+                                
                                 realmData.name = name
                                 print(name)
                                 //save image to realm DB as Data
@@ -150,7 +150,7 @@ class GroupsViewController: UIViewController {
 
 	//prepare token to the correct format
 	func compileToken() -> String {
-		let token = Locksmith.loadDataForUserAccount(userAccount: "VK")
+		let token = AouthTokenHandle().loadToken()
 
 		let tokenKey: String = (token?.keys.first)!
 		guard let tokenValue: String = token?.values.first as? String else {
@@ -185,7 +185,6 @@ extension GroupsViewController: UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
                 fatalError("error")

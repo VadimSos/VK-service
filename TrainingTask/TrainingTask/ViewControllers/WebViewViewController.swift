@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import Locksmith
 
 class WebViewViewController: UIViewController {
 
@@ -72,18 +71,10 @@ extension WebViewViewController: WKNavigationDelegate {
                     }
                     if parseURLResult != nil {
                         let tokenDict: [String: String] = [(parseURLResult![index].key): parseURLResult![index].value as? String ?? "error"]
-                        if Locksmith.loadDataForUserAccount(userAccount: "VK") != nil {
-                            do {
-                                try Locksmith.updateData(data: tokenDict, forUserAccount: "VK")
-                            } catch {
-                                print(error)
-                            }
+                        if AouthTokenHandle().loadToken() != nil {
+                            AouthTokenHandle().updateToken(tokenDictionary: tokenDict)
                         } else {
-                            do {
-                                try Locksmith.saveData(data: tokenDict, forUserAccount: "VK")
-                            } catch {
-                                print(error)
-                            }
+                            AouthTokenHandle().saveToken(tokenDictionary: tokenDict)
                         }
                     }
 

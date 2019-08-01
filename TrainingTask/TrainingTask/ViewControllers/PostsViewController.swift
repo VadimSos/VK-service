@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Locksmith
 import Alamofire
 import SwiftyJSON
 import RealmSwift
@@ -30,7 +29,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
     var refreshControl: UIRefreshControl!
     var scrollMore = false
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
-    
+
     //update realm
     var needUpdate = false
     var item = 0
@@ -124,7 +123,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
                                         self.postTableView.reloadData()
                                     }
-                                    
+
                                     // swiftlint:disable:next force_try
                                     try! self.realm.write {
                                         let realmData = PostsList()
@@ -135,7 +134,6 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                                         guard let imgData = NSData(contentsOf: url!) else {return}
                                         realmData.image = imgData as Data
 
-                                        
                                         if self.needUpdate {
                                             self.updateRealmData(name: name, image: imgData as Data, text: postText)
                                         } else {
@@ -171,7 +169,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
         }
     }
-    
+
     func updateRealmData(name: String, image: Data, text: String) {
         if item < userOffsetAmount {
             let updatedData = realm.objects(PostsList.self)
@@ -184,7 +182,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     //prepare token to the correct format
     func compileToken() -> String {
-        let token = Locksmith.loadDataForUserAccount(userAccount: "VK")
+        let token = AouthTokenHandle().loadToken()
 
         let tokenKey: String = (token?.keys.first)!
         guard let tokenValue: String = token?.values.first as? String else {
