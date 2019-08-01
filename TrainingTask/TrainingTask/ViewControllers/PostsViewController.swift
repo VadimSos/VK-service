@@ -30,6 +30,10 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
     var refreshControl: UIRefreshControl!
     var scrollMore = false
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
+    
+    //update realm
+    var needUpdate = false
+    var item = 0
 
     // MARK: - Lifecycle
 
@@ -65,10 +69,11 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     @objc func refresh(_ sender: Any) {
         self.userOffsetAmount = 0
+        self.needUpdate = true
         // swiftlint:disable:next force_try
-        try! realm.write {
-            items.realm?.delete(items)
-        }
+//        try! realm.write {
+//            items.realm?.delete(items)
+//        }
         getPostList()
         refreshControl.endRefreshing()
     }
@@ -119,6 +124,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
                                         self.postTableView.reloadData()
                                     }
+                                    
                                     // swiftlint:disable:next force_try
                                     try! self.realm.write {
                                         let realmData = PostsList()
@@ -129,8 +135,25 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                                         guard let imgData = NSData(contentsOf: url!) else {return}
                                         realmData.image = imgData as Data
 
-                                        self.realm.add(realmData)
+                                        
+                                        if self.needUpdate {
+                                            self.updateRealmData(name: name, image: imgData as Data, text: postText)
+                                        } else {
+                                            self.realm.add(realmData)
+                                        }
                                     }
+//                                    // swiftlint:disable:next force_try
+//                                    try! self.realm.write {
+//                                        let realmData = PostsList()
+//                                        realmData.name = name
+//                                        realmData.text = postText
+//                                        //save image to realm DB as Data
+//                                        let url = URL(string: urlImage.absoluteString)
+//                                        guard let imgData = NSData(contentsOf: url!) else {return}
+//                                        realmData.image = imgData as Data
+//
+//                                        self.realm.add(realmData)
+//                                    }
 
                                 }
                             }
@@ -140,11 +163,22 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 print("start scroll")
+                self.needUpdate = false
                 self.scrollMore = false
                 self.postTableView.reloadData()
                 self.postTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
             }
 
+        }
+    }
+    
+    func updateRealmData(name: String, image: Data, text: String) {
+        if item < userOffsetAmount {
+            let updatedData = realm.objects(PostsList.self)
+            updatedData[item].name = name
+            updatedData[item].image = image
+            updatedData[item].text = text
+            item += 1
         }
     }
 
@@ -194,7 +228,7 @@ extension PostsViewController: UITableViewDataSource {
                 return items!.count
             }
             return 0
-        } else if section == 1 && scrollMore {
+        } else if section == 1 && !scrollMore {
             //if this is end of table do not show spinner at all
             if userOffsetAmount <= totalCountOfPosts {
                 if Reachability.isConnectedToNetwork() {
@@ -289,7 +323,7 @@ extension PostsViewController: UITableViewDelegate {
             completion()
         } else {
             scrollMore = false
-            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
+//            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
         }
     }
 }

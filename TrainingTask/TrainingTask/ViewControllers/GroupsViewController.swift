@@ -16,7 +16,6 @@ class GroupsViewController: UIViewController {
 
     // MARK: - Outlets
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var groupsTableView: UITableView!
 
 	// MARK: - Variables
