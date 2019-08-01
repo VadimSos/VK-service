@@ -11,9 +11,9 @@ import WebKit
 
 class WebViewViewController: UIViewController {
 
-    private let redirectURL = "https://oauth.vk.com/blank.html"
-
     var webView: WKWebView!
+
+    // MARK: - Lifecycle
 
     override func loadView() {
         webView = WKWebView()
@@ -23,27 +23,19 @@ class WebViewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         urlRequest()
     }
 
-    //create, send URL to VK
+    // MARL: - AOuth2 request
+
     func urlRequest() {
-        let api = "https://oauth.vk.com/authorize?"
-        let clientID = "client_id=7062888&"
-        let scope = "scope=8192&"
-        let display = "display=page&"
-        let version = "v=5.101&"
-        let responseToken = "response_type=token&"
-        let revoke = "revoke=1"
-        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
-        let myRequest = URLRequest(url: myURL!)
+        guard let finalURL = APIrequests().aouth2CreateURLRequest() else {return}
+        let myRequest = URLRequest(url: finalURL)
         webView.load(myRequest)
-        webView.allowsBackForwardNavigationGestures = true //move backward or forward in web browsing
     }
 }
 
-    // MARK: - handle response URL
+    // MARK: - WebView Navigation request/response
 
 extension WebViewViewController: WKNavigationDelegate {
 
@@ -51,57 +43,38 @@ extension WebViewViewController: WKNavigationDelegate {
                  decidePolicyFor navigationResponse: WKNavigationResponse,
                  decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
-        let requestURL = navigationResponse.response.url?.absoluteString
-        guard let newString = (requestURL?.replacingOccurrences(of: "#", with: "?")) else {return}
-        let resultURL = URL(string: newString)
+        guard let requestURL = navigationResponse.response.url?.absoluteString,
+            let resultURL = APIresponse().prepareResponseURLToCorrectFormat(url: requestURL) else {
+            returnToRootViewController()
+            return decisionHandler(.cancel)
+        }
 
-        if requestURL != nil {
-            let stringURL = (resultURL?.absoluteString)!
+            if APIresponse().checkURLValidation(responseURL: resultURL) {
+                let parseURLResult = resultURL.params(url: resultURL)
 
-            if validateResponseUrl(stringURL: stringURL) {
-                let parseURLResult = resultURL?.params(url: resultURL!)
+                //3 - count of key/value pairs in response from "allow privilage" and "Cancel"
+                if parseURLResult.count <= 3 {
 
-                //open tab bar controller
-                if parseURLResult!.count <= 3 {
-
-                    //save token to Locksmith
-                    guard let index = parseURLResult?.index(forKey: "access_token") else {
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    guard let index = parseURLResult.index(forKey: "access_token") else {
+                        returnToRootViewController()
                         return decisionHandler(.cancel)
                     }
-                    if parseURLResult != nil {
-                        let tokenDict: [String: String] = [(parseURLResult![index].key): parseURLResult![index].value as? String ?? "error"]
-                        if AouthTokenHandle().loadToken() != nil {
-                            AouthTokenHandle().updateToken(tokenDictionary: tokenDict)
-                        } else {
-                            AouthTokenHandle().saveToken(tokenDictionary: tokenDict)
-                        }
+                    let tokenDict = [parseURLResult[index].key: parseURLResult[index].value]
+                    if AouthTokenHandle().loadToken() != nil {
+                        AouthTokenHandle().updateToken(tokenDictionary: tokenDict)
+                    } else {
+                        AouthTokenHandle().saveToken(tokenDictionary: tokenDict)
                     }
 
-                    //if cancel permissions in VK
-                    if parseURLResult?.keys.first?.description == "error_description" ||
-                        parseURLResult?.keys.first?.description == "error" ||
-                        parseURLResult?.keys.first?.description == "error_reason" {
-
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                        return decisionHandler(.cancel)
-                    }
                     performSegue(withIdentifier: "toTabBar", sender: nil)
                 }
                 return decisionHandler(.allow)
             }
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            return decisionHandler(.cancel)
-        }
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        returnToRootViewController()
         decisionHandler(.cancel)
     }
 
-    func validateResponseUrl (stringURL: String) -> Bool {
-        var result = false
-        if stringURL.hasPrefix("\(redirectURL)") || stringURL.hasPrefix("https://oauth.vk.com/authorize") {
-            result = true
-        }
-        return result
+    func returnToRootViewController() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 }

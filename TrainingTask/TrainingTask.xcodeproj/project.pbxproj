@@ -29,6 +29,8 @@
 		EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120CF22F1C3C30016B067 /* UITableView.swift */; };
 		EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D122F1E3DD0016B067 /* UITableViewCell.swift */; };
 		EDC120D422F2E9810016B067 /* aouthTokenHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D322F2E9810016B067 /* aouthTokenHandle.swift */; };
+		EDC120D622F304D90016B067 /* APIrequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D522F304D90016B067 /* APIrequests.swift */; };
+		EDC120DA22F312510016B067 /* APIresponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC120D922F312510016B067 /* APIresponse.swift */; };
 		EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCC14F522E9E55E000F5F57 /* PostsModel.swift */; };
 		EDD80B0F22E5DCFF00784AF2 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */; };
 		EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */; };
@@ -60,6 +62,8 @@
 		EDC120CF22F1C3C30016B067 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		EDC120D122F1E3DD0016B067 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		EDC120D322F2E9810016B067 /* aouthTokenHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aouthTokenHandle.swift; sourceTree = "<group>"; };
+		EDC120D522F304D90016B067 /* APIrequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIrequests.swift; sourceTree = "<group>"; };
+		EDC120D922F312510016B067 /* APIresponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIresponse.swift; sourceTree = "<group>"; };
 		EDCC14F522E9E55E000F5F57 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		EDD80B0E22E5DCFF00784AF2 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		EDD80B1022E5E3D900784AF2 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		ED3E12C622DDE5DD00534EED /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				EDC120D522F304D90016B067 /* APIrequests.swift */,
+				EDC120D922F312510016B067 /* APIresponse.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */,
 				EDC120D422F2E9810016B067 /* aouthTokenHandle.swift in Sources */,
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
+				EDC120D622F304D90016B067 /* APIrequests.swift in Sources */,
 				EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */,
 				EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */,
 				EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */,
@@ -341,6 +348,7 @@
 				ED3E12CF22DF4D3B00534EED /* ParseURL.swift in Sources */,
 				ED3E12D322E0831F00534EED /* SettingsViewController.swift in Sources */,
 				3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */,
+				EDC120DA22F312510016B067 /* APIresponse.swift in Sources */,
 				EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */,
 				EDC120CA22F03E2F0016B067 /* Reachability.swift in Sources */,
 				ED97093322E892B4009EEB20 /* GroupsModel.swift in Sources */,
