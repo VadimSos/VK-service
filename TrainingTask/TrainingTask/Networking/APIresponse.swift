@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class APIresponse {
-    
+
     private let redirectURL = "https://oauth.vk.com/blank.html"
 
     func prepareResponseURLToCorrectFormat(url: String) -> URL? {

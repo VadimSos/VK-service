@@ -72,13 +72,7 @@ class GroupsViewController: UIViewController {
 
 	//create, send URL to VK
 	func urlRequest() {
-		let api = "https://api.vk.com/method/groups.get?"
-		let extended = "extended=1&"
-		let count = "count=20&"
-		let offset = "offset=\(userOffsetAmount)&"
-		let version = "v=5.101&"
-		let requestToken = compileToken()
-		guard let myURL = URL(string: api + extended + offset + count + version + requestToken) else {return}
+		guard let myURL = APIrequests().getGroupsURL(userOffsetAmount: userOffsetAmount) else {return}
 
 		//do not increase cells more than total amount of groups
         if userOffsetAmount <= totalCountOfGroups {
@@ -108,7 +102,7 @@ class GroupsViewController: UIViewController {
                             // swiftlint:disable:next force_try
                             try! self.realm.write {
                                 let realmData = GroupsList()
-                                
+
                                 realmData.name = name
                                 print(name)
                                 //save image to realm DB as Data
@@ -147,19 +141,6 @@ class GroupsViewController: UIViewController {
             item += 1
         }
     }
-
-	//prepare token to the correct format
-	func compileToken() -> String {
-		let token = KeychainOperations().getToken()
-
-		let tokenKey = "access_token"
-		guard let tokenValue: String = token else {
-			return "error with token Value"
-		}
-		let finalToken = tokenKey + "=" + tokenValue
-
-		return finalToken
-	}
 }
 
 extension GroupsViewController: UITableViewDataSource {

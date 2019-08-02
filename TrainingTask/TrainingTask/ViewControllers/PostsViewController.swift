@@ -79,13 +79,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     //create, send URL to VK
     func getPostList() {
-        let api = "https://api.vk.com/method/wall.get?"
-        let extended = "extended=1&"
-        let count = "count=15&"
-        let offset = "offset=\(userOffsetAmount)&"
-        let version = "v=5.101&"
-        let requestToken = compileToken()
-        guard let myURL = URL(string: api + extended + offset + count + version + requestToken) else {return}
+		guard let myURL = APIrequests().getPostsURL(userOffsetAmount: userOffsetAmount) else {return}
 
         //do not increase cells more than total amount of groups
         if userOffsetAmount <= totalCountOfPosts {
@@ -152,7 +146,6 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 //
 //                                        self.realm.add(realmData)
 //                                    }
-
                                 }
                             }
                         }
@@ -180,34 +173,16 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    //prepare token to the correct format
-    func compileToken() -> String {
-        let token = KeychainOperations().getToken()
-
-        let tokenKey = "access_token"
-        guard let tokenValue: String = token else {
-            return "error with token Value"
-        }
-        let finalToken = tokenKey + "=" + tokenValue
-
-        return finalToken
-    }
-
     @IBAction func addPostButtonDidTap(_ sender: UIButton) {
         addingPost()
         postTextField.text?.removeAll()
     }
 
     func addingPost() {
-        let api = "https://api.vk.com/method/wall.post?"
-        guard let text = postTextField.text else {return}
-        let message = "message=\(text)&"
-        let version = "v=5.101&"
-        let requestToken = compileToken()
-        guard let myURL = URL(string: api + message + version + requestToken) else {return}
+		guard let postText = postTextField.text else {return}
+		guard let myURL = APIrequests().addingPost(postText: postText) else {return}
 
         AF.request(myURL).response { _ in
-
             self.userOffsetAmount = 0
             // swiftlint:disable:next force_try
             try! self.realm.write {

@@ -29,7 +29,7 @@ class WebViewViewController: UIViewController {
     // MARL: - AOuth2 request
 
     func urlRequest() {
-        guard let finalURL = APIrequests().aouth2CreateURLRequest() else {return}
+        guard let finalURL = APIrequests().authorizeURL() else {return}
         let myRequest = URLRequest(url: finalURL)
         webView.load(myRequest)
     }
@@ -49,26 +49,26 @@ extension WebViewViewController: WKNavigationDelegate {
             return decisionHandler(.cancel)
         }
 
-            if APIresponse().checkURLValidation(responseURL: resultURL) {
-                let parseURLResult = resultURL.params(url: resultURL)
+		if APIresponse().checkURLValidation(responseURL: resultURL) {
+			let parseURLResult = resultURL.params(url: resultURL)
 
-                //3 - count of key/value pairs in response from "allow privilage" and "Cancel"
-                if parseURLResult.count <= 3 {
+			//3 - count of key/value pairs in response from "allow privilage" and "Cancel"
+			if parseURLResult.count <= 3 {
 
-                    guard let index = parseURLResult.index(forKey: "access_token") else {
-                        returnToRootViewController()
-                        return decisionHandler(.cancel)
-                    }
-					guard let tokenValue = parseURLResult[index].value as? String else {
-						returnToRootViewController()
-						return decisionHandler(.cancel)
-					}
-						KeychainOperations().saveToken(value: tokenValue)
+				guard let index = parseURLResult.index(forKey: "access_token") else {
+					returnToRootViewController()
+					return decisionHandler(.cancel)
+				}
+				guard let tokenValue = parseURLResult[index].value as? String else {
+					returnToRootViewController()
+					return decisionHandler(.cancel)
+				}
+					KeychainOperations().saveToken(value: tokenValue)
 
-                    performSegue(withIdentifier: "toTabBar", sender: nil)
-                }
-                return decisionHandler(.allow)
-            }
+				performSegue(withIdentifier: "toTabBar", sender: nil)
+			}
+			return decisionHandler(.allow)
+		}
         returnToRootViewController()
         decisionHandler(.cancel)
     }
