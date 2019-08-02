@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1AA1D77ED4ADD55AA4CECB08 /* Pods_TrainingTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F88CFFD50F9496A26412C5 /* Pods_TrainingTask.framework */; };
+		3F008D9922F46BF1004B6739 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F008D9822F46BF1004B6739 /* Config.plist */; };
+		3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */; };
 		3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0622E4791600D7AAC9 /* UIImageView.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		3B9ADE9863C6C3B20A7367EA /* Pods-TrainingTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.debug.xcconfig"; sourceTree = "<group>"; };
+		3F008D9822F46BF1004B6739 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlistReading.swift; sourceTree = "<group>"; };
 		3F31DC0622E4791600D7AAC9 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		ED28224322DCDF0E003F1784 /* TrainingTask */ = {
 			isa = PBXGroup;
 			children = (
+				3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */,
 				ED3E12C622DDE5DD00534EED /* Networking */,
 				ED3E12B822DDAF2A00534EED /* UI */,
 				ED3E12B722DDAEEC00534EED /* Model */,
@@ -167,6 +172,7 @@
 			children = (
 				EDC120D522F304D90016B067 /* APIrequests.swift */,
 				EDC120D922F312510016B067 /* APIresponse.swift */,
+				3F008D9822F46BF1004B6739 /* Config.plist */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F008D9922F46BF1004B6739 /* Config.plist in Resources */,
 				ED28224F22DCDF0F003F1784 /* LaunchScreen.storyboard in Resources */,
 				ED28224C22DCDF0F003F1784 /* Assets.xcassets in Resources */,
 				ED28224A22DCDF0E003F1784 /* Main.storyboard in Resources */,
@@ -356,6 +363,7 @@
 				EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */,
 				EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
+				3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
 				ED97092E22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift in Sources */,

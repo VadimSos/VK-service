@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Base URL</key>
+	<string>https://api.vk.com/</string>
+	<key>Authorization URL</key>
+	<string>https://oauth.vk.com/</string>
+	<key>Redirect URL</key>
+	<string>https://oauth.vk.com/blank.html</string>
+	<key>API version</key>
+	<real>5.101</real>
+	<key>Client ID</key>
+	<integer>7062888</integer>
+	<key>Count of Posts/Groups</key>
+	<integer>20</integer>
+	<key>Access Permissions</key>
+	<integer>8192</integer>
+	<key>Token Key</key>
+	<string>access_token</string>
+	<key>scrollMore for TableViews</key>
+	<false/>
+	<key>realm if need update</key>
+	<false/>
+</dict>
+</plist>

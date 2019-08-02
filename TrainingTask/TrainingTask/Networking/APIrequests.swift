@@ -11,87 +11,90 @@ import UIKit
 
 class APIrequests {
 
-	let apiVKVersion = "v=5.101&"
-	let userClientID = "client_id=7062888&"
+	let pBaseURL = ConfigPlistReading().getPlistValue(key: "Base URL")
+	let pAuthorizationURL = ConfigPlistReading().getPlistValue(key: "Authorization URL")
+	let pRedirectURL = ConfigPlistReading().getPlistValue(key: "Redirect URL")
+	let pApiVersion = ConfigPlistReading().getPlistValue(key: "API version")
+	let pClientID = ConfigPlistReading().getPlistValue(key: "Client ID")
+	let pCount = ConfigPlistReading().getPlistValue(key: "Count of Posts/Groups")
+	let pScope = ConfigPlistReading().getPlistValue(key: "Access Permissions")
+	let accessTokenKey = ConfigPlistReading().getPlistValue(key: "Token Key")
 
     func authorizeURL() -> URL? {
-        let api = "https://oauth.vk.com/authorize?"
-        let clientID = userClientID
-        let scope = "scope=8192&"
+        let api = "\(pAuthorizationURL)authorize?"
+        let clientID = "client_id=\(pClientID)&"
+        let scope = "scope=\(pScope)&"
         let display = "display=page&"
-        let version = apiVKVersion
+        let version = "v=\(pApiVersion)&"
         let responseToken = "response_type=token&"
         let revoke = "revoke=1"
-        let redirectURL = "https://oauth.vk.com/blank.html"
-        let myURL = URL(string: api + clientID + scope + "redirect_uri=" + redirectURL + "&" + display + version + responseToken + revoke)
+        let redirectURL = "redirect_uri=\(pRedirectURL)&"
+        let myURL = URL(string: api + clientID + scope + redirectURL + display + version + responseToken + revoke)
         return myURL
     }
 
 	func getGroupsURL(userOffsetAmount: Int) -> URL? {
-		let api = "https://api.vk.com/method/groups.get?"
+		let api = "\(pBaseURL)method/groups.get?"
 		let extended = "extended=1&"
-		let count = "count=20&"
+		let count = "count=\(pCount)&"
 		let offset = "offset=\(userOffsetAmount)&"
-		let version = apiVKVersion
-		let requestToken = compileToken()
+		let version = "v=\(pApiVersion)&"
+		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + extended + offset + count + version + requestToken)
 		return myURL
 	}
 
 	func getPostsURL(userOffsetAmount: Int) -> URL? {
-		let api = "https://api.vk.com/method/wall.get?"
+		let api = "\(pBaseURL)method/wall.get?"
 		let extended = "extended=1&"
-		let count = "count=15&"
+		let count = "count=\(pCount)&"
 		let offset = "offset=\(userOffsetAmount)&"
-		let version = apiVKVersion
-		let requestToken = compileToken()
+		let version = "v=\(pApiVersion)&"
+		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + extended + offset + count + version + requestToken)
 		return myURL
 	}
 
 	func addingPost(postText: String) -> URL? {
-		let api = "https://api.vk.com/method/wall.post?"
+		let api = "\(pBaseURL)method/wall.post?"
 		let message = "message=\(postText)&"
-		let version = "v=5.101&"
-		let requestToken = APIrequests().compileToken()
+		let version = "v=\(pApiVersion)&"
+		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + message + version + requestToken)
 		return myURL
 	}
 
 	func getProfileNameURL() -> URL? {
-		let api = "https://api.vk.com/method/account.getProfileInfo?"
-		let version = apiVKVersion
-		let requestToken = compileToken()
+		let api = "\(pBaseURL)method/account.getProfileInfo?"
+		let version = "v=\(pApiVersion)&"
+		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + version + requestToken)
 		return myURL
 	}
 
 	func getProfileImageURL() -> URL? {
-		let api = "https://api.vk.com/method/photos.getProfile?"
+		let api = "\(pBaseURL)method/photos.getProfile?"
 		let reverse = "rev=0&"
 		let extended = "extended=0&"
 		let photoSizes = "photo_sizes=0&"
-		let version = apiVKVersion
-		let requestToken = compileToken()
+		let version = "v=\(pApiVersion)&"
+		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + reverse + extended + photoSizes + version + requestToken)
 		return myURL
 	}
 
 	func logoutURL() -> URL? {
-		let api = "https://api.vk.com/oauth/logout?"
-		let clientID = userClientID
+		let api = "\(pBaseURL)oauth/logout?"
+		let clientID = "client_id=\(pClientID)&"
 		let myURL = URL(string: api + clientID)
 		return myURL
 	}
 
 	//prepare token to the correct format
-	func compileToken() -> String {
-		let token = KeychainOperations().getToken()
-		let tokenKey = "access_token"
-		guard let tokenValue: String = token else {
-			return "error with token Value"
-		}
-		let finalToken = tokenKey + "=" + tokenValue
+	func compileToken() -> String? {
+		guard let token = KeychainOperations().getToken() else {return nil}
+		let tokenKey = "\(accessTokenKey)"
+		let finalToken = tokenKey + "=" + token
 		return finalToken
 	}
 }

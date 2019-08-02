@@ -93,7 +93,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
                         let response = json["response"].dictionaryValue
                         //take value from dictionary
                         guard let profiles = response["profiles"]?.arrayValue else {return}
-                        self.userOffsetAmount += 15
+                        self.userOffsetAmount += 20
                         print("scroll: \(self.userOffsetAmount)")
                         guard let items = response["items"]?.arrayValue else {return}
                         //return total count of posts
@@ -146,6 +146,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 //
 //                                        self.realm.add(realmData)
 //                                    }
+
                                 }
                             }
                         }
