@@ -182,10 +182,10 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
 
     //prepare token to the correct format
     func compileToken() -> String {
-        let token = AouthTokenHandle().loadToken()
+        let token = KeychainOperations().getToken()
 
-        let tokenKey: String = (token?.keys.first)!
-        guard let tokenValue: String = token?.values.first as? String else {
+        let tokenKey = "access_token"
+        guard let tokenValue: String = token else {
             return "error with token Value"
         }
         let finalToken = tokenKey + "=" + tokenValue

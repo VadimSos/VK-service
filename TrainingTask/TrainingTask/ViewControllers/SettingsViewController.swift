@@ -88,10 +88,10 @@ class SettingsViewController: UIViewController {
 
     //prepare token to the correct format
     func compileToken() -> String {
-        let token = AouthTokenHandle().loadToken()
+        let token = KeychainOperations().getToken()
 
-        let tokenKey: String = (token?.keys.first)!
-        guard let tokenValue: String = token?.values.first as? String else {
+        let tokenKey = "access_token"
+        guard let tokenValue: String = token else {
             return "error with token Value"
         }
         let finalToken = tokenKey + "=" + tokenValue
@@ -100,7 +100,7 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {
-        AouthTokenHandle().deleteToken()
+        KeychainOperations().deleteToken()
 
         let logoutURL = URL(string: "https://api.vk.com/oauth/logout?client_id=6191231")
 
@@ -109,9 +109,9 @@ class SettingsViewController: UIViewController {
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")                         // response serialization result
 
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-            }
+//            if let json = response.result.value {
+//                print("JSON: \(json)") // serialized json response
+//            }
 
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)") // original server data as UTF8 string

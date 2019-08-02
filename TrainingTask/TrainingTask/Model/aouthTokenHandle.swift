@@ -7,39 +7,37 @@
 //
 
 import Foundation
-import Locksmith
+import KeychainSwift
 
-class AouthTokenHandle {
-    
-    let userAccount = "VK"
-    typealias Token = [String: Any]
+class Keychain {
+	enum Key: String {
+		case token
+	}
 
-    func saveToken(tokenDictionary: Token) {
-        do {
-            try Locksmith.saveData(data: tokenDictionary, forUserAccount: userAccount)
-        } catch {
-            fatalError("Can't save token")
-        }
-    }
+	func save(key: String, value: String) {
+		KeychainSwift().set(value, forKey: key)
+	}
+	func get(key: String) -> String? {
+		guard let getData = KeychainSwift().get(key) else {return nil}
+		return getData
+	}
+	func delete(key: String) {
+		KeychainSwift().delete(key)
+	}
+}
 
-    func loadToken() -> Token? {
-        guard let token = Locksmith.loadDataForUserAccount(userAccount: userAccount) else {return nil}
-        return token
-    }
+class KeychainOperations: Keychain {
 
-    func updateToken(tokenDictionary: Token) {
-        do {
-            try Locksmith.updateData(data: tokenDictionary, forUserAccount: userAccount)
-        } catch {
-            fatalError("Can't update token")
-        }
-    }
+	func saveToken(value: String) {
+		Keychain().save(key: Key.token.rawValue, value: value)
+	}
 
-    func deleteToken() {
-        do {
-            try Locksmith.deleteDataForUserAccount(userAccount: userAccount)
-        } catch {
-            fatalError("Can't delete token")
-        }
-    }
+	func getToken() -> String? {
+		guard let getToken = Keychain().get(key: Key.token.rawValue) else {return nil}
+		return getToken
+	}
+
+	func deleteToken() {
+		Keychain().delete(key: Key.token.rawValue)
+	}
 }

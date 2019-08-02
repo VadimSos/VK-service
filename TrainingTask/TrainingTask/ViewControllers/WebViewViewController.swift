@@ -59,12 +59,11 @@ extension WebViewViewController: WKNavigationDelegate {
                         returnToRootViewController()
                         return decisionHandler(.cancel)
                     }
-                    let tokenDict = [parseURLResult[index].key: parseURLResult[index].value]
-                    if AouthTokenHandle().loadToken() != nil {
-                        AouthTokenHandle().updateToken(tokenDictionary: tokenDict)
-                    } else {
-                        AouthTokenHandle().saveToken(tokenDictionary: tokenDict)
-                    }
+					guard let tokenValue = parseURLResult[index].value as? String else {
+						returnToRootViewController()
+						return decisionHandler(.cancel)
+					}
+						KeychainOperations().saveToken(value: tokenValue)
 
                     performSegue(withIdentifier: "toTabBar", sender: nil)
                 }
