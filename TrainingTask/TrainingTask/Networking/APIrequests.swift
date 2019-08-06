@@ -11,14 +11,16 @@ import UIKit
 
 class APIrequests {
 
-	let pBaseURL = ConfigPlistReading().getPlistValue(key: "Base URL")
-	let pAuthorizationURL = ConfigPlistReading().getPlistValue(key: "Authorization URL")
-	let pRedirectURL = ConfigPlistReading().getPlistValue(key: "Redirect URL")
-	let pApiVersion = ConfigPlistReading().getPlistValue(key: "API version")
-	let pClientID = ConfigPlistReading().getPlistValue(key: "Client ID")
-	let pCount = ConfigPlistReading().getPlistValue(key: "Count of Posts/Groups")
-	let pScope = ConfigPlistReading().getPlistValue(key: "Access Permissions")
-	let accessTokenKey = ConfigPlistReading().getPlistValue(key: "Token Key")
+	static let resultValue = ConfigPlistResult()
+
+	let pBaseURL = resultValue.stringValue(key: .baseURL)
+	let pAuthorizationURL = resultValue.stringValue(key: .authURL)
+	let pRedirectURL = resultValue.stringValue(key: .redirectURL)
+	let pApiVersion = resultValue.intValue(key: .apiVersion)
+	let pClientID = resultValue.intValue(key: .clientID)
+	let pCount = resultValue.intValue(key: .count)
+	let pScope = resultValue.intValue(key: .permission)
+	let accessTokenKey = resultValue.stringValue(key: .tokenKey)
 
     func authorizeURL() -> URL? {
         let api = "\(pAuthorizationURL)authorize?"

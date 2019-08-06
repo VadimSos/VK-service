@@ -9,10 +9,12 @@
 import Foundation
 
 class ConfigPlistReading {
-	func getPlistValue(key: String) -> Any {
+
+	func getPlist(key: String) -> Any? {
 		guard let plistPath = Bundle.main.path(forResource: "Config", ofType: "plist"),
 			let dict = NSDictionary(contentsOfFile: plistPath),
-			let value = dict.object(forKey: key) else {return "Can't access Config.plist"}
+			let value = dict.object(forKey: key) else {return nil}
 		return value as Any
 	}
+
 }

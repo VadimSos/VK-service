@@ -11,6 +11,9 @@
 		3F008D9922F46BF1004B6739 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F008D9822F46BF1004B6739 /* Config.plist */; };
 		3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */; };
 		3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0622E4791600D7AAC9 /* UIImageView.swift */; };
+		3F4E112522F8316A00E3FA5F /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112422F8316A00E3FA5F /* Route.swift */; };
+		3F4E112722F85FBA00E3FA5F /* GroupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */; };
+		3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
 		ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224422DCDF0E003F1784 /* AppDelegate.swift */; };
@@ -42,6 +45,9 @@
 		3F008D9822F46BF1004B6739 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlistReading.swift; sourceTree = "<group>"; };
 		3F31DC0622E4791600D7AAC9 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		3F4E112422F8316A00E3FA5F /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoute.swift; sourceTree = "<group>"; };
+		3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlistResult.swift; sourceTree = "<group>"; };
 		3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		B724883DA8E5DD1EC8FD9982 /* Pods-TrainingTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +98,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3F4E112822F95ABA00E3FA5F /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				3F4E112422F8316A00E3FA5F /* Route.swift */,
+				3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
 		D1FAAB8B12126CCADE9EFC5A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */,
+				3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */,
 				ED3E12C622DDE5DD00534EED /* Networking */,
 				ED3E12B822DDAF2A00534EED /* UI */,
 				ED3E12B722DDAEEC00534EED /* Model */,
@@ -170,6 +186,7 @@
 		ED3E12C622DDE5DD00534EED /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3F4E112822F95ABA00E3FA5F /* Route */,
 				EDC120D522F304D90016B067 /* APIrequests.swift */,
 				EDC120D922F312510016B067 /* APIresponse.swift */,
 				3F008D9822F46BF1004B6739 /* Config.plist */,
@@ -364,7 +381,9 @@
 				EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */,
+				3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
+				3F4E112722F85FBA00E3FA5F /* GroupRoute.swift in Sources */,
 				ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */,
 				ED97092E22E834C0009EEB20 /* GroupsLoadingTableViewCell.swift in Sources */,
 				3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */,
@@ -375,6 +394,7 @@
 				EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */,
 				EDC120CA22F03E2F0016B067 /* Reachability.swift in Sources */,
 				ED97093322E892B4009EEB20 /* GroupsModel.swift in Sources */,
+				3F4E112522F8316A00E3FA5F /* Route.swift in Sources */,
 				EDC120CE22F0813A0016B067 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

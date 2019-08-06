@@ -18,9 +18,5 @@
 	<integer>8192</integer>
 	<key>Token Key</key>
 	<string>access_token</string>
-	<key>scrollMore for TableViews</key>
-	<false/>
-	<key>realm if need update</key>
-	<false/>
 </dict>
 </plist>
