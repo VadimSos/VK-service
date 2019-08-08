@@ -21,16 +21,23 @@ class APIrequests {
 //		}
 //	}
 
-	func request<U, T>(route: Route<U>, parser: Parser<T>) {
+	func request<U, T>(route: Route<U>, parser: Parser<T>, completion: @escaping (_ result: ProfileModel) -> Void) {
 		guard let url = route.getURL() else {return}
 		guard let httpMethod = HTTPMethod(rawValue: route.type) else {return}
 		let parameters = route.param
-		AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
+		AF.request(url,
+				   method: httpMethod,
+				   parameters: parameters,
+				   encoding: URLEncoding.default,
+				   headers: nil,
+				   interceptor: nil).response { response in
 			if let data = response.data {
-				parser.parsing(data: data)
+				parser.parsing(data: data) { result in
+					let test = result
+					completion((test as? ProfileModel)!)
+				}
 			}
 		}
-
 	}
 
 	static let resultValue = ConfigPlistResult()

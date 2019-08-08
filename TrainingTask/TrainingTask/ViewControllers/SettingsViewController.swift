@@ -27,8 +27,9 @@ class SettingsViewController: UIViewController {
 
 	func getProfileName() {
 //		guard let myURL = APIrequests().getProfileNameURL() else {return}
-		APIrequests().request(route: ProfileRoute(), parser: ProfileParser())
-
+		APIrequests().request(route: ProfileRoute(), parser: ProfileParser()) { result in
+			self.accountName.text = result.name
+		}
 //        AF.request(myURL).responseData { response in
 //            if let data = response.data {
 //                do {

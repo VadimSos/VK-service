@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class ProfileParser: Parser<ProfileModel> {
-	override func  parsing(data: Data) -> ProfileModel? {
+	override func  parsing(data: Data, completion: ( _ result: ProfileModel) -> Void) -> ProfileModel? {
 		let resultName = ProfileModel(name: "")
 		do {
 			let json = try JSON(data: data)
@@ -25,6 +25,7 @@ class ProfileParser: Parser<ProfileModel> {
 //			guard let name = response["first_name"]?.stringValue else {return nil}
 //
 //			resultName.name = name
+			completion(resultName)
 			return resultName
 		} catch {
 			fatalError("error")
