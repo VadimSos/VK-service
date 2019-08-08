@@ -11,9 +11,9 @@ import Foundation
 class ConfigPlistResult {
 	var result = ConfigPlistReading()
 
-	func intValue(key: Key) -> Int {
+	func intValue(key: Key) -> Double {
 		let intResult = result.getPlist(key: key.rawValue)
-		return intResult as? Int ?? 0 //TODo: change default value to correct nil checking
+		return intResult as? Double ?? 0 //TODo: change default value to correct nil checking
 	}
 
 	func stringValue(key: Key) -> String {

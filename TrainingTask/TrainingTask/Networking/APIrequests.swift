@@ -8,8 +8,30 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class APIrequests {
+
+//	func apiRequest() {
+//		guard let test = GroupRoute().getURL() else {return}
+//		AF.request(test).responseData { response in
+//			if let data = response.data {
+//				GroupParser<[GroupModel]>().parsing(data: data)
+//			}
+//		}
+//	}
+
+	func request<U, T>(route: Route<U>, parser: Parser<T>) {
+		guard let url = route.getURL() else {return}
+		guard let httpMethod = HTTPMethod(rawValue: route.type) else {return}
+		let parameters = route.param
+		AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
+			if let data = response.data {
+				parser.parsing(data: data)
+			}
+		}
+
+	}
 
 	static let resultValue = ConfigPlistResult()
 

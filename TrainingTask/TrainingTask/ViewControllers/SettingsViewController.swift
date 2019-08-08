@@ -22,24 +22,25 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileImage()
-        getProfileName()
+		getProfileName()
     }
 
-    func getProfileName() {
-		guard let myURL = APIrequests().getProfileNameURL() else {return}
+	func getProfileName() {
+//		guard let myURL = APIrequests().getProfileNameURL() else {return}
+		APIrequests().request(route: ProfileRoute(), parser: ProfileParser())
 
-        AF.request(myURL).responseData { response in
-            if let data = response.data {
-                do {
-                    let json = try JSON(data: data)
-                    let response = json["response"].dictionaryValue
-                    let name = response["first_name"]?.stringValue
-                    self.accountName.text = name
-                } catch {
-                    print(error)
-                }
-            }
-        }
+//        AF.request(myURL).responseData { response in
+//            if let data = response.data {
+//                do {
+//                    let json = try JSON(data: data)
+//                    let response = json["response"].dictionaryValue
+//                    let name = response["first_name"]?.stringValue
+//                    self.accountName.text = name
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//        }
     }
 
     func getProfileImage() {
