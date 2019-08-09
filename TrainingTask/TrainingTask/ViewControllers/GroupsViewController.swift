@@ -28,6 +28,7 @@ class GroupsViewController: UIViewController {
 	var refreshControl: UIRefreshControl!
     var scrollMore = false
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
+	var groupsArray: [GroupModel] = []
 
     //update realm
     var needUpdate = false
@@ -43,20 +44,21 @@ class GroupsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         groupsTableView.addSubview(refreshControl)
 
-        //request to realm DB
-        items = realm.objects(GroupsList.self)
-        //print realm DB in Finder
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        print("//\(items.count)")
-        if items.count == 0 {
-            DispatchQueue.global().async {
-                self.urlRequest()
-                DispatchQueue.main.async {
-                    self.groupsTableView.reloadData()
-                }
-            }
-
-        }
+		urlRequest()
+//        //request to realm DB
+//        items = realm.objects(GroupsList.self)
+//        //print realm DB in Finder
+//        print(Realm.Configuration.defaultConfiguration.fileURL!)
+//        print("//\(items.count)")
+//        if items.count == 0 {
+//            DispatchQueue.global().async {
+//                self.urlRequest()
+//                DispatchQueue.main.async {
+//                    self.groupsTableView.reloadData()
+//                }
+//            }
+//
+//        }
 	}
 
     @objc func refresh(_ sender: Any) {
@@ -72,64 +74,74 @@ class GroupsViewController: UIViewController {
 
 	//create, send URL to VK
 	func urlRequest() {
-		guard let myURL = APIrequests().getGroupsURL(userOffsetAmount: userOffsetAmount) else {return}
+//		guard let myURL = APIrequests().getGroupsURL(userOffsetAmount: userOffsetAmount) else {return}
 
 		//do not increase cells more than total amount of groups
         if userOffsetAmount <= totalCountOfGroups {
             //send request and operate response
-            AF.request(myURL).responseData { response in
-                if let data = response.data {
-                    do {
-                        let json = try JSON(data: data)
-                        //take dictionary from JSON
-                        let response = json["response"].dictionaryValue
-                        //take value from dictionary
-                        guard let items = response["items"]?.arrayValue else {return}
-                        self.userOffsetAmount += 20
-                        //total count of groups
-                        guard let groupsCount = response["count"]?.intValue else {return}
-                        self.totalCountOfGroups = groupsCount
-                        //save names into array and link into array
-                        for eachItems in items {
-                            guard let name = eachItems["name"].string else {return}
-                            guard let urlImage = eachItems["photo_50"].url else {return}
-
-                            let urlImageView = UIImageView()
-                            urlImageView.load(url: urlImage) {
-
-                                self.groupsTableView.reloadData()
-                            }
-                            // swiftlint:disable:next force_try
-                            try! self.realm.write {
-                                let realmData = GroupsList()
-
-                                realmData.name = name
-                                print(name)
-                                //save image to realm DB as Data
-                                let url = URL(string: urlImage.absoluteString)
-                                guard let imgData = NSData(contentsOf: url!) else {return}
-                                realmData.image = imgData as Data
-                                print(realmData.image)
-
-                                if self.needUpdate {
-                                    self.updateRealmData(name: name, image: imgData as Data)
-                                } else {
-                                    self.realm.add(realmData)
-                                }
-                            }
-
-                        }
-                    } catch {
-                        print(error)
-                    }
-                }
-                print("start scroll")
-                self.needUpdate = false
-                self.scrollMore = false
-                self.groupsTableView.reloadData()
-                self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
-            }
-
+//            AF.request(myURL).responseData { response in
+//                if let data = response.data {
+//                    do {
+//                        let json = try JSON(data: data)
+//                        //take dictionary from JSON
+//                        let response = json["response"].dictionaryValue
+//                        //take value from dictionary
+//                        guard let items = response["items"]?.arrayValue else {return}
+//                        self.userOffsetAmount += 20
+//                        //total count of groups
+//                        guard let groupsCount = response["count"]?.intValue else {return}
+//                        self.totalCountOfGroups = groupsCount
+//                        //save names into array and link into array
+//                        for eachItems in items {
+//                            guard let name = eachItems["name"].string else {return}
+//                            guard let urlImage = eachItems["photo_50"].url else {return}
+//
+//                            let urlImageView = UIImageView()
+//                            urlImageView.load(url: urlImage) {
+//
+//                                self.groupsTableView.reloadData()
+//                            }
+//                            // swiftlint:disable:next force_try
+//                            try! self.realm.write {
+//                                let realmData = GroupsList()
+//
+//                                realmData.name = name
+//                                print(name)
+//                                //save image to realm DB as Data
+//                                let url = URL(string: urlImage.absoluteString)
+//                                guard let imgData = NSData(contentsOf: url!) else {return}
+//                                realmData.image = imgData as Data
+//                                print(realmData.image)
+//
+//                                if self.needUpdate {
+//                                    self.updateRealmData(name: name, image: imgData as Data)
+//                                } else {
+//                                    self.realm.add(realmData)
+//                                }
+//                            }
+//
+//                        }
+//                    } catch {
+//                        print(error)
+//                    }
+//                }
+//                print("start scroll")
+//                self.needUpdate = false
+//                self.scrollMore = false
+//                self.groupsTableView.reloadData()
+//                self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+//            }
+			APIrequests().request(route: GroupRoute(), parser: GroupParser()) { result, error in
+				guard let result = result else {
+					return
+				}
+				self.groupsArray = result
+				print("start scroll")
+				self.needUpdate = false
+				self.scrollMore = false
+				self.groupsTableView.reloadData()
+				self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+			}
         }
 	}
 
@@ -146,21 +158,22 @@ class GroupsViewController: UIViewController {
 extension GroupsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            //realm
-            if items?.count != nil && items?.count != 0 {
-                return items!.count
-            }
-            return 0
-        } else if section == 1 && !scrollMore {
-            //if this is end of table do not show spinner at all
-            if userOffsetAmount <= totalCountOfGroups {
-                if Reachability.isConnectedToNetwork() {
-                    return 1
-                } else {
-                    return 0
-                }
-            }
-            return 0
+//            //realm
+//            if items?.count != nil && items?.count != 0 {
+//                return items!.count
+//            }
+//            return 0
+//        } else if section == 1 && !scrollMore {
+//            //if this is end of table do not show spinner at all
+//            if userOffsetAmount <= totalCountOfGroups {
+//                if Reachability.isConnectedToNetwork() {
+//                    return 1
+//                } else {
+//                    return 0
+//                }
+//            }
+
+            return groupsArray.count
         }
 		return 0
 	}
@@ -170,21 +183,22 @@ extension GroupsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsTableViewCell else {
                 fatalError("error")
             }
-            //realm
-            if indexPath.row < items.count {
-                let item = items?[indexPath.row]
-                cell.updateNameInRealm(name: item!.name, image: item!.image)
-            }
-            print("//\(items.count)")
-            if indexPath.row == items.count - 1 {
-                if scrollMore == false {
-                    beginScrollMore {
-                        if Reachability.isConnectedToNetwork() {
-                            self.urlRequest()
-                        }
-                    }
-                }
-            }
+//            //realm
+//            if indexPath.row < items.count {
+//                let item = items?[indexPath.row]
+//                cell.updateNameInRealm(name: item!.name, image: item!.image)
+//            }
+//            print("//\(items.count)")
+//            if indexPath.row == items.count - 1 {
+//                if scrollMore == false {
+//                    beginScrollMore {
+//                        if Reachability.isConnectedToNetwork() {
+//                            self.urlRequest()
+//                        }
+//                    }
+//                }
+//            }
+			cell.updateGroups(items: groupsArray[indexPath.row])
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
@@ -222,7 +236,7 @@ extension GroupsViewController: UITableViewDelegate {
         return 2
     }
 
-    func beginScrollMore(completion: () -> ()) {
+    func beginScrollMore(completion: () -> Void) {
         if Reachability.isConnectedToNetwork() {
             scrollMore = true
             print("begin scroll")

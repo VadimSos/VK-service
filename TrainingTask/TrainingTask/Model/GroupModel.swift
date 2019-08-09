@@ -12,9 +12,9 @@ import UIKit
 class GroupModel {
 
 	var pGroupName: String
-	var pGroupImage: UIImage
+	var pGroupImage: URL
 
-	init(name: String, image: UIImage) {
+	init(name: String, image: URL) {
 		pGroupName = name
 		pGroupImage = image
 	}
@@ -23,7 +23,7 @@ class GroupModel {
 		return self.pGroupName
 	}
 
-	func postImage() -> UIImage {
+	func postImage() -> URL {
 		return self.pGroupImage
 	}
 }

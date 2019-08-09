@@ -20,4 +20,12 @@ class GroupsTableViewCell: UITableViewCell {
         groupsName.text = name
         groupsImage.image = UIImage(data: image)
     }
+
+	func updateGroups(items: GroupModel) {
+		groupsName.text = items.pGroupName
+		let urlImageView = UIImageView()
+		urlImageView.load(url: items.pGroupImage) {
+			self.groupsImage.image = urlImageView.image
+		}
+	}
 }

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class GroupRoute: Route<GroupParser> {
+class GroupRoute: Route<[GroupModel]> {
 
 	override init() {
 		super.init()
@@ -18,7 +18,7 @@ class GroupRoute: Route<GroupParser> {
 		self.method = "method/groups.get"
 		self.type = HTTPMethod.get.rawValue
 		self.param = ["extended": 1, "count": pCount, "offset": 0, "v": pApiVersion, token.tokenKey: token.token]
-		self.decoder = Parser<GroupParser>()
+		self.decoder = GroupParser()
 	}
 
 //	func getGroupsURL() -> URL? {

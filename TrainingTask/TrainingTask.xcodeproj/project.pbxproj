@@ -17,12 +17,16 @@
 		3F24397622FB041E00885FBD /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24397522FB041E00885FBD /* ProfileModel.swift */; };
 		3F24397822FB049E00885FBD /* ProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24397722FB049E00885FBD /* ProfileParser.swift */; };
 		3F31DC0722E4791600D7AAC9 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31DC0622E4791600D7AAC9 /* UIImageView.swift */; };
+		3F334B4522FC52EC00E03155 /* ProfileAvatarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F334B4422FC52EC00E03155 /* ProfileAvatarModel.swift */; };
+		3F334B4722FC53BA00E03155 /* ProfileAvatarRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F334B4622FC53BA00E03155 /* ProfileAvatarRoute.swift */; };
+		3F334B4922FC548600E03155 /* ProfileAvatarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F334B4822FC548600E03155 /* ProfileAvatarParser.swift */; };
 		3F4E112522F8316A00E3FA5F /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112422F8316A00E3FA5F /* Route.swift */; };
 		3F4E112722F85FBA00E3FA5F /* GroupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */; };
 		3F4E112B22F967EC00E3FA5F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112A22F967EC00E3FA5F /* Parser.swift */; };
 		3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
+		3FB05EE222FD6D2800BAB828 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB05EE122FD6D2800BAB828 /* ValidationError.swift */; };
 		ED28224522DCDF0E003F1784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224422DCDF0E003F1784 /* AppDelegate.swift */; };
 		ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28224622DCDF0E003F1784 /* LoginViewController.swift */; };
 		ED28224A22DCDF0E003F1784 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED28224822DCDF0E003F1784 /* Main.storyboard */; };
@@ -58,12 +62,16 @@
 		3F24397522FB041E00885FBD /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		3F24397722FB049E00885FBD /* ProfileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileParser.swift; sourceTree = "<group>"; };
 		3F31DC0622E4791600D7AAC9 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		3F334B4422FC52EC00E03155 /* ProfileAvatarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAvatarModel.swift; sourceTree = "<group>"; };
+		3F334B4622FC53BA00E03155 /* ProfileAvatarRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAvatarRoute.swift; sourceTree = "<group>"; };
+		3F334B4822FC548600E03155 /* ProfileAvatarParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAvatarParser.swift; sourceTree = "<group>"; };
 		3F4E112422F8316A00E3FA5F /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoute.swift; sourceTree = "<group>"; };
 		3F4E112A22F967EC00E3FA5F /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlistResult.swift; sourceTree = "<group>"; };
 		3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
+		3FB05EE122FD6D2800BAB828 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		B724883DA8E5DD1EC8FD9982 /* Pods-TrainingTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainingTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainingTask/Pods-TrainingTask.release.xcconfig"; sourceTree = "<group>"; };
 		ED28224122DCDF0E003F1784 /* TrainingTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainingTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED28224422DCDF0E003F1784 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +125,7 @@
 			children = (
 				3F4E112422F8316A00E3FA5F /* Route.swift */,
 				3F24397322FB039600885FBD /* ProfileRoute.swift */,
+				3F334B4622FC53BA00E03155 /* ProfileAvatarRoute.swift */,
 				3F1FF02122F9BE25003ABB46 /* PostRoute.swift */,
 				3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */,
 			);
@@ -129,8 +138,17 @@
 				3F4E112A22F967EC00E3FA5F /* Parser.swift */,
 				3F1FF01F22F9A771003ABB46 /* GroupParser.swift */,
 				3F24397722FB049E00885FBD /* ProfileParser.swift */,
+				3F334B4822FC548600E03155 /* ProfileAvatarParser.swift */,
 			);
 			path = Parser;
+			sourceTree = "<group>";
+		};
+		3FB05EE022FD6D0D00BAB828 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				3FB05EE122FD6D2800BAB828 /* ValidationError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		D1FAAB8B12126CCADE9EFC5A /* Pods */ = {
@@ -163,6 +181,7 @@
 		ED28224322DCDF0E003F1784 /* TrainingTask */ = {
 			isa = PBXGroup;
 			children = (
+				3FB05EE022FD6D0D00BAB828 /* Errors */,
 				3F008D9A22F47404004B6739 /* ConfigPlistReading.swift */,
 				3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */,
 				ED3E12C622DDE5DD00534EED /* Networking */,
@@ -191,6 +210,7 @@
 			children = (
 				3F1FF02322F9C57C003ABB46 /* GroupModel.swift */,
 				3F24397522FB041E00885FBD /* ProfileModel.swift */,
+				3F334B4422FC52EC00E03155 /* ProfileAvatarModel.swift */,
 				3F4E112922F967D400E3FA5F /* Parser */,
 				ED97093122E89263009EEB20 /* realm */,
 				ED3E12CE22DF4D3B00534EED /* ParseURL.swift */,
@@ -406,14 +426,18 @@
 				3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */,
 				EDC120D422F2E9810016B067 /* aouthTokenHandle.swift in Sources */,
 				ED28224722DCDF0E003F1784 /* LoginViewController.swift in Sources */,
+				3FB05EE222FD6D2800BAB828 /* ValidationError.swift in Sources */,
 				EDC120D622F304D90016B067 /* APIrequests.swift in Sources */,
 				EDD80B1122E5E3D900784AF2 /* PostsTableViewCell.swift in Sources */,
 				EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */,
 				EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */,
 				3F1FF02222F9BE25003ABB46 /* PostRoute.swift in Sources */,
+				3F334B4522FC52EC00E03155 /* ProfileAvatarModel.swift in Sources */,
+				3F334B4922FC548600E03155 /* ProfileAvatarParser.swift in Sources */,
 				3F1FF02422F9C57C003ABB46 /* GroupModel.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */,
+				3F334B4722FC53BA00E03155 /* ProfileAvatarRoute.swift in Sources */,
 				3F24397622FB041E00885FBD /* ProfileModel.swift in Sources */,
 				3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,

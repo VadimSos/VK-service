@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class ProfileRoute: Route<ProfileParser> {
+class ProfileRoute: Route<ProfileModel> {
 
 	override init() {
 		super.init()
@@ -18,6 +18,6 @@ class ProfileRoute: Route<ProfileParser> {
 		self.method = "method/account.getProfileInfo"
 		self.type = HTTPMethod.get.rawValue
 		self.param = ["v": pApiVersion, token.tokenKey: token.token]
-		self.decoder = Parser<ProfileParser>()
+		self.decoder = ProfileParser()
 	}
 }

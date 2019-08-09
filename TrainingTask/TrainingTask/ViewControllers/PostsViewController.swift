@@ -289,7 +289,7 @@ extension PostsViewController: UITableViewDelegate {
 //        }
 //    }
 
-    func beginScrollMore(completion: () -> ()) {
+    func beginScrollMore(completion: () -> Void) {
         if Reachability.isConnectedToNetwork() {
             scrollMore = true
             print("begin scroll")

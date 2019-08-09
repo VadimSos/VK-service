@@ -10,22 +10,27 @@ import Foundation
 import SwiftyJSON
 
 class ProfileParser: Parser<ProfileModel> {
-	override func  parsing(data: Data, completion: ( _ result: ProfileModel) -> Void) -> ProfileModel? {
+	override func  parsing(data: Data, completion: @escaping (ProfileModel?, ValidationError?) -> Void) -> ProfileModel? {
+
+		func performCompletion(result: ProfileModel?, error: ValidationError?) {
+			completion(result, error)
+		}
+
 		let resultName = ProfileModel(name: "")
 		do {
 			let json = try JSON(data: data)
 			let response = json["response"].dictionaryValue
 			for eachKey in response {
 				if eachKey.key == "first_name" {
-					guard let name = response["first_name"]?.stringValue else {return nil}
+					guard let name = response["first_name"]?.stringValue else {
+						performCompletion(result: nil, error: .parsingError)
+						return nil
+					}
 					resultName.name = name
 					break
 				}
 			}
-//			guard let name = response["first_name"]?.stringValue else {return nil}
-//
-//			resultName.name = name
-			completion(resultName)
+			performCompletion(result: resultName, error: nil)
 			return resultName
 		} catch {
 			fatalError("error")

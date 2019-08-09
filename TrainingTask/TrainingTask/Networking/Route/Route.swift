@@ -41,13 +41,13 @@ class Route<T> {
 //		self.param = param
 //		self.decoder = parser
 //	}
-	
+
 	func getURL() -> URL? {
 		//combine parameters in String
 		let dictString = ((param.compactMap ({ (key, value) -> String in
 			return "\(key)=\(value)"
 		}) as Array).joined(separator: "&") as String)
-		
+
 		let myURL = URL(string: url + method + "?" + dictString)
 		return myURL
 	}

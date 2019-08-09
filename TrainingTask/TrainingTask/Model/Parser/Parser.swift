@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class Parser<T> {
 
-	func parsing(data: Data, completion: (_ result: T) -> Void) -> T? {
+	func parsing(data: Data, completion: @escaping (T?, ValidationError?) -> Void) -> T? {
 		return nil
 	}
 }

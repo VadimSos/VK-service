@@ -21,7 +21,12 @@ class APIrequests {
 //		}
 //	}
 
-	func request<U, T>(route: Route<U>, parser: Parser<T>, completion: @escaping (_ result: ProfileModel) -> Void) {
+	func request<T>(route: Route<T>, parser: Parser<T>, completion: @escaping (T?, ValidationError?) -> Void) {
+
+//		func performCompletion(result: T?, error: ValidationError?) {
+//			completion(result, error)
+//		}
+
 		guard let url = route.getURL() else {return}
 		guard let httpMethod = HTTPMethod(rawValue: route.type) else {return}
 		let parameters = route.param
@@ -30,14 +35,17 @@ class APIrequests {
 				   parameters: parameters,
 				   encoding: URLEncoding.default,
 				   headers: nil,
-				   interceptor: nil).response { response in
+				   interceptor: nil).responseData { response in
 			if let data = response.data {
-				parser.parsing(data: data) { result in
-					let test = result
-					completion((test as? ProfileModel)!)
+				parser.parsing(data: data) { result, error  in
+					if error != nil {
+						completion(nil, .parsingError)
+					} else {
+						completion(result, nil)					}
 				}
 			}
 		}
+		
 	}
 
 	static let resultValue = ConfigPlistResult()

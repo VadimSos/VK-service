@@ -10,22 +10,33 @@ import Foundation
 import SwiftyJSON
 
 class GroupParser: Parser<[GroupModel]> {
-	override func  parsing(data: Data) -> [GroupModel] {
+	override func  parsing(data: Data, completion: @escaping ([GroupModel]?, ValidationError?) -> Void) -> [GroupModel]? {
+
+//		func performCompletion(result: [GroupModel]?, error: ValidationError?) {
+//			completion(result, error)
+//		}
+
 		var groupArray: [GroupModel] = []
 		do {
 			let json = try JSON(data: data)
 			let response = json["response"].dictionaryValue
-			let items = (response["items"]?.arrayValue)!
+			guard let items = response["items"]?.arrayValue else {
+				completion(nil, .parsingError)
+				return nil
+			}
 
 			for eachItems in items {
-				let name = eachItems["name"].string!
-				let urlImage = eachItems["photo_50"].url!
-
-				let urlImageView = UIImageView()
-				urlImageView.load(url: urlImage) {
+				guard let name = eachItems["name"].string,
+					let urlImage = eachItems["photo_50"].url,
+					eachItems["name"].string != "",
+					eachItems["photo_50"] != ""  else {
+					completion(nil, .parsingError)
+					return nil
 				}
-				groupArray.append(GroupModel(name: name, image: urlImageView.image!))
+
+				groupArray.append(GroupModel(name: name, image: urlImage))
 			}
+			completion(groupArray, nil)
 			return groupArray
 		} catch {
 			fatalError("error")

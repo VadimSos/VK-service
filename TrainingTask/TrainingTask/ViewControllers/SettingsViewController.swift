@@ -26,10 +26,15 @@ class SettingsViewController: UIViewController {
     }
 
 	func getProfileName() {
-//		guard let myURL = APIrequests().getProfileNameURL() else {return}
-		APIrequests().request(route: ProfileRoute(), parser: ProfileParser()) { result in
-			self.accountName.text = result.name
+		APIrequests().request(route: ProfileRoute(), parser: ProfileParser()) { result, error  in
+			if error != nil {
+				fatalError("\(error?.errorDescription ?? "Network error")")
+			} else {
+				self.accountName.text = result?.name
+			}
 		}
+
+//		guard let myURL = APIrequests().getProfileNameURL() else {return}
 //        AF.request(myURL).responseData { response in
 //            if let data = response.data {
 //                do {
@@ -45,27 +50,47 @@ class SettingsViewController: UIViewController {
     }
 
     func getProfileImage() {
-		guard let myURL = APIrequests().getProfileImageURL() else {return}
+		APIrequests().request(route: ProfileAvatarRoute(), parser: ProfileAvatarParser()) { result, error in
+			guard let result = result, let error = error else {
+				return
+			}
+			let image = UIImageView()
+			image.load(url: result.image) {
+				self.avatarImage.image = image.image
+			}
+		}
 
-        AF.request(myURL).responseData { response in
-            if let data = response.data {
-                do {
-                    let json = try JSON(data: data)
-                    let response = json["response"].dictionaryValue
-                    guard let items = response["items"]?.arrayValue else {return}
-                    guard let item = items.last?.dictionaryValue else {return}
-                    let sizes = item["sizes"]!.arrayValue
-                    guard let photo = sizes.last!["url"].url else {return}
-
-                    let image = UIImageView()
-                    image.load(url: photo) {
-                        self.avatarImage.image = image.image
-                    }
-                } catch {
-                    print(error)
-                }
-            }
-        }
+//		APIrequests().request(route: ProfileAvatarRoute(), parser: ProfileAvatarParser()) { result, error  in
+//			if error != nil {
+//				fatalError("\(error?.errorDescription ?? "Network error")")
+//			} else {
+//				let image = UIImageView()
+//				image.load(url: result!.image) {
+//					self.avatarImage.image = image.image
+//				}
+//			}
+//		}
+//		guard let myURL = APIrequests().getProfileImageURL() else {return}
+//
+//        AF.request(myURL).responseData { response in
+//            if let data = response.data {
+//                do {
+//                    let json = try JSON(data: data)
+//                    let response = json["response"].dictionaryValue
+//                    guard let items = response["items"]?.arrayValue else {return}
+//                    guard let item = items.last?.dictionaryValue else {return}
+//                    let sizes = item["sizes"]!.arrayValue
+//                    guard let photo = sizes.last!["url"].url else {return}
+//
+//                    let image = UIImageView()
+//                    image.load(url: photo) {
+//                        self.avatarImage.image = image.image
+//                    }
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//        }
     }
 
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {
