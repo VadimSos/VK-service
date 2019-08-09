@@ -35,17 +35,23 @@ class APIrequests {
 				   parameters: parameters,
 				   encoding: URLEncoding.default,
 				   headers: nil,
-				   interceptor: nil).responseData { response in
-			if let data = response.data {
-				parser.parsing(data: data) { result, error  in
-					if error != nil {
-						completion(nil, .parsingError)
-					} else {
-						completion(result, nil)					}
+				   interceptor: nil).validate().responseData { response in
+			//operate result of AF request
+			switch response.result {
+			case .success:
+				if let data = response.data {
+					parser.parsing(data: data) { result, error  in
+						if error != nil {
+							completion(nil, .parsingError)
+						} else {
+							completion(result, nil)
+						}
+					}
 				}
+			case .failure:
+				completion(nil, .requestError)
 			}
 		}
-		
 	}
 
 	static let resultValue = ConfigPlistResult()

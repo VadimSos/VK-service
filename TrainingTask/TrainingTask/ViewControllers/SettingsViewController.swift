@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
 	func getProfileName() {
 		APIrequests().request(route: ProfileRoute(), parser: ProfileParser()) { result, error  in
 			if error != nil {
-				fatalError("\(error?.errorDescription ?? "Network error")")
+				UIAlertController.showError(message: (error?.errorDescription)!, from: self)
 			} else {
 				self.accountName.text = result?.name
 			}
@@ -51,12 +51,14 @@ class SettingsViewController: UIViewController {
 
     func getProfileImage() {
 		APIrequests().request(route: ProfileAvatarRoute(), parser: ProfileAvatarParser()) { result, error in
-			guard let result = result, let error = error else {
-				return
-			}
-			let image = UIImageView()
-			image.load(url: result.image) {
-				self.avatarImage.image = image.image
+			if error != nil {
+				UIAlertController.showError(message: (error?.errorDescription)!, from: self)
+			} else {
+				guard let result = result else {return}
+				let image = UIImageView()
+				image.load(url: result.image) {
+					self.avatarImage.image = image.image
+				}
 			}
 		}
 

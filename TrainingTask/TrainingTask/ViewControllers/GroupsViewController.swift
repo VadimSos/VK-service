@@ -132,15 +132,17 @@ class GroupsViewController: UIViewController {
 //                self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
 //            }
 			APIrequests().request(route: GroupRoute(), parser: GroupParser()) { result, error in
-				guard let result = result else {
-					return
+				if error != nil {
+					UIAlertController.showError(message: (error?.errorDescription)!, from: self)
+				} else {
+					guard let result = result else {return}
+					self.groupsArray = result
+					print("start scroll")
+					self.needUpdate = false
+					self.scrollMore = false
+					self.groupsTableView.reloadData()
+					self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
 				}
-				self.groupsArray = result
-				print("start scroll")
-				self.needUpdate = false
-				self.scrollMore = false
-				self.groupsTableView.reloadData()
-				self.groupsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
 			}
         }
 	}

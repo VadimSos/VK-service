@@ -12,9 +12,9 @@ import SwiftyJSON
 class ProfileParser: Parser<ProfileModel> {
 	override func  parsing(data: Data, completion: @escaping (ProfileModel?, ValidationError?) -> Void) -> ProfileModel? {
 
-		func performCompletion(result: ProfileModel?, error: ValidationError?) {
-			completion(result, error)
-		}
+//		func performCompletion(result: ProfileModel?, error: ValidationError?) {
+//			completion(result, error)
+//		}
 
 		let resultName = ProfileModel(name: "")
 		do {
@@ -23,14 +23,14 @@ class ProfileParser: Parser<ProfileModel> {
 			for eachKey in response {
 				if eachKey.key == "first_name" {
 					guard let name = response["first_name"]?.stringValue else {
-						performCompletion(result: nil, error: .parsingError)
+						completion(nil, .parsingError)
 						return nil
 					}
 					resultName.name = name
 					break
 				}
 			}
-			performCompletion(result: resultName, error: nil)
+			completion(resultName, nil)
 			return resultName
 		} catch {
 			fatalError("error")

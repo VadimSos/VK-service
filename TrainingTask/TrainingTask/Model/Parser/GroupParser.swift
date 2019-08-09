@@ -26,16 +26,15 @@ class GroupParser: Parser<[GroupModel]> {
 			}
 
 			for eachItems in items {
-				guard let name = eachItems["name"].string,
-					let urlImage = eachItems["photo_50"].url,
-					eachItems["name"].string != "",
-					eachItems["photo_50"] != ""  else {
+				guard let name = eachItems["nam"].string,
+					let urlImage = eachItems["photo_50"].url else {
 					completion(nil, .parsingError)
 					return nil
 				}
 
 				groupArray.append(GroupModel(name: name, image: urlImage))
 			}
+			
 			completion(groupArray, nil)
 			return groupArray
 		} catch {
