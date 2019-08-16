@@ -9,7 +9,21 @@
 import Foundation
 
 class ConfigPlistResult {
+
+	static let shared = ConfigPlistResult()
+
+	private init() {}
+
 	var result = ConfigPlistReading()
+
+	lazy var baseURL = stringValue(key: .baseURL)
+	lazy var authorizationURL = stringValue(key: .authURL)
+	lazy var redirectURL = stringValue(key: .redirectURL)
+	lazy var apiVersion = intValue(key: .apiVersion)
+	lazy var clientID = intValue(key: .clientID)
+	lazy var count = intValue(key: .count)
+	lazy var scope = intValue(key: .permission)
+	lazy var accessTokenKey = stringValue(key: .tokenKey)
 
 	func intValue(key: Key) -> Double {
 		let intResult = result.getPlist(key: key.rawValue)

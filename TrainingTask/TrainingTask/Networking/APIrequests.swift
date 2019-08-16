@@ -54,83 +54,74 @@ class APIrequests {
 		}
 	}
 
-	static let resultValue = ConfigPlistResult()
-
-	let pBaseURL = resultValue.stringValue(key: .baseURL)
-	let pAuthorizationURL = resultValue.stringValue(key: .authURL)
-	let pRedirectURL = resultValue.stringValue(key: .redirectURL)
-	let pApiVersion = resultValue.intValue(key: .apiVersion)
-	let pClientID = resultValue.intValue(key: .clientID)
-	let pCount = resultValue.intValue(key: .count)
-	let pScope = resultValue.intValue(key: .permission)
-	let accessTokenKey = resultValue.stringValue(key: .tokenKey)
+	let resultValue = ConfigPlistResult.shared
 
     func authorizeURL() -> URL? {
-        let api = "\(pAuthorizationURL)authorize?"
-        let clientID = "client_id=\(pClientID)&"
-        let scope = "scope=\(pScope)&"
+        let api = "\(resultValue.authorizationURL)authorize?"
+        let clientID = "client_id=\(resultValue.clientID)&"
+        let scope = "scope=\(resultValue.scope)&"
         let display = "display=page&"
-        let version = "v=\(pApiVersion)&"
+        let version = "v=\(resultValue.apiVersion)&"
         let responseToken = "response_type=token&"
         let revoke = "revoke=1"
-        let redirectURL = "redirect_uri=\(pRedirectURL)&"
+        let redirectURL = "redirect_uri=\(resultValue.redirectURL)&"
         let myURL = URL(string: api + clientID + scope + redirectURL + display + version + responseToken + revoke)
         return myURL
     }
 
 	func getGroupsURL(userOffsetAmount: Int) -> URL? {
-		let api = "\(pBaseURL)method/groups.get?"
+		let api = "\(resultValue.baseURL)method/groups.get?"
 		let extended = "extended=1&"
-		let count = "count=\(pCount)&"
+		let count = "count=\(resultValue.count)&"
 		let offset = "offset=\(userOffsetAmount)&"
-		let version = "v=\(pApiVersion)&"
+		let version = "v=\(resultValue.apiVersion)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + extended + offset + count + version + requestToken)
 		return myURL
 	}
 
 	func getPostsURL(userOffsetAmount: Int) -> URL? {
-		let api = "\(pBaseURL)method/wall.get?"
+		let api = "\(resultValue.baseURL)method/wall.get?"
 		let extended = "extended=1&"
-		let count = "count=\(pCount)&"
+		let count = "count=\(resultValue.count)&"
 		let offset = "offset=\(userOffsetAmount)&"
-		let version = "v=\(pApiVersion)&"
+		let version = "v=\(resultValue.apiVersion)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + extended + offset + count + version + requestToken)
 		return myURL
 	}
 
 	func addingPost(postText: String) -> URL? {
-		let api = "\(pBaseURL)method/wall.post?"
+		let api = "\(resultValue.baseURL)method/wall.post?"
 		let message = "message=\(postText)&"
-		let version = "v=\(pApiVersion)&"
+		let version = "v=\(resultValue.apiVersion)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + message + version + requestToken)
 		return myURL
 	}
 
 	func getProfileNameURL() -> URL? {
-		let api = "\(pBaseURL)method/account.getProfileInfo?"
-		let version = "v=\(pApiVersion)&"
+		let api = "\(resultValue.baseURL)method/account.getProfileInfo?"
+		let version = "v=\(resultValue.apiVersion)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + version + requestToken)
 		return myURL
 	}
 
 	func getProfileImageURL() -> URL? {
-		let api = "\(pBaseURL)method/photos.getProfile?"
+		let api = "\(resultValue.baseURL)method/photos.getProfile?"
 		let reverse = "rev=0&"
 		let extended = "extended=0&"
 		let photoSizes = "photo_sizes=0&"
-		let version = "v=\(pApiVersion)&"
+		let version = "v=\(resultValue.baseURL)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + reverse + extended + photoSizes + version + requestToken)
 		return myURL
 	}
 
 	func logoutURL() -> URL? {
-		let api = "\(pBaseURL)oauth/logout?"
-		let clientID = "client_id=\(pClientID)&"
+		let api = "\(resultValue.baseURL)oauth/logout?"
+		let clientID = "client_id=\(resultValue.clientID)&"
 		let myURL = URL(string: api + clientID)
 		return myURL
 	}
@@ -138,7 +129,7 @@ class APIrequests {
 	//prepare token to the correct format
 	func compileToken() -> String? {
 		guard let token = KeychainOperations().getToken() else {return nil}
-		let tokenKey = "\(accessTokenKey)"
+		let tokenKey = "\(resultValue.accessTokenKey)"
 		let finalToken = tokenKey + "=" + token
 		return finalToken
 	}

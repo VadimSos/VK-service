@@ -11,13 +11,15 @@ import Alamofire
 
 class ProfileRoute: Route<ProfileModel> {
 
+	let result = ConfigPlistResult.shared
+
 	override init() {
 		super.init()
 		guard let token = compileToken() else {return}
-		self.url = pBaseURL
+		self.url = result.baseURL
 		self.method = "method/account.getProfileInfo"
 		self.type = HTTPMethod.get.rawValue
-		self.param = ["v": pApiVersion, token.tokenKey: token.token]
+		self.param = ["v": result.apiVersion, token.tokenKey: token.token]
 		self.decoder = ProfileParser()
 	}
 }

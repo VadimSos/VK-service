@@ -11,13 +11,15 @@ import Alamofire
 
 class ProfileAvatarRoute: Route<ProfileAvatarModel> {
 
+	let result = ConfigPlistResult.shared
+
 	override init() {
 		super.init()
 		guard let token = compileToken() else {return}
-		self.url = pBaseURL
+		self.url = result.baseURL
 		self.method = "method/photos.getProfile"
 		self.type = HTTPMethod.get.rawValue
-		self.param = ["extended": 0, "rev": 0, "photo_sizes": 0, "v": pApiVersion, token.tokenKey: token.token]
+		self.param = ["extended": 0, "rev": 0, "photo_sizes": 0, "v": result.apiVersion, token.tokenKey: token.token]
 		self.decoder = ProfileAvatarParser()
 	}
 }

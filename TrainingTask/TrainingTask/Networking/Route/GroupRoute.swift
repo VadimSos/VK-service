@@ -10,14 +10,16 @@ import Foundation
 import Alamofire
 
 class GroupRoute: Route<[GroupModel]> {
+	
+	let result = ConfigPlistResult.shared
 
 	override init() {
 		super.init()
 		guard let token = compileToken() else {return}
-		self.url = pBaseURL
+		self.url = result.baseURL
 		self.method = "method/groups.get"
 		self.type = HTTPMethod.get.rawValue
-		self.param = ["extended": 1, "count": pCount, "offset": 0, "v": pApiVersion, token.tokenKey: token.token]
+		self.param = ["extended": 1, "count": result.count, "offset": 0, "v": result.apiVersion, token.tokenKey: token.token]
 		self.decoder = GroupParser()
 	}
 

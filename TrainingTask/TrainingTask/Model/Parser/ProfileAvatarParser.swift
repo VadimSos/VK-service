@@ -13,10 +13,6 @@ import SwiftyJSON
 class ProfileAvatarParser: Parser<ProfileAvatarModel> {
 	override func  parsing(data: Data, completion: @escaping (ProfileAvatarModel?, ValidationError?) -> Void) -> ProfileAvatarModel? {
 
-//		func performCompletion(result: ProfileAvatarModel?, error: ValidationError?) {
-//			completion(result, error)
-//		}
-
 		do {
 			let json = try JSON(data: data)
 			let response = json["response"].dictionaryValue

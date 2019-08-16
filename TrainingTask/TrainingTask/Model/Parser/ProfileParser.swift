@@ -12,10 +12,6 @@ import SwiftyJSON
 class ProfileParser: Parser<ProfileModel> {
 	override func  parsing(data: Data, completion: @escaping (ProfileModel?, ValidationError?) -> Void) -> ProfileModel? {
 
-//		func performCompletion(result: ProfileModel?, error: ValidationError?) {
-//			completion(result, error)
-//		}
-
 		let resultName = ProfileModel(name: "")
 		do {
 			let json = try JSON(data: data)

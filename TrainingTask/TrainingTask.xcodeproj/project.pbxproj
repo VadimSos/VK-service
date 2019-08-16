@@ -227,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				ED3E12C722DDE81900534EED /* ButtonRounded.swift */,
-				EDC120C922F03E2F0016B067 /* Reachability.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -235,6 +234,7 @@
 		ED3E12C622DDE5DD00534EED /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				EDC120C922F03E2F0016B067 /* Reachability.swift */,
 				3F4E112822F95ABA00E3FA5F /* Route */,
 				EDC120D522F304D90016B067 /* APIrequests.swift */,
 				EDC120D922F312510016B067 /* APIresponse.swift */,

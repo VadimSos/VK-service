@@ -8,8 +8,6 @@
 
 import Foundation
 
-let resultValue = ConfigPlistResult()
-
 class Route<T> {
 
 	var url: String
@@ -18,15 +16,6 @@ class Route<T> {
 	var param: [String: Any]
 	var decoder: Parser<T>
 
-	let pBaseURL = resultValue.stringValue(key: .baseURL)
-	let pAuthorizationURL = resultValue.stringValue(key: .authURL)
-	let pRedirectURL = resultValue.stringValue(key: .redirectURL)
-	let pApiVersion = resultValue.intValue(key: .apiVersion)
-	let pClientID = resultValue.intValue(key: .clientID)
-	let pCount = resultValue.intValue(key: .count)
-	let pScope = resultValue.intValue(key: .permission)
-	let accessTokenKey = resultValue.stringValue(key: .tokenKey)
-
 	init() {
 		url = ""
 		method = ""
@@ -34,13 +23,6 @@ class Route<T> {
 		param = [:]
 		decoder = Parser<T>()
 	}
-//	init(url: String, method: String, type: String, param: [String: Any], parser: Parser<Any>) {
-//		self.url = url
-//		self.method = method
-//		self.type = type
-//		self.param = param
-//		self.decoder = parser
-//	}
 
 	func getURL() -> URL? {
 		//combine parameters in String
@@ -54,7 +36,7 @@ class Route<T> {
 
 	//prepare token to the correct format
 	func compileToken() -> (tokenKey: String, token: Any)? {
-		let resultValue = ConfigPlistResult()
+		let resultValue = ConfigPlistResult.shared
 		let accessTokenKey = resultValue.stringValue(key: .tokenKey)
 		guard let token = KeychainOperations().getToken() else {return nil}
 		let tokenKey = "\(accessTokenKey)"

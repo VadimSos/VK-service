@@ -12,10 +12,6 @@ import SwiftyJSON
 class GroupParser: Parser<[GroupModel]> {
 	override func  parsing(data: Data, completion: @escaping ([GroupModel]?, ValidationError?) -> Void) -> [GroupModel]? {
 
-//		func performCompletion(result: [GroupModel]?, error: ValidationError?) {
-//			completion(result, error)
-//		}
-
 		var groupArray: [GroupModel] = []
 		do {
 			let json = try JSON(data: data)
@@ -26,7 +22,7 @@ class GroupParser: Parser<[GroupModel]> {
 			}
 
 			for eachItems in items {
-				guard let name = eachItems["nam"].string,
+				guard let name = eachItems["name"].string,
 					let urlImage = eachItems["photo_50"].url else {
 					completion(nil, .parsingError)
 					return nil
@@ -34,7 +30,7 @@ class GroupParser: Parser<[GroupModel]> {
 
 				groupArray.append(GroupModel(name: name, image: urlImage))
 			}
-			
+
 			completion(groupArray, nil)
 			return groupArray
 		} catch {
