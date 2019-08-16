@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  TrainingTask
+
+  Created by Vadzim Sasnouski on 8/16/19.
+  Copyright © 2019 Sosnovsky, Vadim. All rights reserved.
+*/
+
+// MARK: - Validation errors
+"Request error" = "Error detected during requesting data";
+"Parsing error" = "Error detected during parsing";
+"No internet" = "Internet Connection not Available";
+"Refresh" = "Refreshing...";
+"Can't refresh" = "Can't refresh data. Please check your network connection";

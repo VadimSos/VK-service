@@ -41,7 +41,7 @@ class PostsViewController: UIViewController, UITextFieldDelegate {
         self.postTableView.rowHeight = 100
 
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Refresh", comment: ""))
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         postTableView.addSubview(refreshControl)
 
@@ -243,10 +243,10 @@ extension PostsViewController: UITableViewDataSource {
             }
             if Reachability.isConnectedToNetwork() {
                 cell.spinner.startAnimating()
-                cell.refreshTextLabel.text = "Refreshing..."
+                cell.refreshTextLabel.text = NSLocalizedString("Refresh", comment: "")
             } else {
                 cell.spinner.startAnimating()
-                cell.refreshTextLabel.text = "Can't refresh data. Please check your network connection."
+                cell.refreshTextLabel.text = NSLocalizedString("Can't refresh", comment: "")
             }
             cell.hideSeparator()
             return cell

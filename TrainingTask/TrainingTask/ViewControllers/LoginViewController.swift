@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
         if Reachability.isConnectedToNetwork() {
             performSegue(withIdentifier: "loginSuccess", sender: nil)
         } else {
-            UIAlertController.showError(message: "Internet Connection not Available!", from: self)
+            UIAlertController.showError(message: NSLocalizedString("No internet", comment: ""), from: self)
         }
     }
 }

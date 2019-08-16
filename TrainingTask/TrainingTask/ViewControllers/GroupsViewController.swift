@@ -40,7 +40,7 @@ class GroupsViewController: UIViewController {
 		super.viewDidLoad()
 
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Refresh", comment: ""))
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         groupsTableView.addSubview(refreshControl)
 
@@ -208,10 +208,10 @@ extension GroupsViewController: UITableViewDataSource {
             }
             if Reachability.isConnectedToNetwork() {
                 cell.spinner.startAnimating()
-                cell.textRefreshingLabel.text = "Refreshing..."
+                cell.textRefreshingLabel.text = NSLocalizedString("Refresh", comment: "")
             } else {
                 cell.spinner.startAnimating()
-                cell.textRefreshingLabel.text = "Can't refresh data. Please check your network connection."
+				cell.textRefreshingLabel.text = NSLocalizedString("Can't refresh", comment: "")
             }
             cell.hideSeparator()
             return cell

@@ -17,9 +17,9 @@ extension ValidationError {
 	var errorDescription: String? {
 		switch self {
 		case .requestError:
-			return "Error detected during requesting data"
+			return NSLocalizedString("Request error", comment: "")
 		case .parsingError:
-			return "Error detected during parsing"
+			return NSLocalizedString("Parsing error", comment: "")
 		}
 	}
 }

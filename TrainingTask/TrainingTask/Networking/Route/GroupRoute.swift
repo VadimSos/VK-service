@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class GroupRoute: Route<[GroupModel]> {
-	
+
 	let result = ConfigPlistResult.shared
 
 	override init() {

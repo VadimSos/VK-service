@@ -11,7 +11,8 @@ import UIKit
 
 class APIresponse {
 
-    private let redirectURL = "https://oauth.vk.com/blank.html"
+	let redirectURL = ConfigPlistResult.shared.redirectURL
+	let auothURL = ConfigPlistResult.shared.authorizationURL
 
     func prepareResponseURLToCorrectFormat(url: String) -> URL? {
         let newString = (url.replacingOccurrences(of: "#", with: "?"))
@@ -22,7 +23,7 @@ class APIresponse {
     func checkURLValidation(responseURL: URL) -> Bool {
         var result = false
         let stringURL = responseURL.absoluteString
-        if stringURL.hasPrefix("\(redirectURL)") || stringURL.hasPrefix("https://oauth.vk.com/authorize") {
+        if stringURL.hasPrefix("\(redirectURL)") || stringURL.hasPrefix("\(auothURL)authorize") {
             result = true
         }
         return result
