@@ -33,20 +33,6 @@ class SettingsViewController: UIViewController {
 				self.accountName.text = result?.name
 			}
 		}
-
-//		guard let myURL = APIrequests().getProfileNameURL() else {return}
-//        AF.request(myURL).responseData { response in
-//            if let data = response.data {
-//                do {
-//                    let json = try JSON(data: data)
-//                    let response = json["response"].dictionaryValue
-//                    let name = response["first_name"]?.stringValue
-//                    self.accountName.text = name
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//        }
     }
 
     func getProfileImage() {
@@ -61,38 +47,6 @@ class SettingsViewController: UIViewController {
 				}
 			}
 		}
-
-//		APIrequests().request(route: ProfileAvatarRoute(), parser: ProfileAvatarParser()) { result, error  in
-//			if error != nil {
-//				fatalError("\(error?.errorDescription ?? "Network error")")
-//			} else {
-//				let image = UIImageView()
-//				image.load(url: result!.image) {
-//					self.avatarImage.image = image.image
-//				}
-//			}
-//		}
-//		guard let myURL = APIrequests().getProfileImageURL() else {return}
-//
-//        AF.request(myURL).responseData { response in
-//            if let data = response.data {
-//                do {
-//                    let json = try JSON(data: data)
-//                    let response = json["response"].dictionaryValue
-//                    guard let items = response["items"]?.arrayValue else {return}
-//                    guard let item = items.last?.dictionaryValue else {return}
-//                    let sizes = item["sizes"]!.arrayValue
-//                    guard let photo = sizes.last!["url"].url else {return}
-//
-//                    let image = UIImageView()
-//                    image.load(url: photo) {
-//                        self.avatarImage.image = image.image
-//                    }
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//        }
     }
 
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {

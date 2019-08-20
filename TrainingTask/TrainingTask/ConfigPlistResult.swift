@@ -43,6 +43,6 @@ enum Key: String {
 	case apiVersion = "API version"
 	case clientID = "Client ID"
 	case count = "Count of Posts/Groups"
-	case permission = "Access Permissions"
+	case permission = "Access Permissions" //73728 = wall + forever token
 	case tokenKey = "Token Key"
 }

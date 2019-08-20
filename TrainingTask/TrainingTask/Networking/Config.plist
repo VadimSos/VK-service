@@ -15,7 +15,7 @@
 	<key>Count of Posts/Groups</key>
 	<integer>20</integer>
 	<key>Access Permissions</key>
-	<integer>8192</integer>
+	<real>73728</real>
 	<key>Token Key</key>
 	<string>access_token</string>
 </dict>

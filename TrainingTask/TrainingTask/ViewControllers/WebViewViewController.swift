@@ -54,7 +54,6 @@ extension WebViewViewController: WKNavigationDelegate {
 
 			//3 - count of key/value pairs in response from "allow privilage" and "Cancel"
 			if parseURLResult.count <= 3 {
-
 				guard let index = parseURLResult.index(forKey: "access_token") else {
 					returnToRootViewController()
 					return decisionHandler(.cancel)
@@ -63,15 +62,14 @@ extension WebViewViewController: WKNavigationDelegate {
 					returnToRootViewController()
 					return decisionHandler(.cancel)
 				}
-					KeychainOperations().saveToken(value: tokenValue)
-
+				KeychainOperations().saveToken(value: tokenValue)
 				performSegue(withIdentifier: "toTabBar", sender: nil)
 			}
 			return decisionHandler(.allow)
 		}
         returnToRootViewController()
         decisionHandler(.cancel)
-    }
+	}
 
     func returnToRootViewController() {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)

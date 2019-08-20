@@ -69,16 +69,16 @@ class APIrequests {
         return myURL
     }
 
-	func getGroupsURL(userOffsetAmount: Int) -> URL? {
-		let api = "\(resultValue.baseURL)method/groups.get?"
-		let extended = "extended=1&"
-		let count = "count=\(resultValue.count)&"
-		let offset = "offset=\(userOffsetAmount)&"
-		let version = "v=\(resultValue.apiVersion)&"
-		guard let requestToken = compileToken() else {return nil}
-		let myURL = URL(string: api + extended + offset + count + version + requestToken)
-		return myURL
-	}
+//	func getGroupsURL(userOffsetAmount: Int) -> URL? {
+//		let api = "\(resultValue.baseURL)method/groups.get?"
+//		let extended = "extended=1&"
+//		let count = "count=\(resultValue.count)&"
+//		let offset = "offset=\(userOffsetAmount)&"
+//		let version = "v=\(resultValue.apiVersion)&"
+//		guard let requestToken = compileToken() else {return nil}
+//		let myURL = URL(string: api + extended + offset + count + version + requestToken)
+//		return myURL
+//	}
 
 	func getPostsURL(userOffsetAmount: Int) -> URL? {
 		let api = "\(resultValue.baseURL)method/wall.get?"
@@ -97,25 +97,6 @@ class APIrequests {
 		let version = "v=\(resultValue.apiVersion)&"
 		guard let requestToken = compileToken() else {return nil}
 		let myURL = URL(string: api + message + version + requestToken)
-		return myURL
-	}
-
-	func getProfileNameURL() -> URL? {
-		let api = "\(resultValue.baseURL)method/account.getProfileInfo?"
-		let version = "v=\(resultValue.apiVersion)&"
-		guard let requestToken = compileToken() else {return nil}
-		let myURL = URL(string: api + version + requestToken)
-		return myURL
-	}
-
-	func getProfileImageURL() -> URL? {
-		let api = "\(resultValue.baseURL)method/photos.getProfile?"
-		let reverse = "rev=0&"
-		let extended = "extended=0&"
-		let photoSizes = "photo_sizes=0&"
-		let version = "v=\(resultValue.baseURL)&"
-		guard let requestToken = compileToken() else {return nil}
-		let myURL = URL(string: api + reverse + extended + photoSizes + version + requestToken)
 		return myURL
 	}
 
