@@ -29,7 +29,8 @@ class ProfileParser: Parser<ProfileModel> {
 			completion(resultName, nil)
 			return resultName
 		} catch {
-			fatalError("error")
+			completion(nil, .jsonDataError)
+			return nil
 		}
 	}
 }

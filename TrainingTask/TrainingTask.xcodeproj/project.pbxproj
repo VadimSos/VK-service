@@ -24,6 +24,9 @@
 		3F4E112722F85FBA00E3FA5F /* GroupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */; };
 		3F4E112B22F967EC00E3FA5F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E112A22F967EC00E3FA5F /* Parser.swift */; };
 		3F71750D230692F7005BB9C5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F71750C230692F7005BB9C5 /* Localizable.strings */; };
+		3F76E69C230C0A4100334B5F /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F76E69B230C0A4100334B5F /* TokenModel.swift */; };
+		3F76E6A0230C107700334B5F /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F76E69F230C107700334B5F /* AuthRoute.swift */; };
+		3F76E6A2230C296400334B5F /* LogoutRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F76E6A1230C296400334B5F /* LogoutRoute.swift */; };
 		3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */; };
 		3FA6B31322E353AE00DA08E8 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */; };
 		3FA6B31522E3544500DA08E8 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */; };
@@ -70,6 +73,9 @@
 		3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoute.swift; sourceTree = "<group>"; };
 		3F4E112A22F967EC00E3FA5F /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3F71750C230692F7005BB9C5 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		3F76E69B230C0A4100334B5F /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		3F76E69F230C107700334B5F /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
+		3F76E6A1230C296400334B5F /* LogoutRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRoute.swift; sourceTree = "<group>"; };
 		3FA073DE22F596C000961BFE /* ConfigPlistResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlistResult.swift; sourceTree = "<group>"; };
 		3FA6B31222E353AE00DA08E8 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		3FA6B31422E3544500DA08E8 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 				3F334B4622FC53BA00E03155 /* ProfileAvatarRoute.swift */,
 				3F1FF02122F9BE25003ABB46 /* PostRoute.swift */,
 				3F4E112622F85FBA00E3FA5F /* GroupRoute.swift */,
+				3F76E69F230C107700334B5F /* AuthRoute.swift */,
+				3F76E6A1230C296400334B5F /* LogoutRoute.swift */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 				3F1FF02322F9C57C003ABB46 /* GroupModel.swift */,
 				3F24397522FB041E00885FBD /* ProfileModel.swift */,
 				3F334B4422FC52EC00E03155 /* ProfileAvatarModel.swift */,
+				3F76E69B230C0A4100334B5F /* TokenModel.swift */,
 				3F4E112922F967D400E3FA5F /* Parser */,
 				ED97093122E89263009EEB20 /* realm */,
 				ED3E12CE22DF4D3B00534EED /* ParseURL.swift */,
@@ -436,12 +445,14 @@
 				EDC120D222F1E3DD0016B067 /* UITableViewCell.swift in Sources */,
 				EDC120D022F1C3C30016B067 /* UITableView.swift in Sources */,
 				3F1FF02222F9BE25003ABB46 /* PostRoute.swift in Sources */,
+				3F76E6A2230C296400334B5F /* LogoutRoute.swift in Sources */,
 				3F334B4522FC52EC00E03155 /* ProfileAvatarModel.swift in Sources */,
 				3F334B4922FC548600E03155 /* ProfileAvatarParser.swift in Sources */,
 				3F1FF02422F9C57C003ABB46 /* GroupModel.swift in Sources */,
 				ED3E12C822DDE81900534EED /* ButtonRounded.swift in Sources */,
 				3F008D9B22F47404004B6739 /* ConfigPlistReading.swift in Sources */,
 				3F334B4722FC53BA00E03155 /* ProfileAvatarRoute.swift in Sources */,
+				3F76E69C230C0A4100334B5F /* TokenModel.swift in Sources */,
 				3F24397622FB041E00885FBD /* ProfileModel.swift in Sources */,
 				3FA073DF22F596C000961BFE /* ConfigPlistResult.swift in Sources */,
 				ED3E12CD22DF16AA00534EED /* WebViewViewController.swift in Sources */,
@@ -456,6 +467,7 @@
 				EDC120DA22F312510016B067 /* APIresponse.swift in Sources */,
 				EDCC14F622E9E55E000F5F57 /* PostsModel.swift in Sources */,
 				EDC120CA22F03E2F0016B067 /* Reachability.swift in Sources */,
+				3F76E6A0230C107700334B5F /* AuthRoute.swift in Sources */,
 				3F4E112B22F967EC00E3FA5F /* Parser.swift in Sources */,
 				ED97093322E892B4009EEB20 /* GroupsModel.swift in Sources */,
 				3F4E112522F8316A00E3FA5F /* Route.swift in Sources */,

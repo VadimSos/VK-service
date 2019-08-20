@@ -29,7 +29,7 @@ class WebViewViewController: UIViewController {
     // MARL: - AOuth2 request
 
     func urlRequest() {
-        guard let finalURL = APIrequests().authorizeURL() else {return}
+		guard let finalURL = AuthRoute().getURL() else {return}
         let myRequest = URLRequest(url: finalURL)
         webView.load(myRequest)
     }

@@ -7,8 +7,8 @@
 */
 
 // MARK: - Validation errors
-"Request error" = "Error detected during requesting data";
 "Parsing error" = "Error detected during parsing";
+"Server error" = "Server error detecting during response";
 "No internet" = "Internet Connection not Available";
 "Refresh" = "Refreshing...";
 "Can't refresh" = "Can't refresh data. Please check your network connection";

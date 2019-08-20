@@ -7,19 +7,23 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 enum ValidationError: Error {
-	case requestError
 	case parsingError
+	case jsonDataError
+	case serverError
 }
 
 extension ValidationError {
 	var errorDescription: String? {
 		switch self {
-		case .requestError:
-			return NSLocalizedString("Request error", comment: "")
 		case .parsingError:
 			return NSLocalizedString("Parsing error", comment: "")
+		case .jsonDataError:
+			return NSLocalizedString(SwiftyJSONError.invalidJSON.localizedDescription, comment: "")
+		case .serverError:
+			return NSLocalizedString("Server error", comment: "")
 		}
 	}
 }

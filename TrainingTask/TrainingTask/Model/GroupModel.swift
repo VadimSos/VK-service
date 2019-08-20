@@ -18,12 +18,4 @@ class GroupModel {
 		pGroupName = name
 		pGroupImage = image
 	}
-
-	func postGroupName() -> String {
-		return self.pGroupName
-	}
-
-	func postImage() -> URL {
-		return self.pGroupImage
-	}
 }

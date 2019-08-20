@@ -16,8 +16,4 @@ class ProfileAvatarModel {
 	init(image: URL) {
 		self.image = image
 	}
-
-	func postAvatar() -> URL {
-		return self.image
-	}
 }

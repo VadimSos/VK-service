@@ -52,21 +52,17 @@ class SettingsViewController: UIViewController {
     @IBAction func logoutButtonDidTab(_ sender: UIButton) {
         KeychainOperations().deleteToken()
 
-		guard let logoutURL = APIrequests().logoutURL() else {return}
+		guard let logoutURL = LogoutRoute().getURL() else {return}
 
-        AF.request(logoutURL).responseData { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
-        }
+        AF.request(logoutURL)
 
+		//delete cookie to input during login login/password
         let storage = HTTPCookieStorage.shared
         if let cookies = storage.cookies {
             for cookie in cookies {
                 storage.deleteCookie(cookie)
             }
         }
-
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 }

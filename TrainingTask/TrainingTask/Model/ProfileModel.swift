@@ -16,8 +16,4 @@ class ProfileModel {
 	init(name: String) {
 		self.name = name
 	}
-
-	func postName() -> String {
-		return self.name
-	}
 }

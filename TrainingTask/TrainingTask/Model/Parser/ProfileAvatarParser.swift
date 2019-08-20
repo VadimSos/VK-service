@@ -28,7 +28,8 @@ class ProfileAvatarParser: Parser<ProfileAvatarModel> {
 			completion(resultImage, nil)
 			return resultImage
 		} catch {
-			fatalError("error")
+			completion(nil, .jsonDataError)
+			return nil
 		}
 	}
 }

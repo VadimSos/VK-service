@@ -34,7 +34,8 @@ class GroupParser: Parser<[GroupModel]> {
 			completion(groupArray, nil)
 			return groupArray
 		} catch {
-			fatalError("error")
+			completion(nil, .jsonDataError)
+			return nil
 		}
 	}
 }
