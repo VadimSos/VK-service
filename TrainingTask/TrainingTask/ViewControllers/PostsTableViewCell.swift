@@ -13,10 +13,4 @@ class PostsTableViewCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postUserNameLabel: UILabel!
     @IBOutlet weak var postTextLabel: UILabel!
-
-    func updateRealmData(image: Data, name: String, text: String) {
-        postImage.image = UIImage(data: image)
-        postUserNameLabel.text = name
-        postTextLabel.text = text
-    }
 }

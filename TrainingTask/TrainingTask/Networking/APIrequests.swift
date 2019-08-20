@@ -49,16 +49,16 @@ class APIrequests {
 
 	let resultValue = ConfigPlistResult.shared
 
-	func getPostsURL(userOffsetAmount: Int) -> URL? {
-		let api = "\(resultValue.baseURL)method/wall.get?"
-		let extended = "extended=1&"
-		let count = "count=\(resultValue.count)&"
-		let offset = "offset=\(userOffsetAmount)&"
-		let version = "v=\(resultValue.apiVersion)&"
-		guard let requestToken = compileToken() else {return nil}
-		let myURL = URL(string: api + extended + offset + count + version + requestToken)
-		return myURL
-	}
+//	func getPostsURL(userOffsetAmount: Int) -> URL? {
+//		let api = "\(resultValue.baseURL)method/wall.get?"
+//		let extended = "extended=1&"
+//		let count = "count=\(resultValue.count)&"
+//		let offset = "offset=\(userOffsetAmount)&"
+//		let version = "v=\(resultValue.apiVersion)&"
+//		guard let requestToken = compileToken() else {return nil}
+//		let myURL = URL(string: api + extended + offset + count + version + requestToken)
+//		return myURL
+//	}
 
 	func addingPost(postText: String) -> URL? {
 		let api = "\(resultValue.baseURL)method/wall.post?"

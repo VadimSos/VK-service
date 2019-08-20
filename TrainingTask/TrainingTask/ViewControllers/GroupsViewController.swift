@@ -72,7 +72,6 @@ class GroupsViewController: UIViewController {
         refreshControl.endRefreshing()
     }
 
-	//create, send URL to VK
 	func urlRequest() {
 //		guard let myURL = APIrequests().getGroupsURL(userOffsetAmount: userOffsetAmount) else {return}
 
@@ -147,14 +146,14 @@ class GroupsViewController: UIViewController {
         }
 	}
 
-    func updateRealmData(name: String, image: Data) {
-        if item < userOffsetAmount {
-            let updatedData = realm.objects(GroupsList.self)
-            updatedData[item].name = name
-            updatedData[item].image = image
-            item += 1
-        }
-    }
+//    func updateRealmData(name: String, image: Data) {
+//        if item < userOffsetAmount {
+//            let updatedData = realm.objects(GroupsList.self)
+//            updatedData[item].name = name
+//            updatedData[item].image = image
+//            item += 1
+//        }
+//    }
 }
 
 extension GroupsViewController: UITableViewDataSource {
@@ -200,7 +199,13 @@ extension GroupsViewController: UITableViewDataSource {
 //                    }
 //                }
 //            }
-			cell.updateGroups(items: groupsArray[indexPath.row])
+			cell.groupsName.text = groupsArray[indexPath.row].pGroupName
+			let image = UIImageView()
+			for eachImage in groupsArray {
+				image.load(url: eachImage.pGroupImage) {
+					cell.groupsImage.image = image.image
+				}
+			}
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? GroupsLoadingTableViewCell else {
